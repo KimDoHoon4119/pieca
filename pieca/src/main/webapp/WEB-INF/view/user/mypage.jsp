@@ -130,8 +130,8 @@
          </div>
          
          <div id="basic_info_right_phoneno_input">
-         	<input type="hidden" id="start_phoneno">
-           	<form:input path="phoneno" id="phoneno" value="${user.phoneno}" oninput="phonenoChk(); upSubmitChk();"/>
+            <input type="hidden" id="start_phoneno">
+              <form:input path="phoneno" id="phoneno" value="${user.phoneno}" oninput="phonenoChk(); upSubmitChk();"/>
          </div>
          
          <%-- 생년월일 --%>
@@ -198,7 +198,7 @@
          </div>
          
          <div id="basic_info_right_password_cancel">
-         	<input type="button" id="update_cancel" value="취소">
+            <input type="button" id="update_cancel" value="취소">
          </div>
               
       </div>
@@ -338,31 +338,31 @@
    
 <%-- 카드결제 --%>
 <div id="mypage_card_wrapper" style="transition-duration: 0.5s; border:1px solid #FFFFFF; border-radius: 5px; margin-bottom:50px; margin-top:120px; box-shadow: 0px 2px 4px 0px #1B1B1B; height:335px; ">
-	<div id="mypage_card_left_inner" style="float:left; width:20%; height:230px; margin: 20px 0px 0px 50px; ">
-		<div id="mypage_card_left_title" style="font-size:24px;">
-			<span><b>PIECA CARD</b></span>
+   <div id="mypage_card_left_inner" style="float:left; width:20%; height:230px; margin: 20px 0px 0px 50px; ">
+      <div id="mypage_card_left_title" style="font-size:24px;">
+         <span><b>PIECA CARD</b></span>
         </div>
         <div id="mypage_card_left_desc" style="font-size:15px;">
-			<p>카드로 다양한 혜택을 누리세요.</p>
+         <p>카드로 다양한 혜택을 누리세요.</p>
         </div>
-	</div>
+   </div>
       
-	<div id="mypage_card_right_inner" style="float:left; width:55%; height:350px; margin: 10px 0px 0px 165px;">
-		<br><br><br><br><br>
-		
-		<div id="mypage_card_right_balance_title_box" style="width:430px; position:relative; float:left;">
-			<label for="mypage_card_right_balance_title" style="font-size:16px; color: #747474;">잔액</label>
-		</div>
-		<div id="mypage_card_right_balance_input_box" style="float:left; margin:-38px 10px 0px -17px;">
-			<input type="text" id="mypage_card_right_balance_input" style="width:420px; border:2px solid #747474; border-radius: 6px; background-color: #FFFFFF; color: #000000; font-size:23px; height:60px; padding:18px 0px 0px 15px;">
-		</div>
+   <div id="mypage_card_right_inner" style="float:left; width:55%; height:350px; margin: 10px 0px 0px 165px;">
+      <br><br><br><br><br>
+      
+      <div id="mypage_card_right_balance_title_box" style="width:430px; position:relative; float:left;">
+         <label for="mypage_card_right_balance_title" style="font-size:16px; color: #747474;">잔액</label>
+      </div>
+      <div id="mypage_card_right_balance_input_box" style="float:left; margin:-38px 10px 0px -17px;">
+         <input type="text" id="mypage_card_right_balance_input" style="width:420px; border:2px solid #747474; border-radius: 6px; background-color: #FFFFFF; color: #000000; font-size:23px; height:60px; padding:18px 0px 0px 15px;">
+      </div>
         <a href="javascript:win_open('payment')" style="text-decoration: none; color:black;">충전하기</a>
-		<div id="mypage_card_right_dropdown_box" style="width:800px; text-align:center; position:relative; float:left;">
-        	<div id="mypage_card_right_detail_button_box" style="width:50px; position:relative; float:left; padding-top:5px;">
-           		<span id="mypage_card_right_detail_button" class="fa-solid fa-angle-down" style="color:#747474"></span>
+      <div id="mypage_card_right_dropdown_box" style="width:800px; text-align:center; position:relative; float:left;">
+           <div id="mypage_card_right_detail_button_box" style="width:50px; position:relative; float:left; padding-top:5px;">
+                 <span id="mypage_card_right_detail_button" class="fa-solid fa-angle-down" style="color:#747474"></span>
             </div>
-		</div>
-		
+      </div>
+      
             <%--
             <div id="mypage_card_right_coupon_title_box" style="width:70px; position:relative; float:left;">
                <label for="mypage_card_right_coupon_title" style="font-size:16px; color: #747474;">보유 쿠폰</label>
@@ -372,215 +372,215 @@
                <input type="text" id="mypage_card_right_coupon_input" style="transition-duration: 0.5s; width:113px; border:2px solid #747474; border-radius: 6px; background-color: #FFFFFF; color: #000000; font-size:23px; height:60px; padding:18px 0px 0px 18px;">
             </div>
             --%>
-	</div>
-	
-	
-	
-	
+   </div>
+   
+   
+   
+   
 </div>
 </div> <%-- main --%>
 <script type="text/javascript">
 function win_open(page) {
-	var childWindow = window.open("payment", "child", "width=500, height=600, top=150, left=150");
-	  childWindow.opener = this;
-	  childWindow.sessionStorage.setItem("loginUser", loginUser);
-  	<%--
-	var op = "width=500, height=500, left=50,top=150";
-	open(page ,"",op);
-	--%>
+   var childWindow = window.open("payment", "child", "width=500, height=600, top=150, left=150");
+     childWindow.opener = this;
+     childWindow.sessionStorage.setItem("loginUser", loginUser);
+     <%--
+   var op = "width=500, height=500, left=50,top=150";
+   open(page ,"",op);
+   --%>
 }
 function movePage(decesion) {
-	if (decesion == '1') {
-		window.scrollTo(0, 0);
-	} else if (decesion == '2') {
-		window.scrollTo(0, 200);
-	} else if (decesion == '3') {
-		window.scrollTo(0, 500);
-		//F15F5F
-	}
+   if (decesion == '1') {
+      window.scrollTo(0, 0);
+   } else if (decesion == '2') {
+      window.scrollTo(0, 200);
+   } else if (decesion == '3') {
+      window.scrollTo(0, 500);
+      //F15F5F
+   }
 }
 
 window.onscroll = function() {
-	if (window.scrollY < 120) {
-		document.getElementById("movepage1").style.color = "#008000";
-		document.getElementById("movepage2").style.color = "#5D5D5D";
-		document.getElementById("movepage3").style.color = "#5D5D5D";
-	} else if ((window.scrollY > 250) && (window.scrollY < 350)) {
-		document.getElementById("movepage1").style.color = "#5D5D5D";
-	   	document.getElementById("movepage2").style.color = "#008000";
-	   	document.getElementById("movepage3").style.color = "#5D5D5D";
-	} else if ((window.scrollY > 350) && (window.scrollY < 500)) {
-		document.getElementById("movepage1").style.color = "#5D5D5D";
-	   	document.getElementById("movepage2").style.color = "#5D5D5D";
-	   	document.getElementById("movepage3").style.color = "#008000";
-	}
+   if (window.scrollY < 120) {
+      document.getElementById("movepage1").style.color = "#008000";
+      document.getElementById("movepage2").style.color = "#5D5D5D";
+      document.getElementById("movepage3").style.color = "#5D5D5D";
+   } else if ((window.scrollY > 250) && (window.scrollY < 350)) {
+      document.getElementById("movepage1").style.color = "#5D5D5D";
+         document.getElementById("movepage2").style.color = "#008000";
+         document.getElementById("movepage3").style.color = "#5D5D5D";
+   } else if ((window.scrollY > 350) && (window.scrollY < 500)) {
+      document.getElementById("movepage1").style.color = "#5D5D5D";
+         document.getElementById("movepage2").style.color = "#5D5D5D";
+         document.getElementById("movepage3").style.color = "#008000";
+   }
 };
-	
+   
 $(document).ready(function(){
-	$("#username").attr("disabled","disabled");
-	$("#email_original").attr("disabled","disabled");
-	$("#phoneno").attr("disabled","disabled");
-	$("#birthday").attr("disabled","disabled");
-	$("#select_email").hide();
-	$("#input_email").hide();
-	$("#basic_info_right_email_address").hide();
-	$("#basic_info_right_birthday_input_update_s2").hide();
-	$("#basic_info_right_update").show();
-	$("#test11").hide()
-	$("#basic_info_right_password").hide()
-	$("#basic_info_right_password_input").hide();
-	$("#basic_info_right_password_input").hide();
-	$("#basic_info_right_password_submit").hide();
-	$("#basic_info_right_password_cancel").hide();
-	$("#basic_delete_right_password_check_logo").hide();
-	$("#basic_delete_right_submit_desc").hide();
-	$("#basic_delete_right_submit_btn").hide();   
-	$("#chgpass").attr("disabled","disabled");
-	$("#chgpass").css("background-color","#D5D5D5");
-	$("#chgpass2").css("background-color","#D5D5D5");
-	$("#chgpass2").attr("disabled","disabled");
-	$("#pw_submit").attr("disabled","disabled");
-	$("#up_submit").attr("disabled","disabled");
-	$("#delete_submit").attr("disabled","disabled");
-	$("#security_code2").attr("disabled","disabled");
-	$("#pw_submit").css("background-color","#D5D5D5");
-	$("#up_submit").css("background-color","#D5D5D5");
-	$("#security_code").css("background-color","#D5D5D5");
-	$("#security_code2").css("background-color","#D5D5D5");
-	$("#up_check").hide();
-	$("#chg_check").hide();
-	$("#delete_check").hide();
-	$("#delete_check2").hide();
-	$("#update_info_wrapper").hide();
-	   
-	if ($("#login_mode").val() == 'pieca') {
-		$("#basic_info_right_update").show();
-	    $("#chg_password").attr('type', 'password');
-	} else if ($("#login_mode").val() == 'naver') {
-	    $("#chg_password").val('Naver회원은 이용 불가능 합니다.');
-	    $("#delete_password").val('Naver회원은 보안코드로 탈퇴 가능 합니다.');
-	} else if ($("#login_mode").val() == 'kakao') {
-	    $("#phoneno").val('-');
-	    console.log($("#birthday").val())
-	    $("#birthday").val($("#birthday").val().replace(/^0001-/, ""));
-	    $("#chg_password").val('kakao회원은 이용 불가능 합니다.');
-	    $("#delete_password").val('kakao회원은 보안코드로 탈퇴 가능 합니다.');
-	}
-	if ($("#login_mode").val() != 'pieca') {
-		$("#basic_info_right_update").hide();
-	    $("#chg_password").attr('type', 'text');
-	    $("#chg_password").prop('readonly', true);
-	    $("#chg_password").css({"background-color":"#F15F5F","border":"2px solid #F15F5F","font-size":"19px","color":"#FFFFFF"});
-	    $("#change_pass_right_password_title").css("color","#FFFFFF");
-	    $("#delete_password").attr('type', 'text');
-	    $("#delete_password").prop('readonly', true);
-	    $("#delete_password").css({"background-color":"#F15F5F","border":"2px solid #F15F5F","font-size":"19px","color":"#FFFFFF"});
-	    $("#basic_delete_right_password_title").css("color","#FFFFFF");
-	    $("#security_code").removeAttr("disabled");
-	    $("#security_code2").removeAttr("disabled");
-	    $("#security_code").css("background-color","#FFFFFF");
-	    $("#security_code2").css("background-color","#FFFFFF");
-	    $("#basic_delete_right_password_check_logo").show();
-	    getRandomString()
-	}
-	
-	$("#show_update").click(function(){
-		var birthday = $("#birthday").val();
-      	var email_af = $("#email_af").val();
+   $("#username").attr("disabled","disabled");
+   $("#email_original").attr("disabled","disabled");
+   $("#phoneno").attr("disabled","disabled");
+   $("#birthday").attr("disabled","disabled");
+   $("#select_email").hide();
+   $("#input_email").hide();
+   $("#basic_info_right_email_address").hide();
+   $("#basic_info_right_birthday_input_update_s2").hide();
+   $("#basic_info_right_update").show();
+   $("#test11").hide()
+   $("#basic_info_right_password").hide()
+   $("#basic_info_right_password_input").hide();
+   $("#basic_info_right_password_input").hide();
+   $("#basic_info_right_password_submit").hide();
+   $("#basic_info_right_password_cancel").hide();
+   $("#basic_delete_right_password_check_logo").hide();
+   $("#basic_delete_right_submit_desc").hide();
+   $("#basic_delete_right_submit_btn").hide();   
+   $("#chgpass").attr("disabled","disabled");
+   $("#chgpass").css("background-color","#D5D5D5");
+   $("#chgpass2").css("background-color","#D5D5D5");
+   $("#chgpass2").attr("disabled","disabled");
+   $("#pw_submit").attr("disabled","disabled");
+   $("#up_submit").attr("disabled","disabled");
+   $("#delete_submit").attr("disabled","disabled");
+   $("#security_code2").attr("disabled","disabled");
+   $("#pw_submit").css("background-color","#D5D5D5");
+   $("#up_submit").css("background-color","#D5D5D5");
+   $("#security_code").css("background-color","#D5D5D5");
+   $("#security_code2").css("background-color","#D5D5D5");
+   $("#up_check").hide();
+   $("#chg_check").hide();
+   $("#delete_check").hide();
+   $("#delete_check2").hide();
+   $("#update_info_wrapper").hide();
       
-      	$("#start_name").val($("#username").val());
-      	$("#start_birthday").val(birthday);
-      	$("#start_phoneno").val($("#phoneno").val());
-      	$("#start_email").val($("#email_original").val());
-      	$("#start_email_be").val($("#input_email").val());
+   if ($("#login_mode").val() == 'pieca') {
+      $("#basic_info_right_update").show();
+       $("#chg_password").attr('type', 'password');
+   } else if ($("#login_mode").val() == 'naver') {
+       $("#chg_password").val('Naver회원은 이용 불가능 합니다.');
+       $("#delete_password").val('Naver회원은 보안코드로 탈퇴 가능 합니다.');
+   } else if ($("#login_mode").val() == 'kakao') {
+       $("#phoneno").val('-');
+       console.log($("#birthday").val())
+       $("#birthday").val($("#birthday").val().replace(/^0001-/, ""));
+       $("#chg_password").val('kakao회원은 이용 불가능 합니다.');
+       $("#delete_password").val('kakao회원은 보안코드로 탈퇴 가능 합니다.');
+   }
+   if ($("#login_mode").val() != 'pieca') {
+      $("#basic_info_right_update").hide();
+       $("#chg_password").attr('type', 'text');
+       $("#chg_password").prop('readonly', true);
+       $("#chg_password").css({"background-color":"#F15F5F","border":"2px solid #F15F5F","font-size":"19px","color":"#FFFFFF"});
+       $("#change_pass_right_password_title").css("color","#FFFFFF");
+       $("#delete_password").attr('type', 'text');
+       $("#delete_password").prop('readonly', true);
+       $("#delete_password").css({"background-color":"#F15F5F","border":"2px solid #F15F5F","font-size":"19px","color":"#FFFFFF"});
+       $("#basic_delete_right_password_title").css("color","#FFFFFF");
+       $("#security_code").removeAttr("disabled");
+       $("#security_code2").removeAttr("disabled");
+       $("#security_code").css("background-color","#FFFFFF");
+       $("#security_code2").css("background-color","#FFFFFF");
+       $("#basic_delete_right_password_check_logo").show();
+       getRandomString()
+   }
+   
+   $("#show_update").click(function(){
+      var birthday = $("#birthday").val();
+         var email_af = $("#email_af").val();
       
-		$("#year").val(birthday.substring(0, 4))
-      	$("#month").val(birthday.substring(5, 7))
-      	$("#day").val(birthday.substring(8, 10))
+         $("#start_name").val($("#username").val());
+         $("#start_birthday").val(birthday);
+         $("#start_phoneno").val($("#phoneno").val());
+         $("#start_email").val($("#email_original").val());
+         $("#start_email_be").val($("#input_email").val());
+      
+      $("#year").val(birthday.substring(0, 4))
+         $("#month").val(birthday.substring(5, 7))
+         $("#day").val(birthday.substring(8, 10))
       
         $("#mode_name").val('enable');
-      	$("#mode_email").val('enable');
-      	$("#mode_phone").val('enable');
+         $("#mode_email").val('enable');
+         $("#mode_phone").val('enable');
    
-      	$("#select_email").val(email_af);
-      	$("#email_original").hide();
-      	$("#select_email").show();
-      	$("#input_email").show();
-      	$("#basic_info_right_email_address").show();
+         $("#select_email").val(email_af);
+         $("#email_original").hide();
+         $("#select_email").show();
+         $("#input_email").show();
+         $("#basic_info_right_email_address").show();
       
-      	$("#username").removeAttr("disabled");
-      	$("#email").removeAttr("disabled");
-      	$("#input_email").removeAttr("disabled");
-      	$("#phoneno").removeAttr("disabled");
-      	$("#birthday").removeAttr("disabled");
-      	$("#username").css("border","2px solid #747474");
-      	$("#email").css("border","2px solid #747474");
-      	$("#input_email").css("border","2px solid #747474");
-      	$("#phoneno").css("border","2px solid #747474");
-      	$("#birthday").css("border","2px solid #747474");
+         $("#username").removeAttr("disabled");
+         $("#email").removeAttr("disabled");
+         $("#input_email").removeAttr("disabled");
+         $("#phoneno").removeAttr("disabled");
+         $("#birthday").removeAttr("disabled");
+         $("#username").css("border","2px solid #747474");
+         $("#email").css("border","2px solid #747474");
+         $("#input_email").css("border","2px solid #747474");
+         $("#phoneno").css("border","2px solid #747474");
+         $("#birthday").css("border","2px solid #747474");
       
-      	$("#basic_info_wrapper").css("height","360px");
-      	$("#basic_info_right_update").hide(0);
+         $("#basic_info_wrapper").css("height","360px");
+         $("#basic_info_right_update").hide(0);
       
-      	$("#basic_info_right_birthday_input_update_s1").hide();
-      	$("#basic_info_right_birthday_input_update_s2").show();
+         $("#basic_info_right_birthday_input_update_s1").hide();
+         $("#basic_info_right_birthday_input_update_s2").show();
       
-      	$("#basic_info_right_password").slideDown(600);
-      	$("#basic_info_right_password_input").slideDown(610);
-      	$("#basic_info_right_password_submit").slideDown(610);
-      	$("#basic_info_right_password_cancel").slideDown(610);
-	});
-	$("#update_cancel").click(function(){
-		var email_af = $("#email_af").val();
-	    $("#username").val($("#start_name").val());
-	    $("#birthday").val($("#start_birthday").val());
-	    $("#phoneno").val($("#start_phoneno").val());
-	    $("#email_original").val($("#start_email").val());
-	    $("#input_email").val($("#start_email_be").val());
-	      
-	    $("#emailCheck").css("color","#ffffff");
-	    $("#phonenoCheck").text("");
-	    $("#password").val('')
-	      
-	    $("#mode_email").val('disable');
-	    $("#mode_phone").val('disable');
-	      
-	    $("#select_email").val(email_af);
-	    $("#email_original").show();
-	    $("#select_email").hide();
-	    $("#input_email").hide();
-	    $("#basic_info_right_email_address").hide();
-	      
-	    $("#username").attr("disabled","disabled");
-	    $("#email").attr("disabled","disabled");
-	    $("#input_email").attr("disabled","disabled");
-	    $("#phoneno").attr("disabled","disabled");
-	    $("#birthday").attr("disabled","disabled");
-	      
-	    $("#username").css("border","2px solid #FFFFFF");
-	    $("#email").css("border","2px solid #FFFFFF");
-	    $("#input_email").css("border","2px solid #FFFFFF");
-	    $("#phoneno").css("border","2px solid #FFFFFF");
-	    $("#birthday").css("border","2px solid #FFFFFF");
-	      
-	    $("#basic_info_wrapper").css("height","280px");
-	    $("#basic_info_right_update").show(0);
-	      
-	    $("#basic_info_right_birthday_input_update_s1").show();
-	    $("#basic_info_right_birthday_input_update_s2").hide();
-	      
-	    $("#basic_info_right_password").hide(0);
-	    $("#basic_info_right_password_input").hide(0);
-	    $("#basic_info_right_password_submit").hide(0);
-	    $("#basic_info_right_password_cancel").hide(0);
-	});
-	
-	$("#mypage_card_right_detail_button_box").click(function(){
-		$("#mypage_card_wrapper").css("height","500px");
-				
-		$("#mypage_card_right_detail_box").show(500);
-		$("#mypage_card_right_detail_box").show(500);
-	});
+         $("#basic_info_right_password").slideDown(600);
+         $("#basic_info_right_password_input").slideDown(610);
+         $("#basic_info_right_password_submit").slideDown(610);
+         $("#basic_info_right_password_cancel").slideDown(610);
+   });
+   $("#update_cancel").click(function(){
+      var email_af = $("#email_af").val();
+       $("#username").val($("#start_name").val());
+       $("#birthday").val($("#start_birthday").val());
+       $("#phoneno").val($("#start_phoneno").val());
+       $("#email_original").val($("#start_email").val());
+       $("#input_email").val($("#start_email_be").val());
+         
+       $("#emailCheck").css("color","#ffffff");
+       $("#phonenoCheck").text("");
+       $("#password").val('')
+         
+       $("#mode_email").val('disable');
+       $("#mode_phone").val('disable');
+         
+       $("#select_email").val(email_af);
+       $("#email_original").show();
+       $("#select_email").hide();
+       $("#input_email").hide();
+       $("#basic_info_right_email_address").hide();
+         
+       $("#username").attr("disabled","disabled");
+       $("#email").attr("disabled","disabled");
+       $("#input_email").attr("disabled","disabled");
+       $("#phoneno").attr("disabled","disabled");
+       $("#birthday").attr("disabled","disabled");
+         
+       $("#username").css("border","2px solid #FFFFFF");
+       $("#email").css("border","2px solid #FFFFFF");
+       $("#input_email").css("border","2px solid #FFFFFF");
+       $("#phoneno").css("border","2px solid #FFFFFF");
+       $("#birthday").css("border","2px solid #FFFFFF");
+         
+       $("#basic_info_wrapper").css("height","280px");
+       $("#basic_info_right_update").show(0);
+         
+       $("#basic_info_right_birthday_input_update_s1").show();
+       $("#basic_info_right_birthday_input_update_s2").hide();
+         
+       $("#basic_info_right_password").hide(0);
+       $("#basic_info_right_password_input").hide(0);
+       $("#basic_info_right_password_submit").hide(0);
+       $("#basic_info_right_password_cancel").hide(0);
+   });
+   
+   $("#mypage_card_right_detail_button_box").click(function(){
+      $("#mypage_card_wrapper").css("height","500px");
+            
+      $("#mypage_card_right_detail_box").show(500);
+      $("#mypage_card_right_detail_box").show(500);
+   });
 });
 
 function nameChk() {

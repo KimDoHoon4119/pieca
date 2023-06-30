@@ -12,7 +12,7 @@
  <!-- File 출력 설정 -->	
 	<appender name="rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>d:/log/shop1.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<fileNamePattern>c:/log/pieca.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<maxFileSize>5kb</maxFileSize> <!-- 5kb씩 파일을 분리 -->
 			</timeBasedFileNamingAndTriggeringPolicy>

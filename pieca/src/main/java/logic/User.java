@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -22,7 +21,7 @@ public class User {
 	@Size(min=6,max=20,message="사용할 수 없는 아이디입니다.")
 	private String userid;
 	
-	private String channel; // 네이버 소셜로그인
+	private String channel; // 네이버, 카카오 소셜로그인
 	
 	@Size(min=6,max=20,message="비밀번호는 8자이상 20자이하로 입력하세요")
 	private String password;

@@ -1,10 +1,3 @@
-/aop/
-/config/
-/controller/
-/dao/
-/exception/
-/interceptor/
-/javatest.class
 /logic/
-/sitemesh/
-/util/
+/dao/
+/controller/
