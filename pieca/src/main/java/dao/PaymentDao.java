@@ -20,6 +20,12 @@ public class PaymentDao {
 	public void insertkakao(Payment payment) {
 		template.getMapper(cls).insert(payment);
 	}
+
+	public String getBalance(String userid) {
+		param.clear();
+		param.put("userid", userid);
+		return template.getMapper(cls).selectBalance(userid);
+	}
 	
 
 }

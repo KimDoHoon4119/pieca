@@ -19,22 +19,23 @@
       </div>
       
       <div id="payment_left_select_box" style="float:left;width: 160px; margin: 5px 0px 10px 10px;">
-         <select id="payment_left_select" name="amount" style="width: 250px; height: 50px; font-size:18px; border: 2px solid #797979; border-radius: 6px;">
+         <select id="payment_left_select" name="amount" onchange="balancsAfter()" style="width: 250px; height: 50px; font-size:18px; border: 2px solid #797979; border-radius: 6px;">
               <option value="10000">금액 선택</option>
               <option value="10000">10,000원</option>
               <option value="30000">30,000원</option>
               <option value="50000">50,000원</option>
               <option value="100000">100,000원</option>
-              <option value="direct">직접 입력</option>
          </select>
       </div>
-      
+      <%-- 
       <div id="payment_left_input_box" style="float:left; width:250px; margin: 5px 0px 10px 0px;">
+      	  <option value="direct">직접 입력</option>
          <input type="text" id="payment_left_input" name="selboxDirect" oninput="payment_inputChk();" placeholder="금액을 입력 해주세요." style="width: 234px; height: 44px; margin:0px 0px 0px 10px; border-radius:6px; font-size:20px; border: 2px solid #797979; padding-left:10px;"/>
       </div>
+      --%>
       <div id="payment_left_balance_box" style="float:left; width:250px; margin: 5px 0px 10px 10px;">
-         <p>충전 전 잔액 : </p><br>
-         <p>충전 후 잔액 : </p>
+         <span>충전 전 잔액 : </span><div id="payment_left_balance_now" style="display:inline-block;"></div><br><br>
+         <span>충전 후 잔액 : </span><div id="payment_left_balance_after" style="display:inline-block;"></div>
       
       </div>
       <div id="payment_left_input_error_box" style="float:left; width:250px; margin: 5px 0px 10px 0px;">
@@ -56,7 +57,25 @@
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <script type="text/javascript">
 //$("#payment_left_input_box").hide();
+function numberWithCommas(balance) {
+  return balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
+$(document).ready(function(){
+	$.ajax({
+      	type:"POST",
+      	url: "../payment/getBalance",
+      	data : {"userid" : $("#payment_hidden_userid").val()},
+      	success:function(result){
+      		$("#payment_left_balance_now").text(numberWithCommas(result));
+      	}
+   	});   
+});
+
+function balancsAfter() {
+	console.log($("#payment_left_balance_now").val())
+	
+}
 $(function(){
    $("#payment_left_select").change(function() {
       if($("#payment_left_select").val() == "direct") {
@@ -69,6 +88,7 @@ $(function(){
    }) 
 });
 
+/*
 function payment_inputChk() {
    const payment = $("#payment_left_input").val();
    const reg = /^[0-9]+$/;
@@ -84,7 +104,7 @@ function payment_inputChk() {
    const payment_formatted = payment.replace(/(\d{3})(?=\d)/g, '$1,');
    $("#payment_left_input").val(payment_formatted);
 }
-
+*/
 let IMP = window.IMP
 IMP.init("imp65420547")
 

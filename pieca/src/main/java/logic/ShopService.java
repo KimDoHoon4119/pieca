@@ -157,5 +157,9 @@ public class ShopService {
 	public void payInsert(Payment payment) {
 		paymentDao.insertkakao(payment);
 	}
+	public String getBalance(String userid) {
+		return paymentDao.getBalance(userid);
+		
+	}
 	
 }
