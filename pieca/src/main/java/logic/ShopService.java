@@ -161,5 +161,7 @@ public class ShopService {
 		return paymentDao.getBalance(userid);
 		
 	}
-	
+	public List<Payment> paymentList(String userid) {
+		return paymentDao.list(userid);
+	}
 }

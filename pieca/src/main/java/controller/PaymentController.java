@@ -3,6 +3,7 @@ package controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import logic.Payment;
 import logic.ShopService;
@@ -43,7 +45,7 @@ public class PaymentController {
 		return null;
 	}
 
-	@RequestMapping("kakao")
+	@RequestMapping({"kakao","toss"})
 	@ResponseBody
 	public Map<String, Object> kakao(HttpSession session, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<>();
@@ -74,7 +76,7 @@ public class PaymentController {
 		payment.setOrderno(orderno);
 		payment.setUserid(userid);
 		payment.setAmount(amount);
-		payment.setType("kakao");
+		payment.setType("kakao pay");
 		payment.setStatus("success");
 		service.payInsert(payment);
 		return true;
@@ -86,6 +88,16 @@ public class PaymentController {
 		System.out.println("gB userid :: "+userid);
 		String balance = service.getBalance(userid);
 		return balance;
+	}
+	
+	@RequestMapping("getOrderList")
+	@ResponseBody
+	public List<Payment> orderlist(String userid) {
+		ModelAndView mav = new ModelAndView();
+		List<Payment> itemList = service.paymentList(userid);
+		mav.addObject("itemList",itemList);
+		
+		return itemList;	
 	}
 
 }

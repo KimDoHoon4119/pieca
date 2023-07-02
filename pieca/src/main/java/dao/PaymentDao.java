@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -25,6 +26,10 @@ public class PaymentDao {
 		param.clear();
 		param.put("userid", userid);
 		return template.getMapper(cls).selectBalance(userid);
+	}
+
+	public List<Payment> list(String userid) {
+		return template.getMapper(cls).select(userid);
 	}
 	
 
