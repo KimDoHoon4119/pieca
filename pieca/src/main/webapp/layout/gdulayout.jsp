@@ -71,14 +71,14 @@ nav ul li {
 	position: relative;
 }
 
-.map-menu, .user-menu {
+.map-menu, .user-menu, .board-menu {
 	font-color: #1B1B1B;
 	padding: 16px;
 	font-size: 16px;
 	cursor: pointer;
 }
 
-.map-content, .user-content {
+.map-content, .user-content, .board-content {
 	display: none;
 	position: absolute;
 	background-color: #f9f9f9;
@@ -91,20 +91,20 @@ nav ul li {
 a {
 	text-decoration: none; 
 }
-.map-content a {
+.map-content a, , .board-content a {
 	color: black;
 	padding: 12px 16px;
 	display: block;
 	text-align:left;
 }
 
-.home, .map-menu, .news, .card, .login, .mypage, .logout{
+.home, .map-menu, .board-menu, .news, .card, .login, .mypage, .logout{
 	text-align:center;
 	font-size: 22px;
 }
 
-.map, .news, .card{
-	width:11%;
+.map, .board, .news, .card{
+	width:8%;
 }
 
 .home {
@@ -119,7 +119,7 @@ a {
 
 
 /* map-menu 에는 hover 적용이 안됨 */
-.map:hover .map-content {
+.map:hover .map-content, .board:hober .board-content {
 	display: block;
 }
 
@@ -173,11 +173,11 @@ a {
 				</div>
 			</li>
 			
-			<li class="map">
-            	<div class="map-menu">
+			<li class="board">
+            	<div class="board-menu">
                		<span>Board</span>
             	</div>
-            	<div class="map-content">
+            	<div class="board-content">
                		<a href="${path}/board/list?boardid=1">공지사항</a>
                		<a href="${path}/board/list?boardid=2">신고 게시판</a>
             	</div>
