@@ -18,14 +18,15 @@
    user     : userid에 해당하는 회원정보
  --%>
 <body>
-
 	<div class="mypage_sidenav">
-		<a onclick="movePage(1);" id="movepage1" style="cursor: pointer;"><span
-			class="fa-regular fa-user"></span> 회원 정보</a> <a onclick="movePage(2);"
-			id="movepage2" style="cursor: pointer;"><span
-			class="fa-solid fa-lock"></span> 비밀번호 변경</a> <a onclick="movePage(3);"
-			id="movepage3" style="cursor: pointer;"><span
-			class="fa-regular fa-circle-xmark"></span> 회원 탈퇴</a>
+		<a onclick="movePage(1);" id="movepage1" style="cursor: pointer;">
+			<span class="fa-regular fa-user"></span> 회원 정보</a>
+		<a onclick="movePage(2);" id="movepage2" style="cursor: pointer;">
+			<span class="fa-solid fa-lock"></span> 비밀번호 변경</a>
+		<a onclick="movePage(3);" id="movepage3" style="cursor: pointer;">
+			<span class="fa-regular fa-credit-card"></span> PIECA CARD</a>
+		<a onclick="movePage(4);" id="movepage4" style="cursor: pointer;">
+			<span class="fa-regular fa-circle-xmark"></span> 회원 탈퇴</a>			
 	</div>
 
 	<div class="mypage_main">
@@ -42,9 +43,9 @@
 									spellcheck="false" /></b>
 						</c:if>
 						<c:if test="${user.channel eq 'kakao' }">
-							<img src="../img/mypage_K.png" id="basic_info_left_naver_img"> 회원<br>
+							<img src="../img/mypage_K.png" id="basic_info_left_kakao_img"> 회원<br>
 							<b><form:input path="userid" value="${user.username}"
-									id="basic_info_left_naver_username" readonly="true"
+									id="basic_info_left_kakao_username" readonly="true"
 									spellcheck="false" /></b>
 						</c:if>
 						<c:if test="${user.channel eq 'pieca' }">
@@ -294,14 +295,53 @@
 				</form>
 			</div>
 		</div>
+		
+		<%-- 카드결제 --%>
+		<div id="mypage_card_wrapper" style="transition-duration: 0.5s; border: 1px solid #FFFFFF; border-radius: 5px; margin-bottom: 50px; margin-top: 200px; box-shadow: 0px 2px 4px 0px #1B1B1B; height: 280px;">
+			<div id="mypage_card_left_inner" style="float: left; width: 20%; height: 230px; margin: 20px 0px 0px 50px;">
+				<div id="mypage_card_left_title" style="font-size: 24px;">
+					<span><b>PIECA CARD</b></span>
+				</div>
+				<div id="mypage_card_left_desc" style="font-size: 15px;">
+					<p>카드로 다양한 혜택을 누리세요.</p>
+				</div><br><br>
+				<c:if test="${loginUser.card != 'y' }">
+					<button onclick="win_open('getcard')" style="width: 170px; background-color: #008000; border: 2px solid #008000; border-radius: 6px; color: #FFFFFF; cursor: pointer;">발급하기</button>
+				</c:if>
+				<c:if test="${loginUser.card == 'y' }">
+					<button onclick="win_open('payment')" style="width: 170px; background-color: #008000; border: 2px solid #008000; border-radius: 6px; color: #FFFFFF; cursor: pointer;">충전하기</button>
+				</c:if>
+			</div>
 
-
-
+			<div id="mypage_card_right_inner" style="float: left; width: 55%; height: 300px; margin: 10px 0px 0px 148px;">
+				<c:if test="${loginUser.card != 'y' }"> 
+					<div id="mypage_card_right_card_box" style="width: 430px; position: relative; float: left; margin: 10px 0px 0px 0px;">
+						<div id="mypage_card_right_card" style="display:flex; width: 420px; height: 220px; font-size:35px; border: 2px dashed #747474; border-radius: 6px; justify-content: center; align-items: center;">+</div>
+					</div>
+				</c:if>
+				
+				<c:if test="${loginUser.card == 'y' }"> 
+					<div id="mypage_card_right_card_box" style="width: 430px; position: relative; float: left; margin: 10px 0px 0px 0px;">
+						<img src="../img/mypage_card2.png" id="mypage_card_right_card" style="width: 420px; height: 220px; border: 2px solid #747474; border-radius: 6px;">
+					</div>
+				
+				<div id="mypage_card_right_dropdown_box" style="width: 800px; text-align: center; position: relative; float: left;">
+					<div id="mypage_card_right_detail_dropdown_up_box" style="width: 50px; position: relative; float: left; padding-top: 5px;">
+						<span id="mypage_card_right_detail_dropdown_up" class="fa-solid fa-angle-down" style="color: #747474"></span>
+					</div>
+					<div id="mypage_card_right_detail_dropdown_down_box" style="width: 50px; position: relative; float: left; padding-top: 5px;">
+						<span id="mypage_card_right_detail_dropdown_down" class="fa-solid fa-angle-up" style="color: #747474"></span>
+					</div>
+				</div>
+				</c:if>
+			</div>
+			<div id="mypage_card_right_orderlist_box" style="width: 800px; position: relative; float: left; margin: 0px 0px 0px 50px;">
+				<div id="mypage_card_right_orderlist"></div>
+			</div>
+		</div>
 
 		<%-- 회원 탈퇴 --%>
-
 		<div id="basic_delete_wrapper">
-
 			<div id="basic_delete_left_inner">
 				<div id="basic_delete_left_title">
 					<span><b>회원 탈퇴</b></span>
@@ -343,7 +383,6 @@
 						<span id="delete_check" class="fa-sharp fa-solid fa-arrows-rotate"
 							onclick="getRandomString();"></span>
 					</div>
-
 					<%-- xxx --%>
 					<div id="basic_delete_right_password_security2">
 						<label for="sec_code" style="font-size: 16px; color: #747474;">보안코드
@@ -368,89 +407,79 @@
 				</form>
 			</div>
 		</div>
-
-
-		<%-- 카드결제 --%>
-		<div id="mypage_card_wrapper"
-			style="transition-duration: 0.5s; border: 1px solid #FFFFFF; border-radius: 5px; margin-bottom: 50px; margin-top: 120px; box-shadow: 0px 2px 4px 0px #1B1B1B; height: 280px;">
-			<div id="mypage_card_left_inner"
-				style="float: left; width: 20%; height: 230px; margin: 20px 0px 0px 50px;">
-				<div id="mypage_card_left_title" style="font-size: 24px;">
-					<span><b>PIECA CARD</b></span>
-				</div>
-				<div id="mypage_card_left_desc" style="font-size: 15px;">
-					<p>카드로 다양한 혜택을 누리세요.</p>
-				</div><br><br>
-				<button onclick="win_open('payment')" style="width: 170px; background-color: #2196F3; border: 2px solid #2196F3; border-radius: 6px; color: black;">충전하기</button>
-			</div>
-
-			<div id="mypage_card_right_inner"
-				style="float: left; width: 55%; height: 300px; margin: 10px 0px 0px 148px;">
-				<div id="mypage_card_right_card_box"
-					style="width: 430px; position: relative; float: left; margin: 10px 0px 0px 0px;">
-					<img src="../img/mypage_card2.png" id="basic_info_left_naver_img"
-						style="width: 420px; height: 220px; border: 2px solid #747474; border-radius: 6px;">
-				</div>
-				<div id="mypage_card_right_dropdown_box"
-					style="width: 800px; text-align: center; position: relative; float: left;">
-					<div id="mypage_card_right_detail_dropdown_up_box"
-						style="width: 50px; position: relative; float: left; padding-top: 5px;">
-						<span id="mypage_card_right_detail_dropdown_up"
-							class="fa-solid fa-angle-down" style="color: #747474"></span>
-					</div>
-					<div id="mypage_card_right_detail_dropdown_down_box"
-						style="width: 50px; position: relative; float: left; padding-top: 5px;">
-						<span id="mypage_card_right_detail_dropdown_down"
-							class="fa-solid fa-angle-up" style="color: #747474"></span>
-					</div>
-				</div>
-			</div>
-			<div id="mypage_card_right_orderlist_box"
-				style="width: 800px; position: relative; float: left; margin: 0px 0px 0px 50px;">
-				<div id="mypage_card_right_orderlist"></div>
-			</div>
-		</div>
-	</div>
+		
+</div>
 <script type="text/javascript">
 function win_open(page) {
-	   var loginUser = sessionStorage.getItem("loginUser");
-	   var childWindow = window.open("payment", "child", "width=500, height=600, top=150, left=150");
-	     childWindow.opener = this;
-	     childWindow.sessionStorage.setItem("loginUser", loginUser);
+	var loginUser = sessionStorage.getItem("loginUser");
+	if (page == 'payment') {
+		var childWindow = window.open("payment", "child", "width=500, height=600, top=150, left=150");
 	}
+	if (page == 'getcard') {
+		var childWindow = window.open("getcard", "child", "width=600, height=600, top=150, left=150");
+	}
+	childWindow.opener = this;
+	childWindow.sessionStorage.setItem("loginUser", loginUser);
+}
+
 function movePage(decesion) {
-   if (decesion == '1') {
-      window.scrollTo(0, 0);
-   } else if (decesion == '2') {
-      window.scrollTo(0, 200);
-   } else if (decesion == '3') {
-      window.scrollTo(0, 500);
-      //F15F5F
-   }
+	if (decesion == '1') {
+		window.scrollTo(0, 0);
+	} else if (decesion == '2') {
+		window.scrollTo(0, 400);
+	} else if (decesion == '3') {
+		window.scrollTo(0, 800);
+	} else if (decesion == '4') {
+		window.scrollTo(0, 1100);
+	}
 }
 
 window.onscroll = function() {
-   if (window.scrollY < 120) {
-      document.getElementById("movepage1").style.color = "#008000";
-      document.getElementById("movepage2").style.color = "#5D5D5D";
-      document.getElementById("movepage3").style.color = "#5D5D5D";
-   } else if ((window.scrollY > 250) && (window.scrollY < 350)) {
-      document.getElementById("movepage1").style.color = "#5D5D5D";
-         document.getElementById("movepage2").style.color = "#008000";
-         document.getElementById("movepage3").style.color = "#5D5D5D";
-   } else if ((window.scrollY > 350) && (window.scrollY < 500)) {
-      document.getElementById("movepage1").style.color = "#5D5D5D";
-         document.getElementById("movepage2").style.color = "#5D5D5D";
-         document.getElementById("movepage3").style.color = "#008000";
-   }
-};
+	if (window.scrollY < 120) {
+		document.getElementById("movepage1").style.color = "#008000";
+      	document.getElementById("movepage2").style.color = "#5D5D5D";
+      	document.getElementById("movepage3").style.color = "#5D5D5D";
+      	document.getElementById("movepage4").style.color = "#5D5D5D";
+      	document.getElementById("movepage1").style.fontSize = "30px";
+      	document.getElementById("movepage2").style.fontSize = "22px";
+      	document.getElementById("movepage3").style.fontSize = "22px";
+      	document.getElementById("movepage4").style.fontSize = "22px";
+	} else if ((window.scrollY > 350) && (window.scrollY < 750)) {
+      	document.getElementById("movepage1").style.color = "#5D5D5D";
+        document.getElementById("movepage2").style.color = "#008000";
+        document.getElementById("movepage3").style.color = "#5D5D5D";
+        document.getElementById("movepage4").style.color = "#5D5D5D";
+        document.getElementById("movepage1").style.fontSize = "22px";
+      	document.getElementById("movepage2").style.fontSize = "30px";
+      	document.getElementById("movepage3").style.fontSize = "22px";
+      	document.getElementById("movepage4").style.fontSize = "22px";
+	} else if ((window.scrollY > 751) && (window.scrollY < 950)) {
+      	document.getElementById("movepage1").style.color = "#5D5D5D";
+        document.getElementById("movepage2").style.color = "#5D5D5D";
+        document.getElementById("movepage3").style.color = "#008000";
+        document.getElementById("movepage4").style.color = "#5D5D5D";
+        document.getElementById("movepage1").style.fontSize = "22px";
+      	document.getElementById("movepage2").style.fontSize = "22px";
+      	document.getElementById("movepage3").style.fontSize = "30px";
+      	document.getElementById("movepage4").style.fontSize = "22px";
+	} else if ((window.scrollY > 951) && (window.scrollY < 1100)) {
+      	document.getElementById("movepage1").style.color = "#5D5D5D";
+        document.getElementById("movepage2").style.color = "#5D5D5D";
+        document.getElementById("movepage3").style.color = "#5D5D5D";
+        document.getElementById("movepage4").style.color = "#008000";
+        document.getElementById("movepage1").style.fontSize = "22px";
+      	document.getElementById("movepage2").style.fontSize = "22px";
+      	document.getElementById("movepage3").style.fontSize = "22px";
+      	document.getElementById("movepage4").style.fontSize = "30px";
+	}
+}
    
 $(document).ready(function(){
 	 $.ajax({
      	type:"POST",
      	url: "../payment/getOrderList",
      	data : {"userid" : $("#userid").val()},
-     	success:function(result){
+     	success:function(result){100000 // 100,000
      		let html = "<tr style='text-align:left; font-size:18px;'><th width='300px;'>주문 번호</th><th width='150px'>결제 금액</th><th width='150px'>결제 수단</th><th width='300px'>결제 일시</th></tr>"
      		$.each(result,function(i,item){
      			html += "<tr style='text-align:left; font-size:15px;'><td>"+result[i].orderno+"</td><td>"+result[i].amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>"
@@ -462,8 +491,14 @@ $(document).ready(function(){
      				}) +"</td></tr>"
      		})	
      		$("#mypage_card_right_orderlist").html(html);
+     		if (result == '') {
+     			$("#mypage_card_right_dropdown_box").hide();
+     		} else {
+     			$("#mypage_card_right_dropdown_box").show();
+     		}
      	}
   	});
+	 
    $("#mypage_card_right_orderlist").hide();
    $("#mypage_card_right_detail_dropdown_down_box").hide();
    $("#username").attr("disabled","disabled");
@@ -504,7 +539,7 @@ $(document).ready(function(){
       
    if ($("#login_mode").val() == 'pieca') {
       $("#basic_info_right_update").show();
-       $("#chg_password").attr('type', 'password');
+      $("#chg_password").attr('type', 'password');
    } else if ($("#login_mode").val() == 'naver') {
        $("#chg_password").val('Naver회원은 이용 불가능 합니다.');
        $("#delete_password").val('Naver회원은 보안코드로 탈퇴 가능 합니다.');
@@ -534,7 +569,7 @@ $(document).ready(function(){
    
    $("#show_update").click(function(){
       var birthday = $("#birthday").val();
-         var email_af = $("#email_af").val();
+      var email_af = $("#email_af").val();
       
          $("#start_name").val($("#username").val());
          $("#start_birthday").val(birthday);
@@ -627,7 +662,6 @@ $(document).ready(function(){
 	   	$("#mypage_card_right_orderlist").fadeIn(1000);
 		const div = document.getElementById("mypage_card_right_orderlist");
 		const height = div.clientHeight;
-		console.log('height :: '+height)
 		$("#mypage_card_right_detail_dropdown_up_box").hide();
 		$("#mypage_card_right_detail_dropdown_down_box").show();
       	$("#mypage_card_wrapper").css("height",380+height);
@@ -639,7 +673,6 @@ $(document).ready(function(){
 	   	$("#mypage_card_right_orderlist").fadeOut(100);
 		const div = document.getElementById("mypage_card_right_orderlist");
 		const height = div.clientHeight;
-		console.log('height :: '+height)
 		$("#mypage_card_right_detail_dropdown_up_box").show();
 		$("#mypage_card_right_detail_dropdown_down_box").hide();
 		setTimeout(function() {
@@ -760,8 +793,8 @@ function upSubmitChk() {
    if ((mode_email == 'enable') && (mode_phone == 'enable') &&
    (mode_pass == 'enable') && (mode_name == 'enable')) {
       $("#up_submit").removeAttr("disabled");
-      $("#up_submit").css("background-color","#2196F3");
-      $("#up_submit").css("border","2px solid #2196F3");
+      $("#up_submit").css("background-color","#008000");
+      $("#up_submit").css("border","2px solid #008000");
    } else {
       $("#up_submit").attr("disabled","disabled");
       $("#up_submit").css("background-color","#D5D5D5");
@@ -813,7 +846,7 @@ function chg_pwCheck(password){
             $("#chgpass2").css("background-color","#D5D5D5");
          }
       }
-   });   
+   });
 }
 
 function delete_pwCheck(password){
@@ -846,27 +879,25 @@ function delete_pwCheck(password){
             $("#basic_delete_right_password_check_logo").hide();
             security_codeChk()
          }
-         
       }
    });   
 }
 
 function security_codeChk(){
-   var security_code = $("#security_code").val();
-   var security_code2 = $("#security_code2").val();
-   
-   if ((security_code == security_code2) && (security_code != '')){
-      $("#delete_check2").show(500);
-      $("#basic_delete_wrapper").css("height","225px");
-      $("#basic_delete_right_submit_desc").show();
-      $("#basic_delete_right_submit_btn").show();
-      $("#delete_submit").removeAttr("disabled");
-   } else {
-      $("#delete_check2").hide(500);
-      $("#basic_delete_wrapper").css("height","160px");
-      $("#basic_delete_right_submit_desc").hide();
-      $("#basic_delete_right_submit_btn").hide();
-      $("#delete_submit").attr("disabled","disabled");
+	var security_code = $("#security_code").val();
+	var security_code2 = $("#security_code2").val();
+	if ((security_code == security_code2) && (security_code != '')){
+		$("#delete_check2").show(500);
+		$("#basic_delete_wrapper").css("height","225px");
+     	$("#basic_delete_right_submit_desc").show();
+      	$("#basic_delete_right_submit_btn").show();
+      	$("#delete_submit").removeAttr("disabled");
+   	} else {
+      	$("#delete_check2").hide(500);
+      	$("#basic_delete_wrapper").css("height","160px");
+      	$("#basic_delete_right_submit_desc").hide();
+      	$("#basic_delete_right_submit_btn").hide();
+      	$("#delete_submit").attr("disabled","disabled");
    }
 }
 
@@ -879,7 +910,7 @@ function getRandomString() {
        randomString += letters.charAt(Math.floor(Math.random() * letters.length));
      }
      $('#security_code').val(randomString);
-   }
+}
 
 function preventCopy(e) {
      e = e || window.event;
@@ -890,7 +921,7 @@ function preventCopy(e) {
      }
    }
 
-   $("input").on("copy", preventCopy);
+$("input").on("copy", preventCopy);
    
 
 function passValid(){
@@ -944,8 +975,8 @@ function passValid(){
    if (chgpass != "" || chgpass2 != "") {
       if ((chgpass == chgpass2)) {
          $("#pw_submit").removeAttr("disabled");
-         $("#pw_submit").css("background-color","#2196F3");
-         $("#pw_submit").css("border","2px solid #2196F3");
+         $("#pw_submit").css("background-color","#008000");
+         $("#pw_submit").css("border","2px solid #008000");
       } else if (chgpass != chgpass2) {
          $("#pw_submit").attr("disabled","disabled");
          $("#pw_submit").css("background-color","#D5D5D5");

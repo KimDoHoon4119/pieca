@@ -62,7 +62,7 @@
 <script type="text/javascript">
 //$("#payment_left_input_box").hide();
 function numberWithCommas(balance) {
-  return balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	return balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 	
 $(document).ready(function(){
@@ -72,7 +72,11 @@ $(document).ready(function(){
       	data : {"userid" : $("#payment_hidden_userid").val()},
       	success:function(result){
       		console.log(result)
-      		$("#payment_left_balance_now").text(numberWithCommas(result)+'원');
+      		if (result != '') {
+      			$("#payment_left_balance_now").text(numberWithCommas(result)+'원');
+      		} else {
+      			$("#payment_left_balance_now").text(numberWithCommas(0)+'원');
+      		}
       	}
    	});   
 });
@@ -86,37 +90,6 @@ function balanceAfter() {
 	console.log(totalValue);
 	  $("#payment_left_balance_after").text(numberWithCommas(totalValue)+'원');
 	}
-
-/*
-$(function(){
-   $("#payment_left_select").change(function() {
-      if($("#payment_left_select").val() == "direct") {
-         $("#payment_left_input_box").show();
-      } else {
-         $("#payment_left_input_box").hide();
-         $("#payment_left_input").val('');
-         $("#payment_left_input_error").text('');
-      }
-   }) 
-});
-
-function payment_inputChk() {
-   const payment = $("#payment_left_input").val();
-   const reg = /^[0-9]+$/;
-   
-   if(reg.test(payment)) {
-      $("#payment_left_input_error").text('충전 가능한 금액입니다.');
-      $("#payment_left_input_error").css("color","green");
-       $("#mode_name").val("enable");
-   } else if (!reg.test(payment)) {
-      $("#payment_left_input_error").text('숫자만 입력 해주세요.');
-      $("#payment_left_input_error").css("color","red");
-   }
-   const payment_formatted = payment.replace(/(\d{3})(?=\d)/g, '$1,');
-   $("#payment_left_input").val(payment_formatted);
-}
-*/
-
 
 function kakaopay() {
 	let IMP = window.IMP
@@ -155,6 +128,7 @@ function kakao(json) {
 		 msg += "\n:상점ID : " + rsp.merchant_uid
 		 msg += "\n:결제금액 : " + rsp.paid_amount
 		 alert(msg)
+         opener.document.location.reload();
          self.close();
       } else {
          alert("결제 실패:" + rsp.error_msg)

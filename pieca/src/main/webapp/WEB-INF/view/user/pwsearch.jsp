@@ -81,9 +81,10 @@ function pwSend() {
 	opener.document.loginform.password.value='${result}';
 	self.close();
 	
-	var result = document.getElementById("result")
+	var result = document.getElementById("pwsearch_result")
 	result.select();
 	document.execCommand("copy");
+	
 }
 
 $(document).ready(function () {
@@ -151,8 +152,8 @@ function idChk() {
 	console.log(email)
 	if ((userid == "enable") && (email == "enable") && (phone == "enable")) {
 		$("#pwsearch_submit").attr("disabled",false);
-		$("#pwsearch_submit").css("background-color","#2196F3");		
-		$("#pwsearch_submit").css("border","2px solid #2196F3");		
+		$("#pwsearch_submit").css("background-color","#008000");		
+		$("#pwsearch_submit").css("border","2px solid #008000");		
 	} else {
 		$("#pwsearch_submit").attr("disabled",true);
 		$("#pwsearch_submit").css("background-color","#D5D5D5");

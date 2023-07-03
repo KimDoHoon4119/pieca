@@ -1,8 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%-- /shop1/src/main/webapp/WEB-INF/view/user/idsearch.jsp 
-     1. sitemesh 대상페이지 아님
-     2. idsearch, pwsearch를 하나의 controller에서 구현 --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -128,8 +124,8 @@ function idChk() {
 	console.log(email)
 	if ((email == "enable") && (phone == "enable")) {
 		$("#idsearch_submit").attr("disabled",false);
-		$("#idsearch_submit").css("background-color","#2196F3");		
-		$("#idsearch_submit").css("border","2px solid #2196F3");		
+		$("#idsearch_submit").css("background-color","#008000");		
+		$("#idsearch_submit").css("border","2px solid #008000");		
 	} else {
 		$("#idsearch_submit").attr("disabled",true);
 		$("#idsearch_submit").css("background-color","#D5D5D5");

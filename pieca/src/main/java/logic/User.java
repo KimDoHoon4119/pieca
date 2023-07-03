@@ -36,6 +36,8 @@ public class User {
 	@Email(message="email 형식으로 입력하세요.")
 	private String email;
 	
+	private String card;
+	
  //입력받은 형식을 format에 맞춰서 Date타입으로 변환	
 	@Past(message="생일은 과거 날짜만 가능합니다.")
 	@DateTimeFormat(pattern="yyyy-MM-dd")

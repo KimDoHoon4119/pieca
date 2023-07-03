@@ -73,29 +73,39 @@ public class PaymentController {
 	@ResponseBody
 	public Boolean insertkakaopay(String orderno, String userid, String amount) {
 		Date date = new Date();
-		payment.setOrderno(orderno);
-		payment.setUserid(userid);
-		payment.setAmount(amount);
-		payment.setType("kakao pay");
-		payment.setStatus("success");
-		service.payInsert(payment);
-		return true;
+		
+		if (userid == null) {
+			return false;
+		}
+		
+		try {
+			payment.setOrderno(orderno);
+			payment.setUserid(userid);
+			payment.setAmount(amount);
+			payment.setType("kakao pay");
+			payment.setStatus("success");
+			service.payInsert(payment);
+			return true;
+		} catch (Exception e) {}
+		
+		return false;
 	}
 
 	@RequestMapping("getBalance")
 	@ResponseBody
 	public String getBalance(String userid) {
-		System.out.println("gB userid :: "+userid);
-		String balance = service.getBalance(userid);
-		return balance;
+		try {
+			String balance = service.getBalance(userid);
+			return balance;
+		} catch (Exception e) {}
+		
+		return "redirect:payment";
 	}
 	
 	@RequestMapping("getOrderList")
 	@ResponseBody
 	public List<Payment> orderlist(String userid) {
-		ModelAndView mav = new ModelAndView();
 		List<Payment> itemList = service.paymentList(userid);
-		mav.addObject("itemList",itemList);
 		
 		return itemList;	
 	}

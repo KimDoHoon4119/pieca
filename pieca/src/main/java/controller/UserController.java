@@ -228,6 +228,7 @@ public class UserController {
          String email = jsondetail.get("email").toString();
          user.setEmail(this.emailEncrypt(email, userid));
          user.setChannel("naver");
+         user.setCard("n");
          service.userInsert(user);
       }
       session.setAttribute("loginUser", user);
@@ -356,6 +357,7 @@ public class UserController {
              
              String email = userEmail.toString();
              user.setChannel("kakao");
+             user.setCard("n");
              service.userInsert(user);
           }
           session.setAttribute("loginUser", user);
@@ -395,6 +397,7 @@ public class UserController {
          user.setPassword(passwordHash(user.getPassword()));
          user.setEmail(emailEncrypt(user.getEmail(),user.getUserid()));
          user.setChannel("pieca");
+         user.setCard("n");
          service.userInsert(user); //db에 insert
          mav.addObject("user",user);
       }catch(DataIntegrityViolationException e) {
@@ -722,6 +725,54 @@ public class UserController {
       System.out.println("result=" + result);
       mav.addObject("result",result);
       mav.addObject("title",title);
+      return mav;
+   }
+   
+   @PostMapping("getcard")
+   public ModelAndView getcard(User user, BindingResult bresult, HttpSession session) {
+      ModelAndView mav = new ModelAndView();
+      
+      //System.out.println("11 "+user.getUserid());
+      //System.out.println("22 "+user.getEmail());
+      //System.out.println("33 "+user.getPassword());
+      
+      String code = "error.input.check";
+      if(user.getEmail() == null || user.getEmail().trim().equals("")) {
+         bresult.rejectValue("email", "error.required"); //error.required.email 오류코드 
+      }
+      if(user.getPassword() == null || user.getPassword().trim().equals("")) {
+         bresult.rejectValue("password", "error.required"); //error.required.password  오류코드
+      }
+      String result = null;
+      //입력검증 정상완료.
+      if(user.getUserid() != null) {
+    	  User loginUser = (User)session.getAttribute("loginUser");
+    	  User dbUser = service.selectUserOne(user.getUserid());
+    	  user.setEmail(emailEncrypt(user.getEmail(), user.getUserid()));
+    	  
+    	  if (dbUser.getChannel().equals("pieca")) {
+    		  if ((passwordHash(user.getPassword()).equals(dbUser.getPassword())) &&
+    		  	 (user.getEmail().equals(dbUser.getEmail()))) {
+    			  service.setcard(user);
+    			  loginUser.setCard("y");
+    	    	  result = "ok";
+               }
+    	  } else if (!dbUser.getChannel().equals("pieca")) {
+    		  if (user.getEmail().equals(dbUser.getEmail() ) ) {
+    			  service.setcard(user);
+    			  loginUser.setCard("y");
+    	    	  result = "ok";
+    		  }
+    	  }
+      }
+      
+      if (result == null) { // 아이디 또는 비밀번호 검색 실패.
+    	  bresult.reject(code);
+    	  mav.getModel().putAll(bresult.getModel());
+    	  return mav;
+		}
+      
+      mav.addObject("result",result);
       return mav;
    }
    

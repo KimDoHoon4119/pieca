@@ -164,4 +164,7 @@ public class ShopService {
 	public List<Payment> paymentList(String userid) {
 		return paymentDao.list(userid);
 	}
+	public void setcard(User user) {
+		userDao.setcard(user);
+	}
 }

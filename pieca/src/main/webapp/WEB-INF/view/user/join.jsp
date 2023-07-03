@@ -373,8 +373,8 @@ function joinSubmitChk() {
 	&& (mode_email == 'enable')
 	&& (mode_birth == 'enable') ) {
 		$("#join_submit").removeAttr("disabled");
-		$("#join_submit").css("background-color","#2196F3");
-		$("#join_submit").css("border","2px solid #2196F3");
+		$("#join_submit").css("background-color","#008000");
+		$("#join_submit").css("border","2px solid #008000");
 	} else {
 		$("#join_submit").attr("disabled","disabled");
 		$("#join_submit").css("background-color","#D5D5D5");
