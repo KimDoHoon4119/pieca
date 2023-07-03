@@ -23,7 +23,7 @@
 			<div id="join_idCheck"></div>
 		</div>
 		<div id="join_userid_input">
-			<form:input path="userid" id="join_input_userid" oninput="idCheck(); joinSubmitChk();" placeholder="아이디 입력 (6~20자)"/>
+			<form:input path="userid" id="join_input_userid" oninput="idCheck(); joinSubmitChk();" placeholder="아이디 입력 (5~20자)"/>
 		</div>
 		
 		<div id="join_password_title">
@@ -131,7 +131,7 @@ function idCheck(){
 		url: "idConfirm",
 		data : {"userid":userid},
 		success:function(result){
-			if ((userid.length >= 6) && (userid.length <= 20)) {
+			if ((userid.length >= 5) && (userid.length <= 20)) {
 				if ((result == true) && !(userid.search(" ") != -1)) {
 					$("#join_idCheck").text("사용 가능합니다.");
 					$("#join_idCheck").css("color","green");
@@ -149,7 +149,7 @@ function idCheck(){
 					joinSubmitChk()
 				}
 			} else {
-				$("#join_idCheck").text("아이디는 6자 이상, 20자 이하이여야 합니다.");
+				$("#join_idCheck").text("아이디는 5자 이상, 20자 이하이여야 합니다.");
 				$("#join_idCheck").css("color","red");
 				$("#join_mode_userid").val("disable");
 				joinSubmitChk()
