@@ -17,8 +17,6 @@
   transition-duration: 0.8s;
 }
 
-
-
 </style>
 </head>
 <body>
@@ -62,7 +60,7 @@
 					<p>고속 ${item.high_min_fuel / 10} ~ ${item.high_max_fuel / 10}</p>
 				</div>
 				
-				<div id="car_list_etc" style="display:none;">
+				<div id="car_list_etc" style="">
 					<div id="car_list_output_main" style="float:left; width:50%; height: 45px; font-size:18px; margin: 0% 0% 0% 15%">
 						출력 : ${item.min_output} ~ ${item.max_output}kW
 					</div>
