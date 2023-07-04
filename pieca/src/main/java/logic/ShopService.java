@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dao.BoardDao;
 import dao.CarDao;
+import dao.CarlikeDao;
 import dao.CommentDao;
 import dao.PaymentDao;
 import dao.UserDao;
@@ -30,6 +31,8 @@ public class ShopService {
 	private PaymentDao paymentDao;
 	@Autowired
 	private CarDao carDao;
+	@Autowired
+	private CarlikeDao carlikeDao;
 	@Autowired
 	private CommentDao commDao;
 	
@@ -198,6 +201,17 @@ public class ShopService {
 	
 	public void recog(Integer num) {
 		boardDao.recog(num);
+	}
+	
+	public Carlike selectUserlike(Carlike carlike) {
+		return carlikeDao.select(carlike);
+	}
+	public void likeInsert(Carlike carlike) {
+		carlikeDao.insert(carlike);
+	}
+	public void likeDelete(Carlike carlike) {
+		carlikeDao.delete(carlike);
+		
 	}
 	
 }

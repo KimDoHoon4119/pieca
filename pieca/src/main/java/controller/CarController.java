@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import logic.Car;
 import logic.ShopService;
+import logic.User;
 @Controller //@Component + Controller 기능
 @RequestMapping("car")  //http://localhost:8080/shop1/item/*
 public class CarController {
@@ -28,10 +30,10 @@ public class CarController {
 		//               view에 전송할 데이터 + view 설정 
 		// view 설정이 안된 경우 : url 과 동일. item/list 뷰로 설정 
 		ModelAndView mav = new ModelAndView();
+		
 		//itemList : item 테이블의 모든 정보를 Item 객체 List로 저장
 		List<Car> carList = service.carList();
 		mav.addObject("carList",carList); //데이터 저장
-                                    		//view : item/list 
 		return mav;	
 	}
 	/*

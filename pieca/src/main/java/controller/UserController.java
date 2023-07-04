@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.LoginException;
+import logic.Carlike;
 import logic.ShopService;
 import logic.User;
 import util.CipherUtil;
@@ -46,6 +47,8 @@ public class UserController {
    private ShopService service;
    @Autowired
    private CipherUtil util;
+   @Autowired
+   private Carlike carlike;
 //================= private  메서드
    private String passwordHash(String password) {
       try {
@@ -456,9 +459,7 @@ public class UserController {
    @RequestMapping("mypage")
    public ModelAndView idCheckMypage(String userid,HttpSession session) {
       ModelAndView mav = new ModelAndView();
-      System.out.println("마이페이지 유저아이디 :: "+userid);
       User user = service.selectUserOne(userid);
-      System.out.println("마이페이지 User :: "+user);
       user.setEmail(emailDecrypt(user));  //이메일 복호화
       mav.addObject("user", user); //회원정보데이터
       return mav;
@@ -771,9 +772,55 @@ public class UserController {
     	  mav.getModel().putAll(bresult.getModel());
     	  return mav;
 		}
-      
       mav.addObject("result",result);
       return mav;
+   }
+
+   @RequestMapping("carlike")
+   @ResponseBody
+   public Boolean carlike(int carno, String userid) {
+      carlike.setCarno(carno);
+      carlike.setUserid(userid);
+      Boolean check = true;
+      
+      Carlike dbUser = service.selectUserlike(carlike);
+      if (dbUser == null) {
+    	  service.likeInsert(carlike);
+    	  check = false;
+    	  return check;
+      }
+      
+      if ((dbUser.getUserid().equals(userid)) && (dbUser.getCarno() == carno)) {
+    	  service.likeDelete(carlike);
+    	  check = true;
+    	  return check;
+      }
+      
+      return check;
+   }
+   
+   @RequestMapping("carlikedec")
+   @ResponseBody
+   public Boolean carlikedec(int carno, String userid) {
+      carlike.setCarno(carno);
+      carlike.setUserid(userid);
+      Boolean check = null;
+      
+      Carlike dbUser = service.selectUserlike(carlike);
+      if (dbUser == null) {
+    	  check = false;
+    	  return check;
+      } else {
+    	  check = true;
+    	  return check;
+      }
+      
+//      if ((dbUser.getUserid().equals(userid)) && (dbUser.getCarno() == carno)) {
+//    	  check = true;
+//    	  return check;
+//      }
+      
+//      return check;
    }
    
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Select;
 
 import logic.Car;
+import logic.Carlike;
 
 public interface CarMapper {
 
@@ -29,4 +30,5 @@ public interface CarMapper {
 	@Delete("delete from item where id=#{id}")
 	void delete(Map<String, Object> param);
 	*/
+
 }

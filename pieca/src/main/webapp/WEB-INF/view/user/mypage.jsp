@@ -809,7 +809,7 @@ function up_pwCheck(password){
       data : {"userid":$("#userid").val(),
             "password": password },
       success:function(result){
-         if (result == true) {
+         if (result == true) { // true == 승인 상태
             $("#mode_pass").val("enable");
             $("#up_check").show(500);
          } else {
