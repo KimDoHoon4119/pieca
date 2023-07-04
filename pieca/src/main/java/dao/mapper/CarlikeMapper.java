@@ -21,4 +21,7 @@ public interface CarlikeMapper {
 	
 	@Delete("delete from carlike where userid=#{userid} and carno=#{carno}")
 	void delete(Carlike carlike);
+	
+	@Select("select count(carno) from carlike where carno=#{carno}")
+	int selectliketotal(Carlike carlike);
 }

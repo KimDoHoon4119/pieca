@@ -22,4 +22,6 @@ public class CarDao {
 	public List<Car> list() {
 		return template.getMapper(cls).select(null); //item 테이블의 전체 내용을 Item 객체의 목록 리턴 
 	}
+
+
 }

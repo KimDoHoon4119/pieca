@@ -166,7 +166,6 @@ public class ShopService {
 	}
 	public String getBalance(String userid) {
 		return paymentDao.getBalance(userid);
-		
 	}
 	public List<Payment> paymentList(String userid) {
 		return paymentDao.list(userid);
@@ -213,5 +212,10 @@ public class ShopService {
 		carlikeDao.delete(carlike);
 		
 	}
+	public int selectliketotal(Carlike carlike) {
+		return carlikeDao.selectliketotal(carlike);
+	}
+	
+	
 	
 }

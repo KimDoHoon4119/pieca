@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import dao.mapper.CarlikeMapper;
 import logic.Carlike;
-
 @Repository // @Component + dao 기능(데이터베이스연결)
 public class CarlikeDao {
 	
@@ -31,5 +30,13 @@ public class CarlikeDao {
 		template.getMapper(cls).delete(carlike);
 		
 	}
+
+
+	public int selectliketotal(Carlike carlike) {
+		return template.getMapper(cls).selectliketotal(carlike);
+	}
+
+
+
 
 }

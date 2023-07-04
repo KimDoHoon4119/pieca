@@ -776,44 +776,9 @@ public class UserController {
       return mav;
    }
 
-   @RequestMapping("carlike")
-   @ResponseBody
-   public Boolean carlike(int carno, String userid) {
-      carlike.setCarno(carno);
-      carlike.setUserid(userid);
-      Boolean check = true;
-      
-      Carlike dbUser = service.selectUserlike(carlike);
-      if (dbUser == null) {
-    	  service.likeInsert(carlike);
-    	  check = false;
-    	  return check;
-      }
-      
-      if ((dbUser.getUserid().equals(userid)) && (dbUser.getCarno() == carno)) {
-    	  service.likeDelete(carlike);
-    	  check = true;
-    	  return check;
-      }
-      
-      return check;
-   }
+
    
-   @RequestMapping("carlikedec")
-   @ResponseBody
-   public Boolean carlikedec(int carno, String userid) {
-      carlike.setCarno(carno);
-      carlike.setUserid(userid);
-      Boolean check = null;
-      
-      Carlike dbUser = service.selectUserlike(carlike);
-      if (dbUser == null) {
-    	  check = false;
-    	  return check;
-      } else {
-    	  check = true;
-    	  return check;
-      }
+   
       
 //      if ((dbUser.getUserid().equals(userid)) && (dbUser.getCarno() == carno)) {
 //    	  check = true;
@@ -821,6 +786,5 @@ public class UserController {
 //      }
       
 //      return check;
-   }
    
 }

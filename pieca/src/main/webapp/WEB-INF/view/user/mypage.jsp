@@ -21,9 +21,9 @@
 		<a onclick="movePage(1);" id="movepage1" style="cursor: pointer;">
 			<span class="fa-regular fa-user"></span> 회원 정보</a>
 		<a onclick="movePage(2);" id="movepage2" style="cursor: pointer;">
-			<span class="fa-solid fa-lock"></span> 비밀번호 변경</a>
+			<span class="fa-solid fa-lock"></span> PIECA CARD</a>
 		<a onclick="movePage(3);" id="movepage3" style="cursor: pointer;">
-			<span class="fa-regular fa-credit-card"></span> PIECA CARD</a>
+			<span class="fa-regular fa-credit-card"></span> 비밀번호 변경</a>
 		<a onclick="movePage(4);" id="movepage4" style="cursor: pointer;">
 			<span class="fa-regular fa-circle-xmark"></span> 회원 탈퇴</a>			
 	</div>
@@ -229,6 +229,51 @@
 		<%-- basic_info_wrapper --%>
 		<%-- basic_info_wrapper --%>
 		<%-- basic_info_wrapper --%>
+		
+		<%-- 카드결제 --%>
+		<div id="mypage_card_wrapper" style="transition-duration: 0.5s; border: 1px solid #FFFFFF; border-radius: 5px; margin-bottom: 50px; margin-top: 200px; box-shadow: 0px 2px 4px 0px #1B1B1B; height: 280px;">
+			<div id="mypage_card_left_inner" style="float: left; width: 20%; height: 230px; margin: 20px 0px 0px 50px;">
+				<div id="mypage_card_left_title" style="font-size: 24px;">
+					<span><b>PIECA CARD</b></span>
+				</div>
+				<div id="mypage_card_left_desc" style="font-size: 15px;">
+					<p>카드로 다양한 혜택을 누리세요.</p>
+				</div><br><br>
+				<c:if test="${loginUser.card != 'y' }">
+					<button onclick="win_open('getcard')" style="width: 170px; background-color: #008000; border: 2px solid #008000; border-radius: 6px; color: #FFFFFF; cursor: pointer;">발급하기</button>
+				</c:if>
+				<c:if test="${loginUser.card == 'y' }">
+					<button onclick="win_open('payment')" style="width: 170px; background-color: #008000; border: 2px solid #008000; border-radius: 6px; color: #FFFFFF; cursor: pointer;">충전하기</button>
+				</c:if>
+			</div>
+
+			<div id="mypage_card_right_inner" style="float: left; width: 55%; height: 300px; margin: 10px 0px 0px 148px;">
+				<c:if test="${loginUser.card != 'y' }"> 
+					<div id="mypage_card_right_card_box" style="width: 430px; position: relative; float: left; margin: 10px 0px 0px 0px;">
+						<div id="mypage_card_right_card" style="display:flex; width: 420px; height: 220px; font-size:35px; border: 2px dashed #747474; border-radius: 6px; justify-content: center; align-items: center;">+</div>
+					</div>
+				</c:if>
+				
+				<c:if test="${loginUser.card == 'y' }"> 
+					<div id="mypage_card_right_card_box" style="width: 430px; position: relative; float: left; margin: 10px 0px 0px 0px;">
+						<img src="../img/mypage_card2.png" id="mypage_card_right_card" style="width: 420px; height: 220px; border: 2px solid #747474; border-radius: 6px;">
+					</div>
+				
+				<div id="mypage_card_right_dropdown_box" style="width: 800px; text-align: center; position: relative; float: left;">
+					<div id="mypage_card_right_detail_dropdown_up_box" style="width: 50px; position: relative; float: left; padding-top: 5px;">
+						<span id="mypage_card_right_detail_dropdown_up" class="fa-solid fa-angle-down" style="color: #747474"></span>
+					</div>
+					<div id="mypage_card_right_detail_dropdown_down_box" style="width: 50px; position: relative; float: left; padding-top: 5px;">
+						<span id="mypage_card_right_detail_dropdown_down" class="fa-solid fa-angle-up" style="color: #747474"></span>
+					</div>
+				</div>
+				</c:if>
+			</div>
+			<div id="mypage_card_right_orderlist_box" style="width: 800px; position: relative; float: left; margin: 0px 0px 0px 50px;">
+				<div id="mypage_card_right_orderlist"></div>
+			</div>
+		</div>
+		
 		<%-- 비밀번호 수정 --%>
 		<div id="basic_pass_wrapper">
 
@@ -295,50 +340,6 @@
 			</div>
 		</div>
 		
-		<%-- 카드결제 --%>
-		<div id="mypage_card_wrapper" style="transition-duration: 0.5s; border: 1px solid #FFFFFF; border-radius: 5px; margin-bottom: 50px; margin-top: 200px; box-shadow: 0px 2px 4px 0px #1B1B1B; height: 280px;">
-			<div id="mypage_card_left_inner" style="float: left; width: 20%; height: 230px; margin: 20px 0px 0px 50px;">
-				<div id="mypage_card_left_title" style="font-size: 24px;">
-					<span><b>PIECA CARD</b></span>
-				</div>
-				<div id="mypage_card_left_desc" style="font-size: 15px;">
-					<p>카드로 다양한 혜택을 누리세요.</p>
-				</div><br><br>
-				<c:if test="${loginUser.card != 'y' }">
-					<button onclick="win_open('getcard')" style="width: 170px; background-color: #008000; border: 2px solid #008000; border-radius: 6px; color: #FFFFFF; cursor: pointer;">발급하기</button>
-				</c:if>
-				<c:if test="${loginUser.card == 'y' }">
-					<button onclick="win_open('payment')" style="width: 170px; background-color: #008000; border: 2px solid #008000; border-radius: 6px; color: #FFFFFF; cursor: pointer;">충전하기</button>
-				</c:if>
-			</div>
-
-			<div id="mypage_card_right_inner" style="float: left; width: 55%; height: 300px; margin: 10px 0px 0px 148px;">
-				<c:if test="${loginUser.card != 'y' }"> 
-					<div id="mypage_card_right_card_box" style="width: 430px; position: relative; float: left; margin: 10px 0px 0px 0px;">
-						<div id="mypage_card_right_card" style="display:flex; width: 420px; height: 220px; font-size:35px; border: 2px dashed #747474; border-radius: 6px; justify-content: center; align-items: center;">+</div>
-					</div>
-				</c:if>
-				
-				<c:if test="${loginUser.card == 'y' }"> 
-					<div id="mypage_card_right_card_box" style="width: 430px; position: relative; float: left; margin: 10px 0px 0px 0px;">
-						<img src="../img/mypage_card2.png" id="mypage_card_right_card" style="width: 420px; height: 220px; border: 2px solid #747474; border-radius: 6px;">
-					</div>
-				
-				<div id="mypage_card_right_dropdown_box" style="width: 800px; text-align: center; position: relative; float: left;">
-					<div id="mypage_card_right_detail_dropdown_up_box" style="width: 50px; position: relative; float: left; padding-top: 5px;">
-						<span id="mypage_card_right_detail_dropdown_up" class="fa-solid fa-angle-down" style="color: #747474"></span>
-					</div>
-					<div id="mypage_card_right_detail_dropdown_down_box" style="width: 50px; position: relative; float: left; padding-top: 5px;">
-						<span id="mypage_card_right_detail_dropdown_down" class="fa-solid fa-angle-up" style="color: #747474"></span>
-					</div>
-				</div>
-				</c:if>
-			</div>
-			<div id="mypage_card_right_orderlist_box" style="width: 800px; position: relative; float: left; margin: 0px 0px 0px 50px;">
-				<div id="mypage_card_right_orderlist"></div>
-			</div>
-		</div>
-
 		<%-- 회원 탈퇴 --%>
 		<div id="basic_delete_wrapper">
 			<div id="basic_delete_left_inner">
@@ -427,7 +428,7 @@ function movePage(decesion) {
 	} else if (decesion == '2') {
 		window.scrollTo(0, 400);
 	} else if (decesion == '3') {
-		window.scrollTo(0, 800);
+		window.scrollTo(0, 850);
 	} else if (decesion == '4') {
 		window.scrollTo(0, 1100);
 	}
