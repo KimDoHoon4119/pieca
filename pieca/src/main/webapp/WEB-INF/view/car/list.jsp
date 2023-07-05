@@ -14,17 +14,18 @@
 <body>
 <div style="float:left; margin:5% 0% 0% 10%;">
 	<input type="hidden" id="car_list_userid" value="${loginUser.userid}">
+	${dbUser.carno}
 	<div id="car_list_out_container" style="float:left; width:40%; margin: 0% 0% 11% 0%;">
 		<c:forEach items="${carList}" var="item">
 		<c:if test="${item.no%2==1}">
 			<div id="car_list_in_container${item.no}" onload="test(${item.no})" onmouseover="zoom('${item.no}')"style="float:left; width:90%; cursor:pointer; border: 0px solid #747474; border-radius:6px; margin: 0% 0% 10% 10%; box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;">
 				<div id="car_list_title_box" >
-				
-				
-					<div id="car_list_mycar_box" style="background-color:red; float:left; width:100%; font-size:20px; margin:0% 0% 1% 0%;">
-						<button id="car_mycar${item.no}" onclick="mycar('${item.no}','${loginUser.userid}')" style="float:right; background-color: #FFFFFF; border:0px; cursor: pointer;"><i class="fa-solid fa-car"></i> 내 차량 추가</button>
-					</div>
 					
+					<div id="car_list_mycar_add_box" onclick="mycar('${item.no}','${loginUser.userid}')" style="text-align:right; background-color:red; float:left; width:100%; font-size:20px; margin:0% 0% 1% 0%;">
+					
+						<span id ="car_list_mycar_add${item.no}">내 차량 추가<i class="fa-regular fa-square-plus"></i></span>
+						<span id ="car_list_mycar${item.no}">내 차량<i class="fa-solid fa-car"></i></span>
+					</div>
 					
 					<c:if test="${item.imgcnt == 4}">
 						<div id="car_list_left_btn" onclick="imgLeft('${item.no}')" style="background-color:red; float:left; width:6%; height:247px;; padding: 16.5% 0% 0% 1%;">
@@ -539,19 +540,10 @@ function mycar(carno,userid){
 			success:function(result){
 				console.log(result)
 				if (result == true) {
+					$("#car_list_mycar"+carno).show()
+					$("#car_list_mycar_add"+carno).hide()
 				} else if (result == false){
 				}
-				/*
-				liketotal(carno)
-				$("#car_list_like_ok"+carno).css("opacity", 0);
-				$("#car_list_like_ok"+carno).animate({
-					opacity: 1
-				}, 300);
-				$("#car_list_like_no"+carno).css("opacity", 0);
-				$("#car_list_like_no"+carno).animate({
-					opacity: 1
-				}, 300);
-				*/
 			}
 		});
 	}

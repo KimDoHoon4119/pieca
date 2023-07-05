@@ -34,7 +34,7 @@ public class CarController {
 	@Autowired
 	private Mycar mycar;
 	@RequestMapping("list") // get,post 방식에 상관없이 호출
-	public ModelAndView list() {
+	public ModelAndView list(HttpSession session) {
 		// ModelAndView : Model + view
 		// view에 전송할 데이터 + view 설정
 		// view 설정이 안된 경우 : url 과 동일. item/list 뷰로 설정
@@ -43,11 +43,21 @@ public class CarController {
 		// itemList : item 테이블의 모든 정보를 Item 객체 List로 저장
 		List<Car> carList = service.carList();
 		
-		int maxnum = carList.size();
-		mav.addObject("carList", carList); // 데이터 저장
-		
-		mav.addObject("maxnum", maxnum); // 데이터 저장
-		return mav;
+		User loginUser = (User)session.getAttribute("loginUser");
+		if (session.getAttribute("loginUser") != null) {
+			Mycar dbUser = service.selectMycar(loginUser.getUserid());
+			System.out.println(dbUser);
+			int maxnum = carList.size();
+			mav.addObject("carList", carList); // 데이터 저장
+			mav.addObject("dbUser", dbUser); // 데이터 저장
+			mav.addObject("maxnum", maxnum); // 데이터 저장
+			return mav;
+		} else {
+			int maxnum = carList.size();
+			mav.addObject("carList", carList); // 데이터 저장
+			mav.addObject("maxnum", maxnum); // 데이터 저장
+			return mav;
+		}
 	}
 
 	@RequestMapping("carlike")
@@ -104,36 +114,17 @@ public class CarController {
 	@ResponseBody
 	public Boolean mycar(int carno, String userid) {
 		Boolean check = null;
-		mycar.setCarno(carno);
 		mycar.setUserid(userid);
-		Mycar dbUser = service.selectMycar(mycar);
-		
-		if (dbUser == null) {
-			System.out.println("추가 했음");
-			service.mycarInsert(mycar);
-			check = false;
-			return check;
-		}
-		
+		mycar.setCarno(carno);
+		Mycar dbUser = service.selectMycar(userid);
 		
 		if (dbUser.getUserid().equals(userid)) {
-			System.out.println("수정 했음");
 			service.mycarUpdate(mycar);
 			check = true;
 			return check;
 		}
 		
-		/*
-		
-		
-		if ((dbUser.getUserid().equals(userid)) && (dbUser.getCarno() == carno)) {
-			System.out.println("삭제 했음");
-			service.mycarDelete(mycar);
-			check = true;
-			return check;
-		}
-		*/
-		return check;
+		return false;
 	}
 	/*
 	 * //http://localhost:8080/shop1/item/detail?id=1

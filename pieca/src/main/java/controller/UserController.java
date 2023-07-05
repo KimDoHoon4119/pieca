@@ -234,6 +234,7 @@ public class UserController {
          user.setChannel("naver");
          user.setCard("n");
          service.userInsert(user);
+         service.mycarInsert(user.getUserid());
       }
       session.setAttribute("loginUser", user);
       return "redirect:mypage?userid="+user.getUserid();
@@ -363,6 +364,7 @@ public class UserController {
              user.setChannel("kakao");
              user.setCard("n");
              service.userInsert(user);
+             service.mycarInsert(user.getUserid());
           }
           session.setAttribute("loginUser", user);
           return "redirect:mypage?userid="+user.getUserid();
@@ -403,6 +405,7 @@ public class UserController {
          user.setChannel("pieca");
          user.setCard("n");
          service.userInsert(user); //db에 insert
+         service.mycarInsert(user.getUserid());
          mav.addObject("user",user);
       }catch(DataIntegrityViolationException e) {
    //DataIntegrityViolationException : db에서 중복 key 오류시 발생되는 예외 객체

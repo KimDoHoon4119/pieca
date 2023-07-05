@@ -230,11 +230,11 @@ public class ShopService {
 	
 	
 	// 차 장바구니
-	public Mycar selectMycar(Mycar mycar) {
-		return mycarDao.select(mycar);
+	public Mycar selectMycar(String userid) {
+		return mycarDao.select(userid);
 	}
-	public void mycarInsert(Mycar mycar) {
-		mycarDao.insert(mycar);
+	public void mycarInsert(String userid) {
+		mycarDao.insert(userid);
 	}
 	public void mycarDelete(Mycar mycar) {
 		mycarDao.delete(mycar);
