@@ -249,7 +249,7 @@
 				</c:if>
 				--%>
 			</div>
-
+			
 			<div id="mypage_car_right_inner" style="float: left; width: 55%; height: 300px; margin: 10px 0px 0px 148px;">
 				<c:if test="${loginUser.card != 'y' }">
 					<div id="mypage_car_right_card_box" style="width: 430px; position: relative; float: left; margin: 10px 0px 0px 0px;">
@@ -257,20 +257,26 @@
 					</div>
 				</c:if>
 				
-				<c:if test="${loginUser.card == 'y' }">
-					<div id="mypage_car_right_card_box" style="width: 430px; position: relative; float: left; margin: 10px 0px 0px 0px;">
-						<img src="../img/mypage_car2.png" id="mypage_car_right_card" style="width: 420px; height: 220px; border: 2px solid #747474; border-radius: 6px;">
-					</div>
+				<c:forEach items="${carList}" var="carItem">
+				<c:if test="${carData.carno > 0 }">
+					<c:if test="${carItem.no == carData.carno}"> 
+						<div id="mypage_car_right_card_box" style="width: 430px; position: relative; float: left; margin: 10px 0px 0px 0px;">
+							<img src="../img/${carItem.img }" id="mypage_car_right_card" style="width: 420px; height: 220px; border: 2px solid #747474; border-radius: 6px;">
+						</div>
 				
-				<div id="mypage_car_right_dropdown_box" style="width: 800px; text-align: center; position: relative; float: left;">
-					<div id="mypage_car_right_detail_dropdown_up_box" style="width: 50px; position: relative; float: left; padding-top: 5px;">
-						<span id="mypage_car_right_detail_dropdown_up" class="fa-solid fa-angle-down" style="color: #747474"></span>
+					<div id="mypage_car_right_dropdown_box" style="width: 800px; text-align: center; position: relative; float: left;">
+						<div id="mypage_car_right_detail_dropdown_up_box" style="width: 50px; position: relative; float: left; padding-top: 5px;">
+							<span id="mypage_car_right_detail_dropdown_up" class="fa-solid fa-angle-down" style="color: #747474"></span>
+						</div>
+						<div id="mypage_car_right_detail_dropdown_down_box" style="width: 50px; position: relative; float: left; padding-top: 5px;">
+							<span id="mypage_car_right_detail_dropdown_down" class="fa-solid fa-angle-up" style="color: #747474"></span>
+						</div>
 					</div>
-					<div id="mypage_car_right_detail_dropdown_down_box" style="width: 50px; position: relative; float: left; padding-top: 5px;">
-						<span id="mypage_car_right_detail_dropdown_down" class="fa-solid fa-angle-up" style="color: #747474"></span>
-					</div>
-				</div>
-				</c:if>
+					</c:if>
+					</c:if>
+				</c:forEach>
+				
+				
 			</div>
 			<div id="mypage_car_right_orderlist_box" style="width: 800px; position: relative; float: left; margin: 0px 0px 0px 50px;">
 				<div id="mypage_car_right_orderlist"></div>

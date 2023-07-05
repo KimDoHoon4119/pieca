@@ -112,19 +112,32 @@ public class CarController {
 	
 	@RequestMapping("mycar")
 	@ResponseBody
-	public Boolean mycar(int carno, String userid) {
-		Boolean check = null;
+	public int mycar(int carno, String userid) {
 		mycar.setUserid(userid);
 		mycar.setCarno(carno);
 		Mycar dbUser = service.selectMycar(userid);
 		
 		if (dbUser.getUserid().equals(userid)) {
 			service.mycarUpdate(mycar);
-			check = true;
-			return check;
+			return carno;
 		}
 		
-		return false;
+		return 0;
+	}
+	
+	@RequestMapping("mycardec")
+	@ResponseBody
+	public int mycardec(int carno, String userid) {
+		mycar.setUserid(userid);
+		mycar.setCarno(carno);
+		Mycar dbUser = service.selectMycar(userid);
+		System.out.println("dbUser mycardec ::" + dbUser.getCarno());
+		
+		if (dbUser.getUserid().equals(userid)) {
+			return dbUser.getCarno();
+		}
+		
+		return 0;
 	}
 	/*
 	 * //http://localhost:8080/shop1/item/detail?id=1

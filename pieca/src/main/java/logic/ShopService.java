@@ -228,7 +228,6 @@ public class ShopService {
 	}
 	
 	
-	
 	// 차 장바구니
 	public Mycar selectMycar(String userid) {
 		return mycarDao.select(userid);
@@ -242,6 +241,12 @@ public class ShopService {
 	public void mycarUpdate(Mycar mycar) {
 		mycarDao.update(mycar);
 	}
+	
+	public List<Carlike> selectLike(String userid) {
+		return carlikeDao.selectLike(userid);
+	}
+	
+	
 	
 	
 	

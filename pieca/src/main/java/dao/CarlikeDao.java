@@ -12,6 +12,7 @@ import dao.mapper.CarlikeMapper;
 import logic.Car;
 import logic.Carlike;
 import logic.Mycar;
+import logic.Payment;
 @Repository // @Component + dao 기능(데이터베이스연결)
 public class CarlikeDao {
 	
@@ -35,6 +36,12 @@ public class CarlikeDao {
 	public int selectliketotal(Carlike carlike) {
 		return template.getMapper(cls).selectliketotal(carlike);
 	}
+
+	public List<Carlike> selectLike(String userid) {
+		return template.getMapper(cls).selectLike(userid);
+	}
+
+	
 
 
 

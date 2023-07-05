@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.LoginException;
+import logic.Car;
 import logic.Carlike;
 import logic.Mycar;
 import logic.ShopService;
@@ -466,6 +467,18 @@ public class UserController {
       User user = service.selectUserOne(userid);
 //      Mycar car = service.selectMycar(userid);
       user.setEmail(emailDecrypt(user));  //이메일 복호화
+      List<Car> carList = service.carList();
+      System.out.println("111 :: "+carList);
+      
+      Mycar carData = service.selectMycar(user.getUserid());
+      System.out.println("222 :: "+carData);
+      
+      List<Carlike> carLikeData = service.selectLike(user.getUserid());
+      System.out.println("333 :: "+carLikeData);
+      
+	  mav.addObject("carList", carList); // 데이터 저장
+	  mav.addObject("carData", carData); // 데이터 저장
+	  mav.addObject("carLikeData", carLikeData); // 데이터 저장
       mav.addObject("user", user); //회원정보데이터
       return mav;
    }   
