@@ -19,7 +19,9 @@ import dao.BoardDao;
 import dao.CarDao;
 import dao.CarlikeDao;
 import dao.CommentDao;
+import dao.MycarDao;
 import dao.PaymentDao;
+import dao.RecogDao;
 import dao.UserDao;
 @Service   //@Component + Service(controller 기능과 dao 기능의 중간 역할 기능) 
 public class ShopService {
@@ -30,11 +32,15 @@ public class ShopService {
 	@Autowired
 	private PaymentDao paymentDao;
 	@Autowired
+	private CommentDao commDao;
+	@Autowired
 	private CarDao carDao;
 	@Autowired
 	private CarlikeDao carlikeDao;
 	@Autowired
-	private CommentDao commDao;
+	private MycarDao mycarDao;
+	@Autowired
+	private RecogDao recogDao;
 	
 	
 	public void uploadFileCreate(MultipartFile file, String path) {
@@ -54,7 +60,6 @@ public class ShopService {
 		userDao.insert(user);
 	}
 	public User selectUserOne(String userid) {
-		System.out.println("샵서비스 유저아이디 :: "+userid);
 		return userDao.selectOne(userid);
 	}
 	/*
@@ -198,10 +203,17 @@ public class ShopService {
 		return commDao.selectOne(num,seq);
 	}
 	
-	public void recog(Integer num) {
-		boardDao.recog(num);
+	public List<Recog> getRecog(Integer num) {
+		return recogDao.getRecog(num);      
+	}
+	public void doRecog(Integer num, int status) {
+		recogDao.doRecog(num, status);
+	}
+	public List<Recog> getRecog() {
+		return recogDao.getRecog();
 	}
 	
+	// 차 좋아요
 	public Carlike selectUserlike(Carlike carlike) {
 		return carlikeDao.select(carlike);
 	}
@@ -210,11 +222,27 @@ public class ShopService {
 	}
 	public void likeDelete(Carlike carlike) {
 		carlikeDao.delete(carlike);
-		
 	}
 	public int selectliketotal(Carlike carlike) {
 		return carlikeDao.selectliketotal(carlike);
 	}
+	
+	
+	
+	// 차 장바구니
+	public Mycar selectMycar(Mycar mycar) {
+		return mycarDao.select(mycar);
+	}
+	public void mycarInsert(Mycar mycar) {
+		mycarDao.insert(mycar);
+	}
+	public void mycarDelete(Mycar mycar) {
+		mycarDao.delete(mycar);
+	}
+	public void mycarUpdate(Mycar mycar) {
+		mycarDao.update(mycar);
+	}
+	
 	
 	
 	

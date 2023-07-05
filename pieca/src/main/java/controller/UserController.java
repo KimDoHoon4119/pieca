@@ -36,6 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.LoginException;
 import logic.Carlike;
+import logic.Mycar;
 import logic.ShopService;
 import logic.User;
 import util.CipherUtil;
@@ -460,6 +461,7 @@ public class UserController {
    public ModelAndView idCheckMypage(String userid,HttpSession session) {
       ModelAndView mav = new ModelAndView();
       User user = service.selectUserOne(userid);
+//      Mycar car = service.selectMycar(userid);
       user.setEmail(emailDecrypt(user));  //이메일 복호화
       mav.addObject("user", user); //회원정보데이터
       return mav;

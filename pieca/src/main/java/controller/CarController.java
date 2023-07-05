@@ -18,9 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import logic.Car;
 import logic.Carlike;
+import logic.Mycar;
 import logic.Payment;
 import logic.ShopService;
 import logic.User;
+import util.CipherUtil;
 
 @Controller // @Component + Controller 기능
 @RequestMapping("car") // http://localhost:8080/shop1/item/*
@@ -29,7 +31,8 @@ public class CarController {
 	private ShopService service;
 	@Autowired
 	private Carlike carlike;
-
+	@Autowired
+	private Mycar mycar;
 	@RequestMapping("list") // get,post 방식에 상관없이 호출
 	public ModelAndView list() {
 		// ModelAndView : Model + view
@@ -39,8 +42,10 @@ public class CarController {
 
 		// itemList : item 테이블의 모든 정보를 Item 객체 List로 저장
 		List<Car> carList = service.carList();
+		
 		int maxnum = carList.size();
 		mav.addObject("carList", carList); // 데이터 저장
+		
 		mav.addObject("maxnum", maxnum); // 데이터 저장
 		return mav;
 	}
@@ -67,7 +72,7 @@ public class CarController {
 
 		return check;
 	}
-
+	
 	@RequestMapping("carlikedec")
 	@ResponseBody
 	public Boolean carlikedec(int carno, String userid) {
@@ -93,6 +98,42 @@ public class CarController {
 		int total = service.selectliketotal(carlike);
 		
 		return total;
+	}
+	
+	@RequestMapping("mycar")
+	@ResponseBody
+	public Boolean mycar(int carno, String userid) {
+		Boolean check = null;
+		mycar.setCarno(carno);
+		mycar.setUserid(userid);
+		Mycar dbUser = service.selectMycar(mycar);
+		
+		if (dbUser == null) {
+			System.out.println("추가 했음");
+			service.mycarInsert(mycar);
+			check = false;
+			return check;
+		}
+		
+		
+		if (dbUser.getUserid().equals(userid)) {
+			System.out.println("수정 했음");
+			service.mycarUpdate(mycar);
+			check = true;
+			return check;
+		}
+		
+		/*
+		
+		
+		if ((dbUser.getUserid().equals(userid)) && (dbUser.getCarno() == carno)) {
+			System.out.println("삭제 했음");
+			service.mycarDelete(mycar);
+			check = true;
+			return check;
+		}
+		*/
+		return check;
 	}
 	/*
 	 * //http://localhost:8080/shop1/item/detail?id=1

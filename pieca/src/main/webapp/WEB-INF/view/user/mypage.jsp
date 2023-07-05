@@ -230,6 +230,55 @@
 		<%-- basic_info_wrapper --%>
 		<%-- basic_info_wrapper --%>
 		
+		<%-- 내 차 조회 --%>
+		<div id="mypage_car_wrapper" style="transition-duration: 0.5s; border: 1px solid #FFFFFF; border-radius: 5px; margin-bottom: 50px; margin-top: 200px; box-shadow: 0px 2px 4px 0px #1B1B1B; height: 280px;">
+			<div id="mypage_car_left_inner" style="float: left; width: 20%; height: 230px; margin: 20px 0px 0px 50px;">
+				<div id="mypage_car_left_title" style="font-size: 24px;">
+					<span><b>차량 조회</b></span>
+				</div>
+				<div id="mypage_car_left_desc" style="font-size: 15px;">
+					<p>내 차량 정보와 관심차량의 정보를 확인하세요.</p>
+				</div>
+				<%-- 
+				<br><br>
+				<c:if test="${loginUser.card != 'y' }">
+					<button onclick="win_open('getcard')" style="width: 170px; background-color: #008000; border: 2px solid #008000; border-radius: 6px; color: #FFFFFF; cursor: pointer;">발급하기</button>
+				</c:if>
+				<c:if test="${loginUser.card == 'y' }">
+					<button onclick="win_open('payment')" style="width: 170px; background-color: #008000; border: 2px solid #008000; border-radius: 6px; color: #FFFFFF; cursor: pointer;">충전하기</button>
+				</c:if>
+				--%>
+			</div>
+
+			<div id="mypage_car_right_inner" style="float: left; width: 55%; height: 300px; margin: 10px 0px 0px 148px;">
+				<c:if test="${loginUser.card != 'y' }">
+					<div id="mypage_car_right_card_box" style="width: 430px; position: relative; float: left; margin: 10px 0px 0px 0px;">
+						<div id="mypage_car_right_card" style="display:flex; width: 420px; height: 220px; font-size:35px; border: 2px dashed #747474; border-radius: 6px; justify-content: center; align-items: center;">+</div>
+					</div>
+				</c:if>
+				
+				<c:if test="${loginUser.card == 'y' }">
+					<div id="mypage_car_right_card_box" style="width: 430px; position: relative; float: left; margin: 10px 0px 0px 0px;">
+						<img src="../img/mypage_car2.png" id="mypage_car_right_card" style="width: 420px; height: 220px; border: 2px solid #747474; border-radius: 6px;">
+					</div>
+				
+				<div id="mypage_car_right_dropdown_box" style="width: 800px; text-align: center; position: relative; float: left;">
+					<div id="mypage_car_right_detail_dropdown_up_box" style="width: 50px; position: relative; float: left; padding-top: 5px;">
+						<span id="mypage_car_right_detail_dropdown_up" class="fa-solid fa-angle-down" style="color: #747474"></span>
+					</div>
+					<div id="mypage_car_right_detail_dropdown_down_box" style="width: 50px; position: relative; float: left; padding-top: 5px;">
+						<span id="mypage_car_right_detail_dropdown_down" class="fa-solid fa-angle-up" style="color: #747474"></span>
+					</div>
+				</div>
+				</c:if>
+			</div>
+			<div id="mypage_car_right_orderlist_box" style="width: 800px; position: relative; float: left; margin: 0px 0px 0px 50px;">
+				<div id="mypage_car_right_orderlist"></div>
+			</div>
+		</div>
+		
+		
+		
 		<%-- 카드결제 --%>
 		<div id="mypage_card_wrapper" style="transition-duration: 0.5s; border: 1px solid #FFFFFF; border-radius: 5px; margin-bottom: 50px; margin-top: 200px; box-shadow: 0px 2px 4px 0px #1B1B1B; height: 280px;">
 			<div id="mypage_card_left_inner" style="float: left; width: 20%; height: 230px; margin: 20px 0px 0px 50px;">

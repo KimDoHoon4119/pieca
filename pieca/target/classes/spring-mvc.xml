@@ -53,6 +53,7 @@
 	  </value>
  	</property>
 </bean>
+
 <!-- message 처리 설정 : messages.properties : 기본
                 1.messages_ko_KR.properties : 지역코드 : ko_KR
                 2.1번 파일이 없는 경우 

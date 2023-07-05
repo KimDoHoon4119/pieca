@@ -26,6 +26,7 @@ import interceptor.BoardInterceptor;
 @ComponentScan(basePackages= {"controller","logic","dao","aop","websocket","util"})
 @EnableAspectJAutoProxy //AOP 관련 어노테이션 사용
 @EnableWebMvc   //유효성 검증 사용
+
 public class MvcConfig implements WebMvcConfigurer{
    @Bean
    public HandlerMapping handlerMapping() { //요청 url 처리

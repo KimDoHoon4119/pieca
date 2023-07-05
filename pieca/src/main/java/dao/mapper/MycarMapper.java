@@ -9,10 +9,11 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import logic.Carlike;
+import logic.Mycar;
 import logic.User;
 
-public interface CarlikeMapper {
-
+public interface MycarMapper {
+/*
 	@Select("select * from carlike where userid=#{userid} and carno=#{carno}")
 	Carlike select(Carlike carlike);
 
@@ -24,5 +25,16 @@ public interface CarlikeMapper {
 	
 	@Select("select count(carno) from carlike where carno=#{carno}")
 	int selectliketotal(Carlike carlike);
+	*/
+	
+	@Select("select * from mycar where userid=#{userid} and carno=#{carno}")
+	Mycar select(Mycar mycar);
+	
+	@Insert("insert into mycar (userid, carno) values (#{userid}, #{carno})")
+	void insert(Mycar mycar);
+	
+	@Delete("delete from mycar where userid=#{userid} and carno=#{carno}")
+	void delete(Mycar mycar);
 
+	void update(Mycar mycar);
 }

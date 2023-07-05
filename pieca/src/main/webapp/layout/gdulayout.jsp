@@ -132,28 +132,33 @@ a {
 	display: table;
 	clear: both;
 }
+
+#layout_top_btn, #layout_bottom_btn {
+  position: fixed;
+  width:40px;
+  height:40px;
+  top: 400px;
+  right: 30px;
+  background-color: #FFFFFF;
+  color: #000000;
+  padding: 2px;
+  border-radius: 100px;
+  font-size:30px;
+  cursor: pointer;
+}
+
+#layout_bottom_btn {
+  top: 460px;
+}
+
+
+
+
 </style>
 
 </head>
 <body>
 
-<!-- Top container -->
-<!-- 
-<div class="navbar">
-	<div class="top_logo" style="margin:-20px 0px 0px 50px;">
-		<a href="${path}/main/home" style="width:70px; height:70px;">
-			<img src="${path}/img/pngwing.com.png" style="width:70px; height:70px;">
-		</a>
-	</div>
-	<div class="top_select">
-		<span>Map</span>
-		<a href="${path}/place/main">충전소</a>
-		<a href="${path}/place/main">주차장</a>
-  		<a href="${path}/place/location">Pay</a>
-  		
-  	</div>
-</div>
- -->
  <div class="navbar">
 	<nav>
 		<ul>
@@ -201,6 +206,8 @@ a {
 	</nav>
 </div>
 <div class="contents">
+	<button id="layout_top_btn" class="fa-solid fa-caret-up"></button>
+	<button id="layout_bottom_btn" class="fa-solid fa-caret-down"></button>
 	<sitemesh:write property="body"/>
 </div>
   
@@ -215,7 +222,21 @@ a {
   <!-- End page content -->
 
 <script>
-var loc = document.location.href.split("pieca/");
+document.getElementById("layout_top_btn").addEventListener("click", function() {
+	window.scrollTo(0, 0);
+	this.style.transform = "scale(1.3)";
+	setTimeout(() => this.style.transform = "scale(1)", 200);
+});
+
+document.getElementById("layout_bottom_btn").addEventListener("click", function() {
+	window.scrollTo(0, document.body.scrollHeight);
+	this.style.transform = "scale(1.3)";
+	setTimeout(() => this.style.transform = "scale(1)", 200);
+});
+
+
+
+loc = document.location.href.split("pieca/");
 
 if (loc[1] == "main/home") {
 $(window).on('load',function() {

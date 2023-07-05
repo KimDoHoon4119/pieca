@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import logic.Car;
 import logic.Carlike;
@@ -15,6 +16,7 @@ public interface CarMapper {
 		     "select * from car <if test='maker != null'>where maker=#{maker}</if> order by no",
 		     "</script>"})
 	List<Car> select(Map<String, Object> param); //namespace : dao.mapper.ItemMapper
+
 	
 	
 	
