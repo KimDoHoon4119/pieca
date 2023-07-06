@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dao.BoardDao;
 import exception.BoardException;
 import exception.LoginException;
 import logic.Board;
@@ -46,9 +47,15 @@ public class BoardController {
     * 3. 등록 성공 : list 재요청
     *    등록 실패 : write 재요청
     */
+   @GetMapping("write")  
+   public ModelAndView loginwrite(HttpSession session) {
+      ModelAndView mav = new ModelAndView();
+      mav.addObject(new Board());
+      return mav;
+   }
    @PostMapping("write")
    public ModelAndView writePost(@Valid Board board, BindingResult bresult,
-            HttpServletRequest request) {
+            HttpServletRequest request,HttpSession session) {
       ModelAndView mav = new ModelAndView();
       if(bresult.hasErrors()) {
          mav.getModel().putAll(bresult.getModel());
@@ -58,6 +65,7 @@ public class BoardController {
       if(boardid == null) boardid="1";
       request.getSession().setAttribute("boardid", boardid);
       board.setBoardid(boardid);
+      //BoardDao boardDao = new BoardDao();
       service.boardWrite(board,request);
       mav.setViewName("redirect:list?boardid="+boardid);
       return mav;
@@ -134,7 +142,7 @@ public class BoardController {
    }
 
    @GetMapping("detail")
-   public ModelAndView loginCheckdetail(Integer num,String pass ,HttpSession session) {
+   public ModelAndView Checkdetail(Integer num,String pass ,HttpSession session) {
       System.out.println(num+"번 게시물 클릭했습니다");
       ModelAndView mav = new ModelAndView();
       Board board = service.getBoard(num); //num 게시판 내용 조회 
@@ -189,9 +197,10 @@ public class BoardController {
     *    등록 실패 : "답변 등록시 오류 발생" reply 페이지 이동           
     */      
    @PostMapping("reply")
-   public ModelAndView reply(@Valid Board board, BindingResult bresult) {
+   public ModelAndView reply(@Valid Board board, BindingResult bresult,HttpSession session) {
       ModelAndView mav = new ModelAndView();
       //유효성 검증
+      mav.addObject("login",session.getAttribute("loginUser"));
        if(bresult.hasErrors()) {
           Board dbboard = service.getBoard(board.getNum()); //원글 정보를 db에서 읽기
           Map<String,Object> map = bresult.getModel();
@@ -304,16 +313,31 @@ public class BoardController {
       mav.setViewName("redirect:detail?num="+comm.getNum()+"#comment");
       return mav;      
    }
+   
+   //현재 댓글을 아무나 삭제 가능 => 수정 필요. 
+   //  업무요건1 : 로그인한 회원만 댓글 가능 => 내글만 삭제 가능
+   //  업무요건2 : 로그아웃상태에서도 댓글가능 => 비밀번호 추가. 비밀번호 검증 필요
    @RequestMapping("commdel")
-   public String commdel(Comment comm) {
-      //현재 댓글을 아무나 삭제 가능 => 수정 필요. 
-      //  업무요건1 : 로그인한 회원만 댓글 가능 => 내글만 삭제 가능
-      //  업무요건2 : 로그아웃상태에서도 댓글가능 => 비밀번호 추가. 비밀번호 검증 필요
+   public ModelAndView commdel(Comment comm,BindingResult bresult) {
+      ModelAndView mav = new ModelAndView();
+      /*
+       * if(bresult.hasErrors()) { mav.getModel().putAll(bresult.getModel());
+       * bresult.reject("error.board.password");
+       * mav.setViewName("redirect:detail?num="+comm.getNum()+"#comment"); return mav;
+       * }
+       */
       Comment dbcomm = service.commSelectOne(comm.getNum(),comm.getSeq());
-      if(comm.getPass().equals(dbcomm.getPass())) //비밀번호 검증
+      if(comm.getPass().equals(dbcomm.getPass())) {//비밀번호 검증
          service.commdel(comm.getNum(),comm.getSeq());
-      else   //비밀번호 틀린 경우
-         throw new BoardException("댓글 삭제 실패","detail?num="+comm.getNum()+"#comment");
-      return "redirect:detail?num="+comm.getNum()+"#comment";      
+         mav.setViewName("redirect:detail?num="+comm.getNum()+"#comment");
+      }
+      else {   //비밀번호 틀린 경우
+         System.out.println("commdel = 비밀번호 틀림");
+         mav.setViewName("redirect:detail?num="+comm.getNum()+"#comment");
+         bresult.reject("error.board.password");
+         return mav;
+      }
+            
+      return mav; 
    }
 }

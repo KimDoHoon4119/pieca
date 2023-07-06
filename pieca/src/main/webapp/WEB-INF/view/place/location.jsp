@@ -9,11 +9,11 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
-.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'KIMM_Bold'; font-size:15px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-#menu_wrap2 {position:absolute;top:0;right:0;bottom:0;width:350px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.map_wrap {position:relative;width:100%;height:880px; margin-top: 0px;}
+#menu_wrap {position:absolute;top:100;left:0;bottom:0;width:320px; height:80%; margin:10px 0 30px 20px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+#menu_wrap2 {position:absolute;top:0;right:0;bottom:0;width:350px; margin:0px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 #menu_wrap .option{text-align: center;}
@@ -46,75 +46,87 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> <!-- locash메소드 -->
 </head>
 <body>
-<h1>충전소 정보.</h1>
-    <div class="w3-container">
-     <div>
-        <table id="place" class="w3-table-all" style="width:30%;">
-        
-        </table>
-     </div>
-  </div>
-      <div><span id="si2">
-       <select name="si2" onchange="getText2('si2')">
-          <option value="">시도를 선택하세요</option>
-       </select></span>
-      <span id="gu2">
-       <select name="gu2" onchange="getText2('gu2')">
-          <option value="">구군을 선택하세요</option>
-       </select></span>
-          <input type="button" id='location_querybutton' value="충전소 조회" onclick="ecclocationApi()" disabled="true"/>
-      </div>
-      
-      
-       <input type='hidden' value="" name="zscode"  id="zscode">
-       
+	<div class="w3-container">
+		<div>
+			<table id="place" class="w3-table-all" style="width: 30%;">
 
-   
-   <div class="w3-container">
-     <div>
-        <table id="placetable" class="w3-table-all">
-        
-        </table>
-     </div>
-  </div>
-  
-  <div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+			</table>
+		</div>
+	</div>
+	
+	<div style="position: absolute; z-index: 50; margin: 20px 0px 0px 20px;">
+		<span id="si2" style="">
+			<select name="si2" onchange="getText2('si2')" style="width:200px; height:50px; border-radius: 6px; padding-left:10px;">
+				<option value="">시/도 선택</option>
+			</select>
+		</span>
+	</div>
 
-    <div id="menu_wrap" class="bg_white">
-        <div class="option">
-        </div>
-        <hr>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
-    </div>
-    <div id="menu_wrap2" class="bg_white">
-    <div>
-       span
-      <span id="location_chgerStat" class="fa-solid fa-charging-station"></span>
-       <i id="location_useTime" class="fa-regular fa-clock"></i>
-       <i id="location_parkingFree" class="fa-solid fa-won-sign"></i>
-    </div>
-        <div class="option">
-        </div>
-        <hr> 
-        
-        <div>
-        <table id="placesList3"></table>
-        </div>
-        
-      <div>
-        <table id="placesList2"></table>
-      </div>
-    </div>
-</div>
+	<div style="position: absolute; z-index: 50; margin: 80px 0px 0px 20px;">
+		<span id="gu2">
+			<select name="gu2" onchange="getText2('gu2')" style="width:200px; height:50px; border-radius: 6px; padding-left:10px;">
+				<option value="">구/군 선택</option>
+			</select>
+		</span>
+	</div>
+	
+	
+	<div style="position: absolute; z-index: 50; margin: 20px 0px 0px 230px;">
+		<input type="button" id='location_querybutton' value="조회" onclick="ecclocationApi()" disabled="true" 
+			style=" width: 110px; height: 110px; border-radius: 6px; color:white; font-size:30px;"/>
+	</div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02d94db8e10d97b2ae5cfd31f23e9c4c&libraries=services"></script>
+
+	<input type='hidden' value="" name="zscode" id="zscode">
+
+
+	<div class="w3-container">
+		<div>
+			<table id="placetable" class="w3-table-all">
+
+			</table>
+		</div>
+	</div>
+
+	<div class="map_wrap">
+		<div id="map"
+			style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+		</div>
+
+		<div id="menu_wrap" class="bg_white">
+			<div class="option"></div>
+			<hr>
+			<ul id="placesList"></ul>
+			<div id="pagination"></div>
+		</div>
+		
+		<div id="menu_wrap2" class="bg_white">
+			<div>
+				<span id="location_chgerStat" class="fa-solid fa-charging-station"></span>
+				<i id="location_useTime" class="fa-regular fa-clock"></i>
+				<i id="location_parkingFree" class="fa-solid fa-won-sign"></i>
+			</div>
+			<div class="option"></div>
+			<hr>
+
+			<div>
+				<table id="placesList3" style="font-size: 20px;"></table> <%-- 지번 위에 까지 --%>
+			</div>
+
+			<div>
+				<table id="placesList2"></table> <%-- 충전기 상태부터 끝까지 --%>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02d94db8e10d97b2ae5cfd31f23e9c4c&libraries=services"></script>
 <script>
+
 var mark_index=0;
 // 마커를 담을 배열입니다
 var markers = [];
@@ -138,24 +150,24 @@ var runCnt = 0;
 //dataIndexArr=[]
 kakaoPlaceData = []
 function searchInMethod (data2 ,status, pagination) {
-   console.log(runCnt+'=========================')
-   console.log(dataIndexArr?.[runCnt]?.addr+'로검색했다. =>'+dataIndexArr?.[runCnt]?.statNm+'은 장소명이다')
+   //console.log(runCnt+'=========================')
+   //console.log(dataIndexArr?.[runCnt]?.addr+'로검색했다. =>'+dataIndexArr?.[runCnt]?.statNm+'은 장소명이다')
    runCnt++; //placeSearch 메서드의 콜백인데 for문안에서 앞메서드가 돌아서..비동기식이면 배열에 값이 누락됨 그래서 Cnt값으로
             //몇번 돌았는지 체크해줘야함
             //runCnt
-   console.log('keywordSearch의 콜백 데이터')
-   console.log(data2)
+   //console.log('keywordSearch의 콜백 데이터')
+   //console.log(data2)
    if (status === kakao.maps.services.Status.OK) {//키워드 검색결과 정상일때,
       let add_flag = 0;
       // convert object
       for(const dataObj of data2){
          if(dataObj?.category_name === '교통,수송 > 자동차 > 전기자동차 충전소' || _.isEmpty(dataObj?.category_name)) {//옵셔널체이닝
-            console.log("_.isEmpty(dataObj?.category_name : ", _.isEmpty(dataObj?.category_name));
+        	 //console.log("_.isEmpty(dataObj?.category_name : ", _.isEmpty(dataObj?.category_name));
             searchArr[runCnt] = dataObj; //testt
-              console.log(runCnt+'번째에 searcharr 넣음') 
-              console.log(dataIndexArr[runCnt])
-              console.log(searchArr.length+'는 searcharr의 길이')
-              console.log(dataIndexArr.length+'는 dataindexarr의 길이')
+            //console.log(runCnt+'번째에 searcharr 넣음') 
+            //console.log(dataIndexArr[runCnt])
+            //console.log(searchArr.length+'는 searcharr의 길이')
+            //console.log(dataIndexArr.length+'는 dataindexarr의 길이')
               add_flag = 1;
             break;
          }
@@ -167,13 +179,13 @@ function searchInMethod (data2 ,status, pagination) {
    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
        dataIndexArr.splice(runCnt-1,1);
        console.log('검색결과없음')
-       console.log('searchArr.length2:'+searchArr.length)
-      console.log('dataIndexArr.length:'+dataIndexArr.length)
+       //console.log('searchArr.length2:'+searchArr.length)
+      //console.log('dataIndexArr.length:'+dataIndexArr.length)
        return;
       //검색결과없음
    } else if (status === kakao.maps.services.Status.ERROR) {
       dataIndexArr.splice(runCnt-1,1);
-       console.log('에러가 있음')
+       //console.log('에러가 있음')
    //에러발생했음
    return;
    }
@@ -181,16 +193,16 @@ function searchInMethod (data2 ,status, pagination) {
         for(let i=0; i<searchArr.length; i++){
            //console.log(_.isEmpty(searchArr[i])+" == "+i+"_.isEmpty(searchArr[i])")
            if(_.isEmpty(searchArr[i])){
-              console.log('비었다 이거##########'+runCnt)
+              //console.log('비었다 이거##########'+runCnt)
               searchArr.splice(i,1)
               //dataIndexArr.splice(i,1)
               i = i-1;
            }
         }
-         console.log("searchArr 제대로 나와야함. : ", searchArr);
+         //console.log("searchArr 제대로 나와야함. : ", searchArr);
          displayPlaces(searchArr,curPage); // 화면에 리스트 출력
          displayPagination(searchArr); // 페이징 처리 호출 
-         console.log(runCnt+'runCnt')
+         //console.log(runCnt+'runCnt')
          runCnt = 0;//Cnt 초기화
          maxPage = Math.floor((searchArr.length+14)/15)//최대 페이지num 입력 페이징시 활용
        } 
@@ -202,21 +214,9 @@ searchArr = [];
 //dataIndexArr = [];
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces(data) {
-   console.log("search places 1111111111111111");
+   //console.log("search places 1111111111111111");
     maxCallCnt = data.length;
-    /*
-    const si22 = $("select[name=si2]").val().substr(0,2)
-    if($("select[name=si2]").val().substr(0,2)=='충청'){
-      si22 = $("select[name=si2]").val().substr(0,1)+$("select[name=si2]").val().substr(2,1);
-   } 
-   if($("select[name=si2]").val().substr(0,2)=='전라'){
-      si22 = $("select[name=si2]").val().substr(0,1)+$("select[name=si2]").val().substr(2,1);
-   }
-   if($("select[name=si2]").val().substr(0,2)=='경상'){
-      si22 = $("select[name=si2]").val().substr(0,1)+$("select[name=si2]").val().substr(2,1);
-   }
-   */
-   console.log(data)
+   //console.log(data)
     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     for (let i=0; i<data.length; i++ ) {
        // searchInMethod
@@ -230,17 +230,17 @@ function searchPlaces(data) {
       //   console.log('검색한 정보는 : '+data[i].addr.slice(0,2)+'지역입니다. 잘못된 데이터에요.')
       //}
    } // for
-   console.log('dataIndexArr = keywordSearch에 넣은순,'+dataIndexArr.length+'만큼 돕니다.')
-   console.log(dataIndexArr)
-   console.log("search places Done 222222");
+   //console.log('dataIndexArr = keywordSearch에 넣은순,'+dataIndexArr.length+'만큼 돕니다.')
+   //console.log(dataIndexArr)
+   //console.log("search places Done 222222");
 } // searchPlaces
       
     
 curPage = 1; //페이징처리하기위한 현재페이지 1로 초기화
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places,curPage) { //places == searchArr
-   console.log('displayPlaces call===')
-   console.log(places.length);
+   //console.log('displayPlaces call===')
+   //console.log(places.length);
    var listEl = document.getElementById('placesList'), 
     menuEl = document.getElementById('menu_wrap'),
     fragment = document.createDocumentFragment(), 
@@ -280,17 +280,16 @@ function displayPlaces(places,curPage) { //places == searchArr
             
             $("#placesList2 *").remove();
             $("#placesList3 *").remove();
-           console.log(title)
-           console.log('dataIndexArr.length: '+dataIndexArr.length)
-           console.log('searchArr.length: '+searchArr.length)//filteredArr
-            console.log('dataindex = '+dataIndex)
-           console.log('dataindexArr  ==  행안부 title로 장소명 필터')
-           console.log(dataIndexArr)
-           console.log('searcharr ==  카카오api title로 장소명 필터')
-           console.log(searchArr)
-           
-          //////////onclick 시 카카오맵 api 정보
-           plcaeinfo2 = '<tr><td>장소명 : '+filteredArray[0].place_name+'</td></tr>'
+           //console.log(title)
+           //console.log('dataIndexArr.length: '+dataIndexArr.length)
+           //console.log('searchArr.length: '+searchArr.length)//filteredArr
+            //console.log('dataindex = '+dataIndex)
+           //console.log('dataindexArr  ==  행안부 title로 장소명 필터')
+           //console.log(dataIndexArr)
+           //console.log('searcharr ==  카카오api title로 장소명 필터')
+           //console.log(searchArr)
+          //////////onclick 시 카카오맵 api 정보 // 마커에서 클릭
+           plcaeinfo2 = "<tr><td>장소명111 : "+filteredArray[0].place_name+"</td></tr>"
            //plcaeinfo2 += '<tr><td>장소분류 : '+filteredArray[0].category_name+'</td></tr>'
            plcaeinfo2 += '<tr><td>주소 : '+filteredArray[0].address_name+'</td></tr>'
            if(filteredArray[0].phone!=null && filteredArray[0].phone!=''){
@@ -319,9 +318,6 @@ function displayPlaces(places,curPage) { //places == searchArr
            plcaeinfo = '<tr><td>충전기 상태 : '+chgerStat+'</td></tr>'
            //plcaeinfo += '<tr><td>realreal : '+filteredArray2[0].stat+'</td></tr>'
            //plcaeinfo += '<tr><td>realreal : '+filteredArray2[0].addr+'</td></tr>'
-           plcaeinfo += '<tr><td><i id="location_chgerStat" class="fa-solid fa-charging-station"></i></td></tr>';
-           plcaeinfo += '<tr><td><i id="location_useTime" class="fa-regular fa-clock"></i></td></tr>';
-           plcaeinfo += '<tr><td><i id="location_parkingFree" class="fa-solid fa-won-sign"></i></td></tr>';
            plcaeinfo += '<tr><td>이용가능시간 : '+filteredArray2[0].useTime+'</td></tr>'
            //plcaeinfo += '<tr><td>운영기관 : '+filteredArray2[0].busiNm+'&nbsp/&nbsp('+filteredArray2[0].busiCall+')</td></tr>'
            plcaeinfo += '<tr><td>최근 상태조회 시간 : '+filteredArray2[0].statUpdDt.substr(2,2)+'년'
@@ -368,7 +364,7 @@ function displayPlaces(places,curPage) { //places == searchArr
                console.log('searcharr ==  카카오api title로 장소명 필터')
                console.log(searchArr)
                
-              //////////onclick 시 카카오맵 api 정보
+              //////////onclick 시 카카오맵 api 정보 // 왼쪽 리스트에서 클릭
                plcaeinfo2 = '<tr><td>장소명 : '+filteredArray[0].place_name+'</td></tr>'
                //plcaeinfo2 += '<tr><td>장소분류 : '+filteredArray[0].category_name+'</td></tr>'
                plcaeinfo2 += '<tr><td>주소 : '+filteredArray[0].address_name+'</td></tr>'
@@ -491,7 +487,7 @@ function removeMarker() {
 
 // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
 function displayPagination(searchArr) {
-    console.log('displayPagination(pagination) 호출')
+    //console.log('displayPagination(pagination) 호출')
    var paginationEl = document.getElementById('pagination'),
         fragment = document.createDocumentFragment(),
         i;
@@ -511,14 +507,14 @@ function displayPagination(searchArr) {
                 return function() {
                     //pagination.gotoPage(i);
                     curPage=i;
-                    console.log(curPage+"현재페이지num")
+                    //console.log(curPage+"현재페이지num")
                     displayPlaces(searchArr,i)
                 }
             })(i);
         fragment.appendChild(el);
     }
     paginationEl.appendChild(fragment);
-    console.log('displayPagination(pagination) Done')
+   // console.log('displayPagination(pagination) Done')
 }
 
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
@@ -544,7 +540,7 @@ function removeAllChildNods(el) {
  function ecclocationApi() {
     dataIndexArr = [];
    searchArr = [];
-   console.log('ecclocationApi 호출')
+   //console.log('ecclocationApi 호출')
    params = "zscode=" + document.getElementById('zscode').value;
     $("#placetable *").remove();
     removeAllChildNods(document.getElementById('placesList'));
@@ -571,7 +567,7 @@ function removeAllChildNods(el) {
          alert("충전소 찾다가 에러발생 : "+e.status)
       }
         })
-        console.log('ecclocationApi Done')
+        //console.log('ecclocationApi Done')
 }
  
  function cityCode() {
@@ -604,10 +600,13 @@ function removeAllChildNods(el) {
    }
  
    function getText2(name){
+	   $("#location_querybutton").css("background-color","#D5D5D5");
+		$("#location_querybutton").css("border","2px solid #D5D5D5");
+	   $("#location_querybutton").attr("disabled","disabled");
       let city = $("select[name='si2']").val();
       let gu = $("select[name='gu2']").val();
       let disname;
-      let toptext="구군을 선택하세요";
+      let toptext="구/군 선택";
       let params="";
       if(name == "si2"){
          params = "si2="+city.trim();
@@ -625,6 +624,7 @@ function removeAllChildNods(el) {
          data : params,
          success : function(arr){
             $("select[name="+disname+"] option").remove();
+            
             $("select[name="+disname+"]").append(function(){
                return "<option value=''>"+toptext+"</option>"
             })
@@ -633,8 +633,8 @@ function removeAllChildNods(el) {
                   return "<option>"+item+"</option>"
                })
             })
-            if(city!=null && gu!=null && city!="" && gu!= ""){ 
-               placecode(si2,gu2)
+            if(city!=null && gu!=null && city!="" && gu!= ""){
+               	placecode(si2,gu2)
             }
          }
       })
@@ -649,8 +649,15 @@ function removeAllChildNods(el) {
             data : params,
             type : "POST",
             success : function(data){
+            	console.log('#######################'+city)
+            	console.log('#######################'+gu)
+            	
                $('input[name=zscode]').attr('value',data[1].row[0].region_cd.substr(0,5))
-               document.getElementById("location_querybutton").disabled = false;
+               $("#location_querybutton").css("background-color","#008000");
+         		$("#location_querybutton").css("border","2px solid #008000");
+               $("#location_querybutton").removeAttr("disabled");
+               
+               //document.getElementById("location_querybutton").disabled = false;
             }
          })
       }

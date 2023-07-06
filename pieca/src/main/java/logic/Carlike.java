@@ -13,7 +13,8 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Carlike {
-	private String userid;
-	private int carno;
+   private String userid;
+   private int carno;
+   private int cnt;
 
 }

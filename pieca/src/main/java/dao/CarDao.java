@@ -14,18 +14,13 @@ import logic.Carlike;
 
 @Repository // @Component + dao 기능(데이터베이스연결)
 public class CarDao {
-	
-	@Autowired
-	private SqlSessionTemplate template; //org.mybatis.spring.SqlSessionTemplate 객체 주입
-	private Map<String, Object> param = new HashMap<>();
-	private final Class<CarMapper> cls = CarMapper.class;
+   
+   @Autowired
+   private SqlSessionTemplate template; //org.mybatis.spring.SqlSessionTemplate 객체 주입
+   private Map<String, Object> param = new HashMap<>();
+   private final Class<CarMapper> cls = CarMapper.class;
 
-	public List<Car> list() {
-		return template.getMapper(cls).select(null); //item 테이블의 전체 내용을 Item 객체의 목록 리턴 
-	}
-
-
-
-
-
+   public List<Car> list() {
+      return template.getMapper(cls).select(null); //item 테이블의 전체 내용을 Item 객체의 목록 리턴 
+   }
 }

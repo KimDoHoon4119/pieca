@@ -468,13 +468,13 @@ public class UserController {
 //      Mycar car = service.selectMycar(userid);
       user.setEmail(emailDecrypt(user));  //이메일 복호화
       List<Car> carList = service.carList();
-      System.out.println("111 :: "+carList);
+      System.out.println("carList :: "+carList);
       
       Mycar carData = service.selectMycar(user.getUserid());
-      System.out.println("222 :: "+carData);
+      System.out.println("carData :: "+carData);
       
       List<Carlike> carLikeData = service.selectLike(user.getUserid());
-      System.out.println("333 :: "+carLikeData);
+      System.out.println("carLikeData :: "+carLikeData);
       
 	  mav.addObject("carList", carList); // 데이터 저장
 	  mav.addObject("carData", carData); // 데이터 저장

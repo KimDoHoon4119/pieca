@@ -71,39 +71,40 @@ nav ul li {
 	position: relative;
 }
 
-.map-menu, .user-menu, .board-menu {
+.board-menu {
 	font-color: #1B1B1B;
 	padding: 16px;
 	font-size: 16px;
 	cursor: pointer;
 }
 
-.map-content, .user-content, .board-content {
+.board-content {
 	display: none;
 	position: absolute;
+	margin-left: 25px;
 	background-color: #f9f9f9;
-	border : 1px solid #FFFFFF;
-	border-radius: 5px;
-	width: 80px;
+	border : 1px solid #747474;
+	border-radius: 6px;
+	width: 100px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 a {
 	text-decoration: none; 
 }
-.map-content a, , .board-content a {
+.board-content a {
 	color: black;
 	padding: 12px 16px;
 	display: block;
-	text-align:left;
+	text-align:center;
 }
 
-.home, .map-menu, .board-menu, .news, .card, .login, .mypage, .logout{
+.home, .map, .board-menu, .news, .car, .login, .mypage, .logout{
 	text-align:center;
 	font-size: 22px;
 }
 
-.map, .board, .news, .card{
+.map, .board, .news, .car{
 	width:8%;
 }
 
@@ -119,7 +120,7 @@ a {
 
 
 /* map-menu 에는 hover 적용이 안됨 */
-.map:hover .map-content, .board:hober .board-content {
+.board:hover .board-content {
 	display: block;
 }
 
@@ -168,28 +169,20 @@ a {
 				</a>
 			</li>
 			
-			<li class="map">
-				<div class="map-menu">
-					<span>Map</span>
-				</div>
-				<div class="map-content">
-					<a href="${path}/place/location">충전소</a>
-					<a href="${path}/place/main">주차장</a>
-				</div>
-			</li>
+			<li class="map"><a href="${path}/place/location">충전소</a></li>
 			
 			<li class="board">
             	<div class="board-menu">
                		<span>Board</span>
             	</div>
             	<div class="board-content">
-               		<a href="${path}/board/list?boardid=1">공지사항</a>
-               		<a href="${path}/board/list?boardid=2">신고 게시판</a>
+               		<a href="${path}/board/list?boardid=1">공지 사항</a>
+               		<a href="${path}/board/list?boardid=2">정보 공유</a>
             	</div>
          	</li>
 			
 			<li class="news"><a href="${path}/news/main">News</a></li>
-			<li class="card"><a href="${path}/car/list">Car</a></li>
+			<li class="car"><a href="${path}/car/list">Car</a></li>
 			<c:if test="${empty sessionScope.loginUser}">
 				<li class="login"><a class="fa-regular fa-user" href="${path}/user/login"></a></li>
 			</c:if>
@@ -241,13 +234,14 @@ loc = document.location.href.split("pieca/");
 if (loc[1] == "main/home") {
 $(window).on('load',function() {
 	$("ul").css('background-color', '#1B1B1B');
-	$(".map span").css('color', '#FFFFFF');
-	$(".news").css('color', '#FFFFFF');
-	$(".card").css('color', '#FFFFFF');
-	$(".home").css('color', '#FFFFFF');
-	$(".login").css('color', '#FFFFFF');
-	$(".mypage").css('color', '#FFFFFF');
-	$(".logout").css('color', '#FFFFFF');
+	 $(".home").css('color', '#FFFFFF');
+	    $(".map").css('color', '#FFFFFF');
+	    $(".board span").css('color', '#FFFFFF');
+	    $(".news").css('color', '#FFFFFF');
+	    $(".car").css('color', '#FFFFFF');
+	    $(".login").css('color', '#FFFFFF');
+	    $(".mypage").css('color', '#FFFFFF');
+	    $(".logout").css('color', '#FFFFFF');
 	
   });
 }
@@ -255,10 +249,11 @@ $(window).on('load',function() {
 $(window).scroll(function() {
 	if ($(window).scrollTop() > 1) {
 	    $("ul").css('background-color', '#FFFFFF');
-	    $(".map span").css('color', '#1B1B1B');
-	    $(".news").css('color', '#1B1B1B');
-	    $(".card").css('color', '#1B1B1B');
 	    $(".home").css('color', '#1B1B1B');
+	    $(".map").css('color', '#1B1B1B');
+	    $(".board span").css('color', '#1B1B1B');
+	    $(".news").css('color', '#1B1B1B');
+	    $(".car").css('color', '#1B1B1B');
 	    $(".login").css('color', '#1B1B1B');
 	    $(".mypage").css('color', '#1B1B1B');
 	    $(".logout").css('color', '#1B1B1B');
@@ -266,13 +261,14 @@ $(window).scroll(function() {
 	if ($(window).scrollTop() == 0) {
 		if (loc[1] == "main/home") {
 			$("ul").css('background-color', '#1B1B1B');
-			$(".map span").css('color', '#FFFFFF');
-			$(".news").css('color', '#FFFFFF');
-			$(".card").css('color', '#FFFFFF');
 			$(".home").css('color', '#FFFFFF');
-			$(".login").css('color', '#FFFFFF');
-			$(".mypage").css('color', '#FFFFFF');
-			$(".logout").css('color', '#FFFFFF');
+		    $(".map").css('color', '#FFFFFF');
+		    $(".board span").css('color', '#FFFFFF');
+		    $(".news").css('color', '#FFFFFF');
+		    $(".car").css('color', '#FFFFFF');
+		    $(".login").css('color', '#FFFFFF');
+		    $(".mypage").css('color', '#FFFFFF');
+		    $(".logout").css('color', '#FFFFFF');
 		}
 	}
 });

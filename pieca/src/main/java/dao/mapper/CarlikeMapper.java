@@ -13,23 +13,26 @@ import logic.User;
 
 public interface CarlikeMapper {
 
-	@Select("select * from carlike where userid=#{userid} and carno=#{carno}")
-	Carlike select(Carlike carlike);
+   @Select("select * from carlike where userid=#{userid} and carno=#{carno}")
+   Carlike select(Carlike carlike);
 
-	@Insert("insert into carlike (userid, carno) values (#{userid}, #{carno})")
-	void insert(Carlike carlike);
-	
-	@Delete("delete from carlike where userid=#{userid} and carno=#{carno}")
-	void delete(Carlike carlike);
-	
-	@Select("select count(carno) from carlike where carno=#{carno}")
-	int selectliketotal(Carlike carlike);
+   @Insert("insert into carlike (userid, carno) values (#{userid}, #{carno})")
+   void insert(Carlike carlike);
+   
+   @Delete("delete from carlike where userid=#{userid} and carno=#{carno}")
+   void delete(Carlike carlike);
+   
+   @Select("select count(carno) from carlike where carno=#{carno}")
+   int selectliketotal(Carlike carlike);
+   
+   @Select("SELECT carno, COUNT(userid) AS cnt FROM carlike GROUP BY carno;")
+   List<Carlike> selectliketotal2();
 
-	@Select({"<script>",
-	     "select * from carlike <if test='id != null'>where userid=#{userid}</if>",
-	     "</script>"})
-	List<Carlike> selectLike(String userid);
-	
+   @Select({"<script>",
+        "select * from carlike <if test='id != null'>where userid=#{userid}</if>",
+        "</script>"})
+   List<Carlike> selectLike(String userid);
+   
 
 
 }
