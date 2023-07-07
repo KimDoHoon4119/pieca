@@ -150,6 +150,8 @@ a {
 
 #layout_bottom_btn {
   top: 460px;
+  
+  
 }
 
 
@@ -159,7 +161,6 @@ a {
 
 </head>
 <body>
-
  <div class="navbar">
 	<nav>
 		<ul>
@@ -205,11 +206,12 @@ a {
 </div>
   
   <!-- Footer -->
-  <footer class="w3-container w3-padding-16 w3-light-grey">
-    <h4>FOOTER</h4>
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-   	<hr>
-   	<div>
+  <footer style="overflow: hidden;">
+  	<div style="width:100%; height:150px; background-color: #D5D5D5">
+    	<h4>FOOTER</h4>
+    	<p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+   		<div>
+   		</div>
    	</div> 
   </footer>
   <!-- End page content -->

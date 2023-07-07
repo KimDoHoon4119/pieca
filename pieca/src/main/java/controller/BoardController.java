@@ -112,7 +112,7 @@ public class BoardController {
       String boardName=null;
       switch(boardid) {
          case "1" : boardName = "공지사항"; break;
-         case "2" : boardName = "신고 게시판"; break;
+         case "2" : boardName = "공유 게시판"; break;
          case "3" : boardName = "QNA"; break;
       }
       int limit = 10;  //한페이지에 보여줄 게시물 건수
