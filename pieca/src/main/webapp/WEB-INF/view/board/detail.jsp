@@ -30,20 +30,37 @@
 </style>
 </head>
 <body>
-	<table class="w3-table">
+<div style="width:1920px; height:700px; display: flex; justify-content: center; align-items: center;">
+
+	<table class="w3-table-all" style="width:1000px; margin: 9% 0% 0% 0%;">
 		<tr>
-			<td colspan="2">${boardName}</td>
+			<th style="width: 20%; vertical-align: middle; font-size:20px;">글쓴이</th>
+			<td style="width: 80%" class="leftcol">&nbsp;&nbsp;${board.writer}</td>
 		</tr>
 		<tr>
-			<td width="15%">글쓴이</td>
-			<td width="85%" class="leftcol">${board.writer}</td>
+			<th style = "vertical-align: middle; font-size:20px;">제목</th>
+			
+			<td class="leftcol">
+			<div style="width:70%; text-align: left; float:left;">
+				${board.title}
+			</div>
+			<div style="width:30%; text-align: right; float:left;">
+			<c:if test="${board.boardid==2}">
+					<c:if test="${status==0}">
+						<font color="black">처리 대기중인 게시물입니다.</font>
+					</c:if>
+					<c:if test="${status==1}">
+						<font color="green">승인 되어있는 게시물입니다.</font>
+					</c:if>
+					<c:if test="${status==2}">
+						<font color="red">반려 되어있는 게시물입니다.</font>
+					</c:if>
+				</c:if> <!-- 여기까지@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+				</div>
+				</td>
 		</tr>
 		<tr>
-			<td>제목</td>
-			<td class="leftcol">${board.title}</td>
-		</tr>
-		<tr>
-			<td>내용</td>
+			<th style = "font-size:20px; height:450px;">내용</th>
 			<td class="leftcol">
 				<table class="lefttoptable">
 					<tr>
@@ -53,39 +70,77 @@
 			</td>
 		</tr>
 		<tr>
-			<td>첨부파일</td>
+			<th style = "vertical-align: middle; font-size:20px;">첨부파일</th>
 			<td>&nbsp; <c:if test="${!empty board.fileurl}">
 					<a href="file/${board.fileurl}">${board.fileurl}</a>
 				</c:if></td>
 		</tr>
 		<tr>
-			<td colspan="2"><c:if test="${login.username=='관리자'}">
+			<td colspan="2">
+				<c:if test="${login.username=='관리자'}">
 					<a href="reply?num=${board.num}">[답글]</a>
-				</c:if> <c:if
-					test="${board.writer == login.username || login.username == '관리자'}">
+				</c:if>
+				<c:if test="${board.writer == login.username || login.username == '관리자'}">
 					<a href="update?num=${board.num}">[수정]</a>
 					<a href="delete?num=${board.num}">[삭제]</a>
-				</c:if> <a href="list?boardid=${board.boardid}">[게시물목록]</a> <c:if
-					test="${board.boardid==2}">
+				</c:if>
+				<a href="list?boardid=${board.boardid}">[게시물목록]</a>
+				<c:if test="${board.boardid==2}">
 					<c:if test="${login.userid=='admin'}">
-						<a href="../admin/recog?num=${board.num}">[승인]</a>
-						<a href="../admin/refuse?num=${board.num}">[반려]</a>
+						<a href="../admin/refuse?num=${board.num}" style="float:right;">[반려]</a>
+						<a href="../admin/recog?num=${board.num}" style="float:right;">[승인]</a>
 					</c:if>
-				</c:if> <!-- layout 수정 후 게시물 표현부분 위로 올려야할 부분임@@@@@@@@@@@@@@@@@@@ --> <c:if
-					test="${board.boardid==2}">
-					<c:if test="${status==0}">
-						<font color="black">처리대기중인 게시물입니다.</font>
-					</c:if>
-					<c:if test="${status==1}">
-						<font color="green">승인되어있는 게시물입니다.</font>
-					</c:if>
-					<c:if test="${status==2}">
-						<font color="red">반려되어있는 게시물입니다.</font>
-					</c:if>
-				</c:if> <!-- 여기까지@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ --></td>
+				</c:if> <!-- layout 수정 후 게시물 표현부분 위로 올려야할 부분임@@@@@@@@@@@@@@@@@@@ -->
+			</td>
 		</tr>
 	</table>
+	
+	
+</div>
+	<div class="w3-container" style="width:54%; margin: 10% 0% 0% 23%;">
+		<table class="w3-table-all w3-bordered">
+			<c:forEach var="c" items="${commlist}" varStatus="stat">
+				<c:if test="${stat.first}">
+  					<tr>
+    					<th style="width:8%">번호</th>
+    					<th style="width:12%">작성자</th>
+    					<th style="width:35%">내용</th>
+    					<th style="width:25%">작성일자</th>
+    					<th style="width:20%">댓글 삭제</th>
+  					</tr>
+				</c:if>
+				<tr>
+					<td>${c.seq}</td>
+					<td>${c.writer}</td>
+					<td>${c.content}</td>
+					<td><fmt:formatDate value="${c.regdate}"
+							pattern="yyyy-MM-dd HH:mm:ss" /></td>
+					<td class="w3-right">
+						<form action="commdel" method="post" name="commdel${stat.index}">
+							<input type="hidden" name="num" value="${c.num}"> <input
+								type="hidden" name="seq" value="${c.seq}">
+							<spring:hasBindErrors name="board">
+								<font color="red"><c:forEach
+										items="${errors.globalErrors}" var="error">
+										<spring:message code="${error.code }" />
+									</c:forEach> </font>
+							</spring:hasBindErrors>
+							<c:if test="${login.userid == c.loginid}">
+								<input type="password" name="pass" placeholder="비밀번호" style="width:60%;">
+								<a href="javascript:document.commdel${stat.index}.submit()" style="margin-left:10%;">삭제</a>
+							</c:if>
+						</form>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+		
+	</div>
+	
+	
+
 	<%-- 댓글 등록,조회,삭제 --%>
+	<div style="width:51.65%; margin: 1% 0% 0% 23.85%;">
 	<span id="comment"></span>
 	<c:if test="${login.userid !=null }">
 		<form:form modelAttribute="comment" action="comment" method="post"
@@ -122,36 +177,11 @@
 			</div>
 		</form:form>
 	</c:if>
-	<div class="w3-container">
-		<table class="w3-table-all">
-			<c:forEach var="c" items="${commlist}" varStatus="stat">
-				<tr>
-					<td>${c.seq}</td>
-					<td>${c.writer}</td>
-					<td>${c.content}</td>
-					<td><fmt:formatDate value="${c.regdate}"
-							pattern="yyyy-MM-dd HH:mm:ss" /></td>
-					<td class="w3-right">
-						<form action="commdel" method="post" name="commdel${stat.index}">
-							<input type="hidden" name="num" value="${c.num}"> <input
-								type="hidden" name="seq" value="${c.seq}">
-							<spring:hasBindErrors name="board">
-								<font color="red"><c:forEach
-										items="${errors.globalErrors}" var="error">
-										<spring:message code="${error.code }" />
-									</c:forEach> </font>
-							</spring:hasBindErrors>
-							<c:if test="${login.userid == c.loginid}">
-								<input type="password" name="pass" placeholder="비밀번호">
-								<a class="w3-btn w3-border w3-blue"
-									href="javascript:document.commdel${stat.index}.submit()">삭제</a>
-							</c:if>
-						</form>
-					</td>
-				</tr>
-			</c:forEach>
-		</table>
 	</div>
+	
+	
+	
+
 	<script type="text/javascript">
 		function comment_insert() {
 			let data = {

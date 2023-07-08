@@ -15,52 +15,73 @@
 <body>
 <div style="width:1920px; height:700px; display: flex; justify-content: center; align-items: center;">
 	<form:form modelAttribute="board" action="write" enctype="multipart/form-data" name="f">
-		<table class="w3-table">
+		<table class="w3-table" style="width:1000px; margin-top: 10%;">
 			<tr>
-				<th>글쓴이</th>
-				<td>
+				<th style="width: 25%; vertical-align: middle; font-size:20px;">글쓴이</th>
+				<td style="width: 75%;">
 					<form:input path="writer" readonly="true" class="w3-input" value="${login.username}" />
 				</td>
 			</tr>
 			<tr>
-				<th>비밀번호</th>
+				<th style = "vertical-align: middle; font-size:20px;">
+					<div>
+						비밀번호
+					</div>
+					<div>
+						<font color="red">
+							<form:errors path="pass" />
+						</font>
+					</div>
+				</th>
 				<td>
-					<form:password path="pass" class="w3-input" value="" />
-					<font color="red">
-						<form:errors path="pass" />
-					</font>
+					<form:password path="pass" class="w3-input" value="" placeholder="게시글의 비밀번호를 입력 하세요."/>
 				</td>
 			</tr>
 			<tr>
-				<th>제목</th>
+				<th style = "vertical-align: middle; font-size:20px;">
+					<div>
+						제목
+					</div>
+					<div>
+						<font color="red">
+							<form:errors path="title" />
+						</font>
+					</div>
+				</th>
 				<td>
-					<form:input path="title" class="w3-input" />
-					<font color="red">
-						<form:errors path="title" /></font>
+					<form:input path="title" class="w3-input" placeholder="게시글의 제목을 입력 하세요."/>
 				</td>
 			</tr>
 			<tr>
-				<th>내용</th>
+				<th style = "font-size:20px;">
+					<div>
+						내용
+					</div>
+					<div>
+						<font color="red">
+							<form:errors path="content" />
+						</font>
+					</div>
+				</th>
 				<td>
-					<form:textarea path="content" rows="15" cols="80" />
-					<font color="red">
-						<form:errors path="content" />
-					</font>
+					<form:textarea path="content" rows="15" cols="80"/>
 				</td>
 			</tr>
 			<script>
 				CKEDITOR.replace("content", {
-					filebrowserImageUploadUrl : "imgupload"
+					filebrowserImageUploadUrl : "imgupload",
+					height : '300'
+					
 				})
 			</script>
 			<tr>
-				<th>첨부파일</th>
+				<th style = "vertical-align: middle; font-size:20px;">첨부파일</th>
 				<td><input type="file" name="file1"></td>
 			</tr>
 			<tr>
 				<td colspan="2" class="w3-center">
-					<a href="javascript:document.f.submit()">[게시글등록]</a>
-					<a href="list?boardid=${boardid}">[게시글목록]</a>
+					<a href="javascript:document.f.submit()"><div style="display: inline; color:#F15F5F; font-size:20px;">[게시글 등록]</div></a>
+					<a href="list?boardid=${boardid}"><div style="display: inline; font-size:20px;">[게시글 목록]</div></a>
 				</td>
 			</tr>
 		</table>

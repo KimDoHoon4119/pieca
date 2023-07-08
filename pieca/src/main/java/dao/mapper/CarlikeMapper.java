@@ -27,6 +27,9 @@ public interface CarlikeMapper {
    
    @Select("SELECT carno, COUNT(userid) AS cnt FROM carlike GROUP BY carno;")
    List<Carlike> selectliketotal2();
+   
+   @Select("SELECT carno, COUNT(userid) AS cnt FROM carlike GROUP BY carno ORDER BY cnt DESC LIMIT 5;")
+   List<Carlike> select_rank5();
 
    @Select({"<script>",
         "select * from carlike <if test='id != null'>where userid=#{userid}</if>",

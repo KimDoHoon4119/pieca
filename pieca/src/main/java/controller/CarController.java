@@ -50,11 +50,16 @@ public class CarController {
       List<Carlike> liked_Total = service.carliketotal();
       mav.addObject("liked_Total", liked_Total);
       System.out.println("liked_Total : " + liked_Total);
+      
+      List<Carlike> rank5_Car = service.select_rank5();
+      mav.addObject("rank5_Car", rank5_Car);
+      System.out.println("rank5_Car : " +rank5_Car);
       //ㅎㅇ
       if (session.getAttribute("loginUser") != null) {
          Mycar dbUser = service.selectMycar(loginUser.getUserid());
          
          //ㅎㅇ
+         
          List<Carlike> liked_Car = service.selectUserlike(loginUser.getUserid());
             mav.addObject("liked_Car", liked_Car);
             System.out.println("liked_Car : "+liked_Car);
@@ -68,8 +73,6 @@ public class CarController {
          mav.addObject("dbUser", dbUser); // 데이터 저장
          mav.addObject("carLikeData", carLikeData); // 데이터 저장
          mav.addObject("maxnum", maxnum); // 데이터 저장
-
-         
          return mav;
       } else {
          int maxnum = carList.size();

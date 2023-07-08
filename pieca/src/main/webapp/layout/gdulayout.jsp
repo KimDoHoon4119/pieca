@@ -170,7 +170,7 @@ a {
 				</a>
 			</li>
 			
-			<li class="map"><a href="${path}/place/location">충전소</a></li>
+			<li class="map"><a href="${path}/place/location">Station</a></li>
 			
 			<li class="board">
             	<div class="board-menu">
@@ -199,21 +199,21 @@ a {
 		</ul>
 	</nav>
 </div>
-<div class="contents">
+<div class="contents" style="height:auto; padding-bottom:150px;">
 	<button id="layout_top_btn" class="fa-solid fa-caret-up"></button>
 	<button id="layout_bottom_btn" class="fa-solid fa-caret-down"></button>
 	<sitemesh:write property="body"/>
 </div>
   
   <!-- Footer -->
-  <footer style="overflow: hidden;">
+  <footer>
   	<div style="width:100%; height:150px; background-color: #D5D5D5">
     	<h4>FOOTER</h4>
     	<p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
    		<div>
    		</div>
-   	</div> 
-  </footer>
+   	</div>
+   </footer> 
   <!-- End page content -->
 
 <script>

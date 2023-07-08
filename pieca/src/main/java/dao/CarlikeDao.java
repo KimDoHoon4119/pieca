@@ -45,6 +45,9 @@ public class CarlikeDao {
       return template.getMapper(cls).selectLike(userid);
    }
 
+   public List<Carlike> select_rank5() {
+      return template.getMapper(cls).select_rank5();
+   }
    
 
 

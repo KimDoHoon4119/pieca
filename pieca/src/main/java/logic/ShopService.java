@@ -254,6 +254,10 @@ public class ShopService {
       return carlikeDao.selectLike(userid);
    }
    
+   public List<Carlike> select_rank5() {
+         return carlikeDao.select_rank5();
+      }
+   
    
    
    
