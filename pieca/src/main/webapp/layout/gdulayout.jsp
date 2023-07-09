@@ -151,12 +151,7 @@ a {
 #layout_bottom_btn {
   top: 460px;
   
-  
 }
-
-
-
-
 </style>
 
 </head>
@@ -223,39 +218,39 @@ a {
     	<div style="float:left; width:20%; margin: 1% 0% 0% 0% ">
 			<p style="font-size:25px;"><i class="fa-solid fa-hands-clapping"></i> Thanks to</p>
 			<p style="font-size:15px;">카카오맵 API
-    			<a href="https://apis.map.kakao.com/" style="color:#F15F5F">&nbsp;바로가기</a>
+    			<a href="https://apis.map.kakao.com/" target="_blank" style="color:#F15F5F">&nbsp;바로가기</a>
     		</p>
 			<p style="font-size:15px;">카카오 로그인 API
-    			<a href="https://developers.kakao.com/product/kakaoLogin" style="color:#F15F5F">&nbsp;바로가기</a>
+    			<a href="https://developers.kakao.com/product/kakaoLogin" target="_blank" style="color:#F15F5F">&nbsp;바로가기</a>
     		</p>
 			<p style="font-size:15px;">네이버 로그인 API
-    			<a href="https://developers.naver.com/products/login/api/api.md" style="color:#F15F5F">&nbsp;바로가기</a>
+    			<a href="https://developers.naver.com/products/login/api/api.md" target="_blank" style="color:#F15F5F">&nbsp;바로가기</a>
     		</p>
 			<p style="font-size:15px;">Port one API (결제)
-    			<a href="https://developers.naver.com/products/login/api/api.md" style="color:#F15F5F">&nbsp;바로가기</a>
+    			<a href="https://developers.naver.com/products/login/api/api.md" target="_blank" style="color:#F15F5F">&nbsp;바로가기</a>
     		</p>
     		<p style="font-size:15px;">한국전력 API (지역정보) 
-    			<a href="https://bigdata.kepco.co.kr/cmsmain.do?scode=S01&pcode=000493&pstate=L&redirect=Y" style="color:#F15F5F">&nbsp;바로가기</a>
+    			<a href="https://bigdata.kepco.co.kr/cmsmain.do?scode=S01&pcode=000493&pstate=L&redirect=Y" target="_blank" style="color:#F15F5F">&nbsp;바로가기</a>
     		</p>
     	</div>
     	<div style="float:left; width:20%; margin: 2% 0% 0% 0% ">
     		<p style="font-size:15px;">Pixlr X
-    			<a href="https://pixlr.com/kr/x/" style="color:#F15F5F">&nbsp;바로가기</a>
+    			<a href="https://pixlr.com/kr/x/" target="_blank" style="color:#F15F5F">&nbsp;바로가기</a>
     		</p>
     		<p style="font-size:15px;">Freepik
-    			<a href="https://www.freepik.com/" style="color:#F15F5F">&nbsp;바로가기</a>
+    			<a href="https://www.freepik.com/" target="_blank" style="color:#F15F5F">&nbsp;바로가기</a>
     		</p>
     		<p style="font-size:15px;">Noonnu
-    			<a href="https://noonnu.cc/" style="color:#F15F5F">&nbsp;바로가기</a>
+    			<a href="https://noonnu.cc/" target="_blank" style="color:#F15F5F">&nbsp;바로가기</a>
     		</p>
     		<p style="font-size:15px;">Font-awesome 
-    			<a href="https://fontawesome.com/search" style="color:#F15F5F">&nbsp;바로가기</a>
+    			<a href="https://fontawesome.com/search" target="_blank" style="color:#F15F5F">&nbsp;바로가기</a>
     		</p>
     		<p style="font-size:15px;">공공데이터 API (충전소 정보)
-    			<a href="https://www.data.go.kr/data/15076352/openapi.do" style="color:#F15F5F">&nbsp;바로가기</a>
+    			<a href="https://www.data.go.kr/data/15076352/openapi.do" target="_blank" style="color:#F15F5F">&nbsp;바로가기</a>
     		</p>
     		<p style="font-size:15px;">공공데이터 API (행정표준코드)
-    			<a href="https://www.data.go.kr/data/15077871/openapi.do" style="color:#F15F5F">&nbsp;바로가기</a>
+    			<a href="https://www.data.go.kr/data/15077871/openapi.do" target="_blank" style="color:#F15F5F">&nbsp;바로가기</a>
     		</p>
     	</div>
     	
@@ -276,26 +271,35 @@ document.getElementById("layout_bottom_btn").addEventListener("click", function(
 	setTimeout(() => this.style.transform = "scale(1)", 200);
 });
 
-
-
 loc = document.location.href.split("pieca/");
 
 if (loc[1] == "main/home") {
-$(window).on('load',function() {
-	$("ul").css('background-color', '#1B1B1B');
-	 $(".home").css('color', '#FFFFFF');
-	    $(".map").css('color', '#FFFFFF');
-	    $(".board span").css('color', '#FFFFFF');
-	    $(".news").css('color', '#FFFFFF');
-	    $(".car").css('color', '#FFFFFF');
-	    $(".login").css('color', '#FFFFFF');
-	    $(".mypage").css('color', '#FFFFFF');
-	    $(".logout").css('color', '#FFFFFF');
-	
-  });
+	$(window).on('load',function() {
+		$("ul").css('background-color', '#1B1B1B');
+		$(".home").css('color', '#FFFFFF');
+		$(".map").css('color', '#FFFFFF');
+		$(".board span").css('color', '#FFFFFF');
+		$(".news").css('color', '#FFFFFF');
+		$(".car").css('color', '#FFFFFF');
+		$(".login").css('color', '#FFFFFF');
+		$(".mypage").css('color', '#FFFFFF');
+		$(".logout").css('color', '#FFFFFF');
+	});
 }
 
+
+
 $(window).scroll(function() {
+	if ((loc[1] == "main/home") && ($(window).scrollTop() > 700)) {
+		$("#layout_top_btn").fadeIn(600);
+	    $("#layout_bottom_btn").fadeIn(600);			
+	}
+
+	if ((loc[1] == "main/home") && ($(window).scrollTop() <= 700)) {
+		$("#layout_top_btn").fadeOut(600);
+	    $("#layout_bottom_btn").fadeOut(600);			
+	}
+	
 	if ($(window).scrollTop() > 1) {
 	    $("ul").css('background-color', '#FFFFFF');
 	    $(".home").css('color', '#1B1B1B');
@@ -307,6 +311,7 @@ $(window).scroll(function() {
 	    $(".mypage").css('color', '#1B1B1B');
 	    $(".logout").css('color', '#1B1B1B');
 	}
+	
 	if ($(window).scrollTop() == 0) {
 		if (loc[1] == "main/home") {
 			$("ul").css('background-color', '#1B1B1B');
@@ -321,6 +326,10 @@ $(window).scroll(function() {
 		}
 	}
 });
+function openInNewTab(url) {
+	  var win = window.open(url, '_blank');
+	  win.focus();
+	}
 </script>  
   
 

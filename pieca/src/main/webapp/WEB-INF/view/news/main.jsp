@@ -54,6 +54,10 @@
 #result1, #result2, #result3 {
 	display:none;
 }
+a {
+  target: _blank;
+}
+
 </style>
 </head>
 <body>
@@ -74,6 +78,8 @@ $(document).ready(function () {
 	$("#result1").fadeIn(1000);
 	$("#result2").fadeIn(1500);
 	$("#result3").fadeIn(2000);
+	var a = document.querySelector('a');
+	a.target = '_blank';
   });
 
 $(function(){
@@ -93,17 +99,17 @@ function naversearch() {
             let html3="";
             $.each(json.items, function(i,item){
             	if(i%3==0){
-					html1 += "<a href='"+item.link+"'><div id='news_list'><div id='news_title'>";
+					html1 += "<a href='"+item.link+"' target='_blank'><div id='news_list'><div id='news_title'>";
         	    	html1 += "<b>"+item.title+"</b></div><div id='news_description'>";
            			html1 += item.description+"</div></div></a>";
             		$("#result1").html(html1);
             	} else if(i%3==1){
-            		html2 += "<a href='"+item.link+"'><div id='news_list'><div id='news_title'>";
+            		html2 += "<a href='"+item.link+"' target='_blank'><div id='news_list'><div id='news_title'>";
         	    	html2 += "<b>"+item.title+"</b></div><div id='news_description'>";
            			html2 += item.description+"</div></div></a>";
             		$("#result2").html(html2);
             	} else if(i%3==2){
-            		html3 += "<a href='"+item.link+"'><div id='news_list'><div id='news_title'>";
+            		html3 += "<a href='"+item.link+"' target='_blank'><div id='news_list'><div id='news_title'>";
         	    	html3 += "<b>"+item.title+"</b></div><div id='news_description'>";
            			html3 += item.description+"</div></div></a>";
             		$("#result3").html(html3);;

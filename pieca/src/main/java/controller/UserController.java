@@ -477,9 +477,9 @@ public class UserController {
       List<Carlike> carLikeData = service.selectLike(user.getUserid());
       System.out.println("carLikeData :: "+carLikeData);
       mav.addObject("login",session.getAttribute("loginUser"));
-     mav.addObject("carList", carList); // 데이터 저장
-     mav.addObject("carData", carData); // 데이터 저장
-     mav.addObject("carLikeData", carLikeData); // 데이터 저장
+      mav.addObject("carList", carList); // 데이터 저장
+      mav.addObject("carData", carData); // 데이터 저장
+      mav.addObject("carLikeData", carLikeData); // 데이터 저장
       mav.addObject("user", user); //회원정보데이터
       List<User> list = service.select_all();
       for(int i=0;i<list.size();i++) {

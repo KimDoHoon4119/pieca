@@ -13,6 +13,18 @@
 </style>
 </head>
 <body>
+<c:set var="rank_index" value="1" />
+<c:forEach items="${rank5_Car}" var="rank5">
+   <c:forEach items="${carList}" var="item">
+      <c:if test="${rank5.carno == item.no}">
+      <br><br><br><br><br>
+         <p>${rank_index} ${item.name}</p>
+         <c:set var="rank_index" value="${rank_index+1}" />
+      </c:if>
+   </c:forEach>
+</c:forEach>
+
+
 <div style="">
 <form action="list" method="post">
 

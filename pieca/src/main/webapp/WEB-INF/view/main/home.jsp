@@ -76,7 +76,7 @@
 </div>
 
 <%-- section 4 --%>
-<div id="img_car" style="display:none; margin-bottom: 200px;">
+<div id="img_car" style="display:none; margin-bottom: 300px;">
 	<div class="container" style="display: flex; justify-content: center;">
 		<div class="inner2" style="width:800px; padding: 70px 0px 0px 430px;">
 			<div style="font-size:30px;">

@@ -8,59 +8,109 @@
 <meta charset="UTF-8">
 <title>차량 목록</title>
 <style>
-
-
 </style>
 </head>
 <body>
+
+<div style="float:left; width:1920px; background-color: #747474; margin-top: 100px;">
+<div style="float:left; width:70%; background-color: #555555; margin: 0% 0% 0% 15%;">
+<c:set var="rank_index" value="1" />
+
+<c:forEach items="${rank5_Car}" var="rank5">
+	<c:forEach items="${carList}" var="item">
+		<c:if test="${rank5.carno == item.no}">
+			<div id="imgSlide_${rank_index}" style="width:100%;"> <%-- 박스 생성 --%>
+				<div style="float:left;  text-align:right; width:10%; background-color: red;">
+					<c:if test="${rank_index == 1}">
+						<img src="../img/car_rank_1.png" style="width:60px;">
+					</c:if>
+					<c:if test="${rank_index == 2}">
+						<img src="../img/car_rank_2.png" style="width:60px;">
+					</c:if>
+					<c:if test="${rank_index == 3}">
+						<img src="../img/car_rank_3.png" style="width:60px;">
+					</c:if>
+				</div>
+				<div style="float:left; width:90%; height:60px; background-color: orange; font-size:35px;">
+					<p>${item.maker} ${item.name}</p>
+				</div>
+				<div style="float:left; width:100%; background-color: yellow; font-size:35px;">
+					<img src="../img/${item.img}" style="width:90%; height:550px;">
+				</div>
+				<c:set var="rank_index" value="${rank_index+1}" />
+			</div>
+		</c:if>
+	</c:forEach>
+</c:forEach>
+</div>
+</div>
+
+<div id="imgDot" style="float:left; width:1920px; margin:0px 0px 0px 250px;">
+	<div id="imgDot_1" style="float:left; width:40px; height:40px;  border-radius: 100px; margin-left:50px; box-shadow: 0px 0px 5px 0px #000000;"></div>
+	<div id="imgDot_2" style="float:left; width:40px; height:40px;  border-radius: 100px; margin-left:50px; box-shadow: 0px 0px 5px 0px #000000;"></div>
+	<div id="imgDot_3" style="float:left; width:40px; height:40px;  border-radius: 100px; margin-left:50px; box-shadow: 0px 0px 5px 0px #000000;"></div>
+	<div id="imgDot_4" style="float:left; width:40px; height:40px;  border-radius: 100px; margin-left:50px; box-shadow: 0px 0px 5px 0px #000000;"></div>
+	<div id="imgDot_5" style="float:left; width:40px; height:40px;  border-radius: 100px; margin-left:50px; box-shadow: 0px 0px 5px 0px #000000;"></div>
+	<%-- 
+	<i class="fa-solid fa-circle" id="imgDot_1"></i>
+	<i class="fa-solid fa-circle" id="imgDot_2"></i>
+	<i class="fa-solid fa-circle" id="imgDot_3"></i>
+	<i class="fa-solid fa-circle" id="imgDot_4"></i>
+	<i class="fa-solid fa-circle" id="imgDot_5"></i>
+	--%>
+</div>
+
+
 <input type="hidden" value="${mycar.carno}" id="mycar">
 <form action="list" method="post">
-<select name="maker">
-   <c:if test="${maker_selected!=null}">
-      <option value="${maker_selected}">${maker_selected}</option>
-      <option value="">브랜드 선택 없음</option>
-   </c:if>
-   <c:if test="${maker_selected==null}">
-      <option value=>브랜드 선택</option>
-   </c:if>
-  <c:forEach items="${makers}" var="maker_option">
-    <c:if test="${maker_selected ne maker_option.maker}">
-      <option value="${maker_option.maker}">${maker_option.maker}</option>
-    </c:if>
-  </c:forEach>
-</select>
+	<select name="maker">
+   		<c:if test="${maker_selected!=null}">
+      		<option value="${maker_selected}">${maker_selected}</option>
+      		<option value="">브랜드 선택 없음</option>
+   		</c:if>
+   		<c:if test="${maker_selected==null}">
+			<option value=>브랜드 선택</option>
+   		</c:if>
+  		<c:forEach items="${makers}" var="maker_option">
+	    	<c:if test="${maker_selected ne maker_option.maker}">
+      			<option value="${maker_option.maker}">${maker_option.maker}</option>
+    		</c:if>
+  		</c:forEach>
+	</select>
 
-<select name="car_size">
-     <c:if test="${car_size_selected!=null}">
-      <option value="${car_size_selected}">${car_size_selected}</option>
-      <option value="">크기 선택없음</option>
-   </c:if>
-   <c:if test="${car_size_selected==null}">
-      <option value=>크기 선택</option>
-   </c:if>
-  <c:forEach items="${car_sizes}" var="car_size_option">
-    <c:if test="${car_size_selected ne car_size_option.car_size}">
-      <option value="${car_size_option.car_size}">${car_size_option.car_size}</option>
-    </c:if>
-  </c:forEach>
-</select>
+	<select name="car_size">
+		<c:if test="${car_size_selected!=null}">
+      		<option value="${car_size_selected}">${car_size_selected}</option>
+      		<option value="">크기 선택없음</option>
+	   	</c:if>
+   		<c:if test="${car_size_selected==null}">
+			<option value=>크기 선택</option>
+   		</c:if>
+  		<c:forEach items="${car_sizes}" var="car_size_option">
+    		<c:if test="${car_size_selected ne car_size_option.car_size}">
+      			<option value="${car_size_option.car_size}">${car_size_option.car_size}</option>
+    		</c:if>
+  		</c:forEach>
+	</select>
 
-<select name="car_type">
-       <c:if test="${car_type_selected!=null}">
-      <option value="${car_type_selected}">${car_type_selected}</option>
-      <option value="">차종 선택없음</option>
-   </c:if>
-   <c:if test="${car_type_selected==null}">
-      <option value=>차종 선택</option>
-   </c:if>
-  <c:forEach items="${car_types}" var="car_type_option">
-    <c:if test="${car_type_selected ne car_type_option.car_type}">
-      <option value="${car_type_option.car_type}">${car_type_option.car_type}</option>
-    </c:if>
-  </c:forEach>
-</select>
+	<select name="car_type">
+		<c:if test="${car_type_selected!=null}">
+			<option value="${car_type_selected}">${car_type_selected}</option>
+			<option value="">차종 선택없음</option>
+		</c:if>
+		<c:if test="${car_type_selected==null}">
+			<option value=>차종 선택</option>
+		</c:if>
+		<c:forEach items="${car_types}" var="car_type_option">
+		<c:if test="${car_type_selected ne car_type_option.car_type}">
+			<option value="${car_type_option.car_type}">${car_type_option.car_type}</option>
+		</c:if>
+		</c:forEach>
+	</select>
+
 <input type="submit" value="조회" />
 </form>
+
 <form action="list" method="post">
    <input type="hidden" value="" name="maker">
    <input type="hidden" value="" name="car_size">
@@ -559,19 +609,21 @@ function slideShow() {
         ];
 
      setInterval(function() {
-       images[i].show();
-       dots[i].css("color","#747474")
+       images[i].delay(1000).fadeIn(1000);
+       dots[i].delay(2000).css("background-color","#747474")
        for (var j = 0; j < images.length; j++) {
          if (j !== i) {
-           images[j].hide();
-           dots[i].css("color","#D5D5D5")
+     	      	images[j].fadeOut(1000);
+	      	  dots[j].css("background-color","#D5D5D5")
+
+
          }
        }
        i++;
        if (i == images.length) {
          i = 0;
        }
-     }, 1500);
+     }, 3000);
    }
 
 $(document).ready(function(){
@@ -581,11 +633,11 @@ $(document).ready(function(){
    $("#imgSlide_4").hide();
    $("#imgSlide_5").hide();
    
-   $("#imgDot_1").css("color","#747474")
-   $("#imgDot_2").css("color","#D5D5D5")
-   $("#imgDot_3").css("color","#D5D5D5")
-   $("#imgDot_4").css("color","#D5D5D5")
-   $("#imgDot_5").css("color","#D5D5D5")
+   $("#imgDot_1").css("background-color","#747474")
+   $("#imgDot_2").css("background-color","#D5D5D5")
+   $("#imgDot_3").css("background-color","#D5D5D5")
+   $("#imgDot_4").css("background-color","#D5D5D5")
+   $("#imgDot_5").css("background-color","#D5D5D5")
    
    
    
