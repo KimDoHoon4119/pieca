@@ -11,8 +11,6 @@ import org.springframework.stereotype.Repository;
 import dao.mapper.CarlikeMapper;
 import logic.Car;
 import logic.Carlike;
-import logic.Mycar;
-import logic.Payment;
 @Repository // @Component + dao 기능(데이터베이스연결)
 public class CarlikeDao {
    
@@ -48,6 +46,16 @@ public class CarlikeDao {
    public List<Carlike> select_rank5() {
       return template.getMapper(cls).select_rank5();
    }
+
+public List<Car> getMakers() {
+   return template.getMapper(cls).getMakers();
+}
+public List<Car> getSizes() {
+   return template.getMapper(cls).getSizes();
+}
+public List<Car> getTypes() {
+   return template.getMapper(cls).getTypes();
+}
    
 
 

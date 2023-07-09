@@ -1,15 +1,13 @@
 package dao.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
+import logic.Car;
 import logic.Carlike;
-import logic.User;
 
 public interface CarlikeMapper {
 
@@ -35,6 +33,21 @@ public interface CarlikeMapper {
         "select * from carlike <if test='id != null'>where userid=#{userid}</if>",
         "</script>"})
    List<Carlike> selectLike(String userid);
+   
+   @Select({"<script>",
+       "select maker from car GROUP BY maker",
+       "</script>"})
+   List<Car> getMakers();
+   
+   @Select({"<script>",
+       "select car_size from car GROUP BY car_size",
+       "</script>"})
+   List<Car> getSizes();
+   
+   @Select({"<script>",
+       "select car_type from car GROUP BY car_type",
+       "</script>"})
+   List<Car> getTypes();
    
 
 

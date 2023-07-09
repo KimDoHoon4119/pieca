@@ -8,84 +8,84 @@
 }
 
 body * {
-	margin: 0;
-	font-family: 'KIMM_Bold';
+   margin: 0;
+   font-family: 'KIMM_Bold';
 }
 
 #join_container {
-	width: 100%;
-	height: 100%;
-	margin: 7% 0% 10% 37.7%;
+   width: 100%;
+   height: 100%;
+   margin: 7% 0% 10% 37.7%;
 }
 
 #join_logo {
-	width: 470px;
-	text-align: center;
-	margin-bottom: 50px;
+   width: 470px;
+   text-align: center;
+   margin-bottom: 50px;
 }
 
 #join_userid_title {
-	display: inline;
-	text-align: left;
+   display: inline;
+   text-align: left;
 }
 
 #join_password2_title, #join_username_title, #join_phoneno_title, #join_birthday_title, #join_email_title, #join_password_title {
-	display: inline;
+   display: inline;
 }
 
 #join_userid_error, #join_idCheck, #join_password_error, #join_pwValid, #join_pwCheck, #join_username_error, 
 #join_nameChk, #join_email_error, #join_emailChk, #join_phoneChk, #join_birthdayChk, #join_phoneno_error, #join_birthday_error  {
-	display: inline;
-	font-size: 13px;
+   display: inline;
+   font-size: 13px;
 }
 
 #join_userid_input, #join_password_input, #join_phoneno_input, #join_email_input, #join_password2_input, #join_username_input {
-	margin: 5px 0px 20px 0px;
+   margin: 5px 0px 20px 0px;
 }
 
 #join_birthday_input {
-	margin: 5px 0px 50px 0px;
+   margin: 5px 0px 50px 0px;
 }
 
 
 #join_input_userid, #join_input_password, #join_input_password2, #join_input_username, #join_input_phoneno, 
 #join_input_email, #join_select_email, #join_year, #join_month, #join_day {
-	border: 2px solid #747474;
-	border-radius: 6px;
-	font-size: 15px;
-	width: 470px;
-	height: 40px;
-	padding-left: 15px;
+   border: 2px solid #747474;
+   border-radius: 6px;
+   font-size: 15px;
+   width: 470px;
+   height: 40px;
+   padding-left: 15px;
 }
 
 #join_input_email, #join_select_email {
-	width: 222px;
+   width: 222px;
 }
 
 #join_select_email {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 #join_year, #join_month, #join_day {
-	width: 140px;
+   width: 140px;
 }
 
 #join_year, #join_month {
-	margin-right: 19.5px;
+   margin-right: 19.5px;
 }
 
 #join_submit, #join_reset {
-	color: #FFFFFF;
-	width: 232px;
-	height: 40px;
-	border-radius: 6px;
-	border: 2px solid #D5D5D5;
-	cursor: pointer;
+   color: #FFFFFF;
+   width: 232px;
+   height: 40px;
+   border-radius: 6px;
+   border: 2px solid #D5D5D5;
+   cursor: pointer;
 }
 
 #join_reset {
-	border: 2px solid #FFBB00;
-	background-color: #FFBB00;
+   border: 2px solid #FFBB00;
+   background-color: #FFBB00;
 }
 
 #login_container {width:100%; height:450px; margin: 10% 0% 10% 42.2%;}
@@ -151,6 +151,10 @@ body * {
 #basic_info_left_naver_username:focus, #basic_info_left_kakao_username:focus{
     outline:none;
 }
+
+#basic_info_wrapper2 {transition-duration: 0.5s; border:1px solid #FFFFFF; border-radius: 5px; margin:120px 0px 50px 0px; box-shadow: 0px 2px 4px 0px #1B1B1B; }
+#basic_info_left_inner2 {float:left; width:20%; height:60px; margin: 20px 0px 0px 50px; }
+#basic_info_left_inner3 {float:left; width:20%; height:600px; margin: 20px 0px 0px 50px; }
 
 #basic_info_wrapper {transition-duration: 0.5s; border:1px solid #FFFFFF; border-radius: 5px; margin:120px 0px 50px 0px; box-shadow: 0px 2px 4px 0px #1B1B1B; height:280px; }
 #basic_info_left_inner {float:left; width:20%; height:230px; margin: 20px 0px 0px 50px; }

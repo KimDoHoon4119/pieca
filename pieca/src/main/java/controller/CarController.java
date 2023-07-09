@@ -1,30 +1,22 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
-import dao.CarDao;
 import logic.Car;
 import logic.Carlike;
 import logic.Mycar;
-import logic.Payment;
 import logic.ShopService;
 import logic.User;
-import util.CipherUtil;
 
 @Controller // @Component + Controller 기능
 @RequestMapping("car") // http://localhost:8080/shop1/item/*
@@ -35,16 +27,75 @@ public class CarController {
    private Carlike carlike;
    @Autowired
    private Mycar mycar;
+   
+   @RequestMapping("test") // get,post 방식에 상관없이 호출
+   public ModelAndView test(HttpSession session) {
+      ModelAndView mav = new ModelAndView();
+      List<Integer> list = Arrays.asList(1, 2, 3);
+      mav.addObject("list",list);
+      return mav;
+   }
    @RequestMapping("list") // get,post 방식에 상관없이 호출
-   public ModelAndView list(HttpSession session) {
+   public ModelAndView list(String maker,String car_size,String car_type, HttpSession session) {
       // ModelAndView : Model + view
       // view에 전송할 데이터 + view 설정
       // view 설정이 안된 경우 : url 과 동일. item/list 뷰로 설정
       ModelAndView mav = new ModelAndView();
-
-      // itemList : item 테이블의 모든 정보를 Item 객체 List로 저장
-      List<Car> carList = service.carList();
+      System.out.println("초기 : "+maker+car_size+car_type);
+      //String maker2; String car_size2; String car_type2;
+      //if(maker != null) maker2 = maker.substring(1);
+      //if(car_size != null) car_size2 = car_size.substring(1);
+      //if(car_type != null) car_type2 = car_type.substring(1);
+      if(maker==null || maker.equals("")) {
+         maker = null;
+      }
+      if(car_size==null || car_size.equals("")) {
+         car_size = null;
+      }
+      if(car_type==null || car_type.equals("")) {
+         car_type = null;
+      }
+      
+      Car car = new Car();
+      car.setMaker(maker);
+      car.setCar_size(car_size);
+      car.setCar_type(car_type);
+      List<Car> carList = service.carList(car);
+      System.out.println(carList);
+      
+      List<Car> carList1 = new ArrayList<>();
+      List<Car> carList2 = new ArrayList<>();
+      for(int i=0; i<carList.size(); i++) {
+         if(i%2 ==0) {
+            carList1.add(carList.get(i));
+         }else if(i%2 == 1) {
+            carList2.add(carList.get(i));
+         }
+      }
+      mav.addObject("carList1",carList1);
+      mav.addObject("carList2",carList2);
+      
+      mav.addObject("maker_selected",maker);
+      mav.addObject("car_size_selected",car_size);
+      mav.addObject("car_type_selected",car_type);
+      if(carList.size()==0) { // carList를 가져오지 못했을때,
+      }else{
+         //mav.addObject("maker_selected",maker.substring(1));
+         //mav.addObject("car_size_selected",car_size.substring(1));
+         //mav.addObject("car_type_selected",car_type.substring(1));
+      }
+      
+      
+      List<Car> makers = service.getMakers();
+      List<Car> car_sizes = service.getSizes();
+      List<Car> car_types = service.getTypes();
+      
+      mav.addObject("makers",makers);
+      mav.addObject("car_sizes",car_sizes);
+      mav.addObject("car_types",car_types);
+      
       User loginUser = (User)session.getAttribute("loginUser");
+      System.out.println(loginUser);
       
       //ㅎㅇ
       List<Carlike> liked_Total = service.carliketotal();
@@ -54,18 +105,16 @@ public class CarController {
       List<Carlike> rank5_Car = service.select_rank5();
       mav.addObject("rank5_Car", rank5_Car);
       System.out.println("rank5_Car : " +rank5_Car);
+      System.out.println("없을때 : "+carList.size());
+      
+      
       //ㅎㅇ
       if (session.getAttribute("loginUser") != null) {
          Mycar dbUser = service.selectMycar(loginUser.getUserid());
-         
-         //ㅎㅇ
-         
          List<Carlike> liked_Car = service.selectUserlike(loginUser.getUserid());
             mav.addObject("liked_Car", liked_Car);
             System.out.println("liked_Car : "+liked_Car);
-         //
-            
-          List<Carlike> carLikeData = service.selectLike(loginUser.getUserid());
+         List<Carlike> carLikeData = service.selectLike(loginUser.getUserid());
           //System.out.println("333 :: "+carLikeData);
          //System.out.println(dbUser);
          int maxnum = carList.size();
@@ -73,6 +122,9 @@ public class CarController {
          mav.addObject("dbUser", dbUser); // 데이터 저장
          mav.addObject("carLikeData", carLikeData); // 데이터 저장
          mav.addObject("maxnum", maxnum); // 데이터 저장
+         Mycar mycar = service.selectMycar(loginUser.getUserid());
+         mav.addObject("mycar",mycar);
+         System.out.println(mycar+"이게 아이디값으로 검색한 mycar");
          return mav;
       } else {
          int maxnum = carList.size();
@@ -81,7 +133,9 @@ public class CarController {
          return mav;
       }
    }
-
+   
+   
+   
    @RequestMapping("carlike") //좋아요 추가/삭제
    @ResponseBody
    public Boolean carlike(int carno, String userid) {

@@ -180,8 +180,8 @@ public class ShopService {
       userDao.setcard(user);
    }
    
-   public List<Car> carList() {
-      return carDao.list();
+   public List<Car> carList(Car car) {
+      return carDao.list(car);
    }
    
    public int commmaxseq(int num) {
@@ -257,6 +257,18 @@ public class ShopService {
    public List<Carlike> select_rank5() {
          return carlikeDao.select_rank5();
       }
+public List<Car> getMakers() {
+   return carlikeDao.getMakers();
+}
+public List<Car> getSizes() {
+   return carlikeDao.getSizes();
+}
+public List<Car> getTypes() {
+   return carlikeDao.getTypes();
+}
+public List<User> select_all() {
+   return userDao.select_all();
+}
    
    
    

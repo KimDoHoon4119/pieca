@@ -206,14 +206,61 @@ a {
 </div>
   
   <!-- Footer -->
-  <footer>
-  	<div style="width:100%; height:150px; background-color: #D5D5D5">
-    	<h4>FOOTER</h4>
-    	<p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-   		<div>
-   		</div>
+<footer>
+	<div style="width:105%; height:180px; background-color: #D5D5D5; box-shadow: 0px 0px 5px 4px #1B1B1B;">
+		<div style="float:left; width:20%; margin: 1% 0% 0% 12% ">
+			<p style="font-size:25px;">구디 아카데미</p>
+    		<p style="font-size:20px;">GDJ 62기 <span style="color:#F15F5F">이현우</span></p>
+    		<p style="font-size:18px;">dlgusdn16@naver.com</p>
+    		<p style="font-size:18px;">010-2316-8678</p>
+    	</div>
+    	<div style="float:left; width:20%; margin: 1% 0% 0% 0% ">
+			<p style="font-size:25px;">구디 아카데미</p>
+    		<p style="font-size:20px;">GDJ 62기 <span style="color:#F15F5F">김도훈</span></p>
+    		<p style="font-size:18px;">guardian010@naver.com</p>
+    		<p style="font-size:18px;">010-8850-4119</p>
+    	</div>
+    	<div style="float:left; width:20%; margin: 1% 0% 0% 0% ">
+			<p style="font-size:25px;"><i class="fa-solid fa-hands-clapping"></i> Thanks to</p>
+			<p style="font-size:15px;">카카오맵 API
+    			<a href="https://apis.map.kakao.com/" style="color:#F15F5F">&nbsp;바로가기</a>
+    		</p>
+			<p style="font-size:15px;">카카오 로그인 API
+    			<a href="https://developers.kakao.com/product/kakaoLogin" style="color:#F15F5F">&nbsp;바로가기</a>
+    		</p>
+			<p style="font-size:15px;">네이버 로그인 API
+    			<a href="https://developers.naver.com/products/login/api/api.md" style="color:#F15F5F">&nbsp;바로가기</a>
+    		</p>
+			<p style="font-size:15px;">Port one API (결제)
+    			<a href="https://developers.naver.com/products/login/api/api.md" style="color:#F15F5F">&nbsp;바로가기</a>
+    		</p>
+    		<p style="font-size:15px;">한국전력 API (지역정보) 
+    			<a href="https://bigdata.kepco.co.kr/cmsmain.do?scode=S01&pcode=000493&pstate=L&redirect=Y" style="color:#F15F5F">&nbsp;바로가기</a>
+    		</p>
+    	</div>
+    	<div style="float:left; width:20%; margin: 2% 0% 0% 0% ">
+    		<p style="font-size:15px;">Pixlr X
+    			<a href="https://pixlr.com/kr/x/" style="color:#F15F5F">&nbsp;바로가기</a>
+    		</p>
+    		<p style="font-size:15px;">Freepik
+    			<a href="https://www.freepik.com/" style="color:#F15F5F">&nbsp;바로가기</a>
+    		</p>
+    		<p style="font-size:15px;">Noonnu
+    			<a href="https://noonnu.cc/" style="color:#F15F5F">&nbsp;바로가기</a>
+    		</p>
+    		<p style="font-size:15px;">Font-awesome 
+    			<a href="https://fontawesome.com/search" style="color:#F15F5F">&nbsp;바로가기</a>
+    		</p>
+    		<p style="font-size:15px;">공공데이터 API (충전소 정보)
+    			<a href="https://www.data.go.kr/data/15076352/openapi.do" style="color:#F15F5F">&nbsp;바로가기</a>
+    		</p>
+    		<p style="font-size:15px;">공공데이터 API (행정표준코드)
+    			<a href="https://www.data.go.kr/data/15077871/openapi.do" style="color:#F15F5F">&nbsp;바로가기</a>
+    		</p>
+    	</div>
+    	
    	</div>
-   </footer> 
+</footer> 
   <!-- End page content -->
 
 <script>

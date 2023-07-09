@@ -467,7 +467,8 @@ public class UserController {
       User user = service.selectUserOne(userid);
 //      Mycar car = service.selectMycar(userid);
       user.setEmail(emailDecrypt(user));  //이메일 복호화
-      List<Car> carList = service.carList();
+      Car car = new Car();
+      List<Car> carList = service.carList(car);
       System.out.println("carList :: "+carList);
       
       Mycar carData = service.selectMycar(user.getUserid());
@@ -475,11 +476,16 @@ public class UserController {
       
       List<Carlike> carLikeData = service.selectLike(user.getUserid());
       System.out.println("carLikeData :: "+carLikeData);
-      
-	  mav.addObject("carList", carList); // 데이터 저장
-	  mav.addObject("carData", carData); // 데이터 저장
-	  mav.addObject("carLikeData", carLikeData); // 데이터 저장
+      mav.addObject("login",session.getAttribute("loginUser"));
+     mav.addObject("carList", carList); // 데이터 저장
+     mav.addObject("carData", carData); // 데이터 저장
+     mav.addObject("carLikeData", carLikeData); // 데이터 저장
       mav.addObject("user", user); //회원정보데이터
+      List<User> list = service.select_all();
+      for(int i=0;i<list.size();i++) {
+         list.get(i).setEmail(emailDecrypt(list.get(i)));
+      }
+      mav.addObject("list",list);
       return mav;
    }   
    //로그아웃 컨트롤러 구현하기.
@@ -765,31 +771,31 @@ public class UserController {
       String result = null;
       //입력검증 정상완료.
       if(user.getUserid() != null) {
-    	  User loginUser = (User)session.getAttribute("loginUser");
-    	  User dbUser = service.selectUserOne(user.getUserid());
-    	  user.setEmail(emailEncrypt(user.getEmail(), user.getUserid()));
-    	  
-    	  if (dbUser.getChannel().equals("pieca")) {
-    		  if ((passwordHash(user.getPassword()).equals(dbUser.getPassword())) &&
-    		  	 (user.getEmail().equals(dbUser.getEmail()))) {
-    			  service.setcard(user);
-    			  loginUser.setCard("y");
-    	    	  result = "ok";
+         User loginUser = (User)session.getAttribute("loginUser");
+         User dbUser = service.selectUserOne(user.getUserid());
+         user.setEmail(emailEncrypt(user.getEmail(), user.getUserid()));
+         
+         if (dbUser.getChannel().equals("pieca")) {
+            if ((passwordHash(user.getPassword()).equals(dbUser.getPassword())) &&
+                (user.getEmail().equals(dbUser.getEmail()))) {
+               service.setcard(user);
+               loginUser.setCard("y");
+                result = "ok";
                }
-    	  } else if (!dbUser.getChannel().equals("pieca")) {
-    		  if (user.getEmail().equals(dbUser.getEmail() ) ) {
-    			  service.setcard(user);
-    			  loginUser.setCard("y");
-    	    	  result = "ok";
-    		  }
-    	  }
+         } else if (!dbUser.getChannel().equals("pieca")) {
+            if (user.getEmail().equals(dbUser.getEmail() ) ) {
+               service.setcard(user);
+               loginUser.setCard("y");
+                result = "ok";
+            }
+         }
       }
       
       if (result == null) { // 아이디 또는 비밀번호 검색 실패.
-    	  bresult.reject(code);
-    	  mav.getModel().putAll(bresult.getModel());
-    	  return mav;
-		}
+         bresult.reject(code);
+         mav.getModel().putAll(bresult.getModel());
+         return mav;
+      }
       mav.addObject("result",result);
       return mav;
    }
@@ -799,8 +805,8 @@ public class UserController {
    
       
 //      if ((dbUser.getUserid().equals(userid)) && (dbUser.getCarno() == carno)) {
-//    	  check = true;
-//    	  return check;
+//         check = true;
+//         return check;
 //      }
       
 //      return check;
