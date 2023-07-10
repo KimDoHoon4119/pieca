@@ -240,14 +240,14 @@
       <div id="basic_info_left_inner2">
          <span style="font-size:30px;">회원 관리</span>
       </div>
-      <div style="font-size: 16px; width:90%; margin:0px 0px 40px 5%">
+      <div style="font-size: 16px; width:85%; margin:0px 0px 40px 5%">
          <table class="w3-table" style="text-align: center; border:2px solid #D5D5D5">
          <tr style="border:2px solid #D5D5D5;">
-			<th width="15%" style="background-color:red; font-size:18px; color:#F15F5F">회원 이름</th>
-            <th width="21%" style="background-color:orange; font-size:18px; color:#F15F5F">전화번호</th>
-            <th width="18%" style="background-color:yellow; font-size:18px; color:#F15F5F; padding-left: 18px;">생년월일</th>
-            <th width="31%" style="background-color:green; font-size:18px; color:#F15F5F">이메일</th>
-            <th width="25%" style="background-color:blue; text-align:center; font-size:18px; color:#F15F5F">기타 기능</th>
+			<th width="20%" style="background-color:red; font-size:18px; color:#F15F5F">회원 이름</th>
+            <th width="25%" style="background-color:orange; font-size:18px; color:#F15F5F">전화번호</th>
+            <th width="20%" style="background-color:yellow; font-size:18px; color:#F15F5F; padding-left: 18px;">생년월일</th>
+            <th width="35%" style="background-color:green; font-size:18px; color:#F15F5F">이메일</th>
+            <th width="15%" style="background-color:blue; text-align:center; font-size:18px; color:#F15F5F">수정</th>
 		</tr>
 		
 		<c:set var="userCnt" value="1" /> 
@@ -259,7 +259,7 @@
             <td>
             	<c:if test="${user.channel eq 'pieca' }">
             		<img src="../img/mypage_P2.png" style="width:25px;">
-            		<form:input path="username" id="adminUsername" value="${user.username}" readonly="true" style="width:65%; padding: 0px; font-size:16px; height:35px;"/>
+            		<form:input path="username" id="adminUsername${userCnt}" value="${user.username}" style="width:65%; background-color:#FFFFFF; border:none; color:#000000; padding-left: 3px; font-size:16px; height:35px;"/>
             	</c:if>
             	<c:if test="${user.channel eq 'kakao' }">
             		<img src="../img/mypage_K.png" style="width:25px;">
@@ -272,7 +272,7 @@
             </td>
             <td>
             	<c:if test="${user.channel eq 'pieca' }">
-            		<form:input path="phoneno" id="adminPhoneno" value="${user.phoneno}" readonly="true" style="width:95%; padding: 0px; font-size:16px; height:35px;"/>
+            		<form:input path="phoneno" id="adminPhoneno${userCnt}" value="${user.phoneno}" style="width:95%; background-color:#FFFFFF; border:none; color:#000000; padding-left: 3px; font-size:16px; height:35px;"/>
             	</c:if>
             	<c:if test="${user.channel ne 'pieca' }">
             		<input type="text" value="${user.phoneno}" readonly="readonly"style="width:90%; padding: 0px; font-size:16px; height:35px; border:none; padding-left: 3px;"/>
@@ -282,7 +282,7 @@
             <td>
             	<c:if test="${user.channel eq 'pieca'}">
             		<fmt:formatDate value="${user.birthday}" var="adminBirth" type="date" pattern="yyyy-MM-dd" />
-            		<form:input path="birthday" id="adminBirthday" value="${adminBirth}" readonly="true" style="width:100%; padding: 0px; height:35px; font-size:16px;"/>
+            		<form:input path="birthday" id="adminBirthday${userCnt}" value="${adminBirth}" style="width:100%; background-color:#FFFFFF; border:none; color:#000000; padding-left: 3px; font-size:16px; height:35px;"/>
             	</c:if>
             	<c:if test="${user.channel ne 'pieca'}">
             		<fmt:formatDate value="${user.birthday}" var="adminBirth" type="date" pattern="****-MM-dd" />
@@ -291,7 +291,7 @@
             </td>
             <td>
             	<c:if test="${user.channel eq 'pieca'}">
-            		<form:input path="email" value="${user.email}" id="adminEmail" readonly="true" style="width:105%; padding: 0px; height:35px; font-size:16px;"/>
+            		<form:input path="email" value="${user.email}" id="adminEmail${userCnt}" style="width:105%; background-color:#FFFFFF; border:none; color:#000000; padding-left: 3px; font-size:16px; height:35px;"/>
             	</c:if>
             	<c:if test="${user.channel ne 'pieca'}">
             		<input type="text" value="${user.email}" readonly="readonly" style="width:105%; padding: 0px; height:35px; font-size:16px; border: none; padding-left: 3px;"/>
@@ -301,12 +301,10 @@
             	<c:if test="${user.channel eq 'pieca' }">
                		<input type="button" id="admin_fix${userCnt}" value="수정" onclick="showUserId('${userCnt}')" style="width:50px; height: 35px; background-color: #008000; border:none; color:#FFFFFF; border-radius: 6px;">
                		<input type="submit" id="admin_submit${userCnt}" value="저장" style="width:50px; height: 35px; background-color: #00B6EF;; border:none; color:#FFFFFF; border-radius: 6px;">
-               		<a href="../user/delete?userid=${user.userid}" style="color:">[탈퇴]</a>
                	</c:if>
                		
                	<c:if test="${user.channel ne 'pieca' }">
                		<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-</a>
-               		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../user/delete?userid=${user.userid}" style="color:#F15F5F">[탈퇴]</a>
                	</c:if>
             </td>
          </tr>
@@ -687,6 +685,10 @@ function showUserId(cnt) {
 	$("#AdminUserIdBox"+cnt).show()
 	$("#admin_fix"+cnt).hide()
 	$("#admin_submit"+cnt).show()
+	$("#adminUsername"+cnt).removeAttr("disabled").css("border","1px solid #000000").css("border-radius","6px").css("padding-left","2px");
+	$("#adminPhoneno"+cnt).removeAttr("disabled").css("border","1px solid #000000").css("border-radius","6px").css("padding-left","2px");
+	$("#adminBirthday"+cnt).removeAttr("disabled").css("border","1px solid #000000").css("border-radius","6px").css("padding-left","2px");
+	$("#adminEmail"+cnt).removeAttr("disabled").css("border","1px solid #000000").css("border-radius","6px").css("padding-left","2px");
 }
 
 var isToggled = false;
@@ -838,13 +840,17 @@ $(document).ready(function(){
            }
         }
      });
-	let max = $("#userCntMax").val();
-   for (let i=1; i<=max; i++ ) {
-	   $("#AdminUserIdBox"+i).hide()
-	   $("#admin_submit"+i).hide()
-   }
+    
+let max = $("#userCntMax").val();
+for (let i=1; i<=max; i++ ) {
+	$("#AdminUserIdBox"+i).hide()
+	$("#admin_submit"+i).hide()
+	$("#adminUsername"+i).attr("disabled","disabled");
+	$("#adminPhoneno"+i).attr("disabled","disabled");
+	$("#adminBirthday"+i).attr("disabled","disabled");
+	$("#adminEmail"+i).attr("disabled","disabled");
+}
 	   
-   
    $("#mypage_car_right_name_box").hide();
    $("#mypage_car_right_type_box").hide();
    $("#mypage_car_right_price_box").hide();
