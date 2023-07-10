@@ -8,86 +8,133 @@
 <meta charset="UTF-8">
 <title>차량 목록</title>
 <style>
-
-
 </style>
 </head>
 <body>
+
+<div style="float:left; width:1920px; background-color: #747474; margin-top: 100px; height:610px;">
+<div style="float:left; width:70%; background-color: #555555; margin: 0% 0% 0% 15%; height:610px;">
 <c:set var="rank_index" value="1" />
+
 <c:forEach items="${rank5_Car}" var="rank5">
-   <c:forEach items="${carList}" var="item">
-      <c:if test="${rank5.carno == item.no}">
-      <br><br><br><br><br>
-         <p>${rank_index} ${item.name}</p>
-         <c:set var="rank_index" value="${rank_index+1}" />
-      </c:if>
-   </c:forEach>
+	<c:forEach items="${carList}" var="item">
+		<c:if test="${rank5.carno == item.no}">
+			<div id="imgSlide_${rank_index}" style="width:100%; height:610px;"> <%-- 박스 생성 --%>
+				<div style="float:left;  text-align:right; width:40%; background-color: red;">
+					<c:if test="${rank_index == 1}">
+						<img src="../img/car_rank_1.png" style="width:60px;">
+					</c:if>
+					<c:if test="${rank_index == 2}">
+						<img src="../img/car_rank_2.png" style="width:60px;">
+					</c:if>
+					<c:if test="${rank_index == 3}">
+						<img src="../img/car_rank_3.png" style="width:60px;">
+					</c:if>
+					<c:if test="${(rank_index == 4) || (rank_index == 5)}">
+						<div style="width:60px; height:60px;"></div>
+					</c:if>
+				</div>
+				<div style="float:left; width:60%; height:60px; background-color: orange; font-size:35px;">
+					<p>${item.maker} ${item.name}</p>
+				</div>
+				<div style="float:left; width:100%; background-color: yellow; font-size:35px;">
+					<img src="../img/${item.img}" style="width:90%; height:550px;">
+				</div>
+				<c:set var="rank_index" value="${rank_index+1}" />
+			</div>
+		</c:if>
+	</c:forEach>
 </c:forEach>
+</div>
+</div>
 
+<div id="imgDot" style="float:left; width:1920px; padding:0px 0px 0px 37%;">
+	<div id="imgDot_1" style="float:left; width:40px; height:40px;  border-radius: 100px; margin-left:50px; box-shadow: 0px 0px 5px 0px #000000;"></div>
+	<div id="imgDot_2" style="float:left; width:40px; height:40px;  border-radius: 100px; margin-left:50px; box-shadow: 0px 0px 5px 0px #000000;"></div>
+	<div id="imgDot_3" style="float:left; width:40px; height:40px;  border-radius: 100px; margin-left:50px; box-shadow: 0px 0px 5px 0px #000000;"></div>
+	<div id="imgDot_4" style="float:left; width:40px; height:40px;  border-radius: 100px; margin-left:50px; box-shadow: 0px 0px 5px 0px #000000;"></div>
+	<div id="imgDot_5" style="float:left; width:40px; height:40px;  border-radius: 100px; margin-left:50px; box-shadow: 0px 0px 5px 0px #000000;"></div>
+	<%-- 
+	<i class="fa-solid fa-circle" id="imgDot_1"></i>
+	<i class="fa-solid fa-circle" id="imgDot_2"></i>
+	<i class="fa-solid fa-circle" id="imgDot_3"></i>
+	<i class="fa-solid fa-circle" id="imgDot_4"></i>
+	<i class="fa-solid fa-circle" id="imgDot_5"></i>
+	--%>
+</div>
 
-<div style="">
+<div style="float:left; height:40px; margin:0% 0% 0% 17.5%">
+<input type="hidden" value="${mycar.carno}" id="mycar">
 <form action="list" method="post">
+	<select name="maker" style="font-size:20px; width:150px; height:45px; border:2px solid #D5D5D5; border-radius:6px;">
+   		<c:if test="${maker_selected!=null}">
+      		<option value="${maker_selected}">${maker_selected}</option>
+      		<option value="">브랜드 선택 없음</option>
+   		</c:if>
+   		<c:if test="${maker_selected==null}">
+			<option value=>브랜드 선택</option>
+   		</c:if>
+  		<c:forEach items="${makers}" var="maker_option">
+	    	<c:if test="${maker_selected ne maker_option.maker}">
+      			<option value="${maker_option.maker}">${maker_option.maker}</option>
+    		</c:if>
+  		</c:forEach>
+	</select>
 
-<select name="maker">
-   <c:if test="${maker_selected!=null}">
-      <option value="${maker_selected}">${maker_selected}</option>
-      <option value="">브랜드 선택 없음</option>
-   </c:if>
-   <c:if test="${maker_selected==null}">
-      <option value=>브랜드 선택</option>
-   </c:if>
-  <c:forEach items="${makers}" var="maker_option">
-    <c:if test="${maker_selected ne maker_option.maker}">
-      <option value="${maker_option.maker}">${maker_option.maker}</option>
-    </c:if>
-  </c:forEach>
-</select>
+	<select name="car_size" style="font-size:20px; width:150px; height:45px; border:2px solid #D5D5D5; border-radius:6px;">
+		<c:if test="${car_size_selected!=null}">
+      		<option value="${car_size_selected}">${car_size_selected}</option>
+      		<option value="">크기 선택없음</option>
+	   	</c:if>
+   		<c:if test="${car_size_selected==null}">
+			<option value=>크기 선택</option>
+   		</c:if>
+  		<c:forEach items="${car_sizes}" var="car_size_option">
+    		<c:if test="${car_size_selected ne car_size_option.car_size}">
+      			<option value="${car_size_option.car_size}">${car_size_option.car_size}</option>
+    		</c:if>
+  		</c:forEach>
+	</select>
 
-<select name="car_size">
-     <c:if test="${car_size_selected!=null}">
-      <option value="${car_size_selected}">${car_size_selected}</option>
-      <option value="">크기 선택없음</option>
-   </c:if>
-   <c:if test="${car_size_selected==null}">
-      <option value=>크기 선택</option>
-   </c:if>
-  <c:forEach items="${car_sizes}" var="car_size_option">
-    <c:if test="${car_size_selected ne car_size_option.car_size}">
-      <option value="${car_size_option.car_size}">${car_size_option.car_size}</option>
-    </c:if>
-  </c:forEach>
-</select>
+	<select name="car_type" style="font-size:20px; width:150px; height:45px; border:2px solid #D5D5D5; border-radius:6px;">
+		<c:if test="${car_type_selected!=null}">
+			<option value="${car_type_selected}">${car_type_selected}</option>
+			<option value="">차종 선택없음</option>
+		</c:if>
+		<c:if test="${car_type_selected==null}">
+			<option value=>차종 선택</option>
+		</c:if>
+		<c:forEach items="${car_types}" var="car_type_option">
+		<c:if test="${car_type_selected ne car_type_option.car_type}">
+			<option value="${car_type_option.car_type}">${car_type_option.car_type}</option>
+		</c:if>
+		</c:forEach>
+	</select>
 
-<select name="car_type">
-       <c:if test="${car_type_selected!=null}">
-      <option value="${car_type_selected}">${car_type_selected}</option>
-      <option value="">차종 선택없음</option>
-   </c:if>
-   <c:if test="${car_type_selected==null}">
-      <option value=>차종 선택</option>
-   </c:if>
-  <c:forEach items="${car_types}" var="car_type_option">
-    <c:if test="${car_type_selected ne car_type_option.car_type}">
-      <option value="${car_type_option.car_type}">${car_type_option.car_type}</option>
-    </c:if>
-  </c:forEach>
-</select>
-<input type="submit" value="Submit" />
+<input type="submit" value="조회" />
 </form>
 </div>
 
+<div style="float:left; height:40px;">
+	<form action="list" method="post">
+   		<input type="hidden" value="" name="maker">
+   		<input type="hidden" value="" name="car_size">
+   		<input type="hidden" value="" name="car_type">
+   		<input type="submit" value="전차량 조회">
+	</form>
+</div>
 
 <c:set var="loop_index" value="1" />
 
-<div style="float:left; margin:5% 0% 0% 10%;">
+<div id="car_list_container" style="float:left; margin:5% 0% 0% 14%;">
 <input type="hidden" id="car_list_userid" value="${loginUser.userid}">
 <input type="hidden" id="car_list_carno" value="${dbUser.carno}">
    
-<c:forEach items="${carList}" var="item">
 <c:set var="loop_flag" value="true"/>
 
-<c:if test="${loop_index%2 == 1 && loop_flag != false}">
-   <div id="car_list_out_container" style="float:left; width:40%; margin: 0% 0% 0% 0%; background-color: green;">
+   <div id="car_list_out_container" style="float:left; width:40%; margin: 0% 0% 0% 0%;">
+   <div id="car_list_in_leftside"  style="float:left; width:746.48px; cursor:pointer; border: 0px solid #747474; border-radius:6px; margin: 0% 0% 10% 10%;"></div>
+         <c:forEach items="${carList1}" var="item">
          <div id="car_list_in_container${item.no}" onload="test(${item.no})" onmouseover="zoom('${item.no}')"style="float:left; width:90%; cursor:pointer; border: 0px solid #747474; border-radius:6px; margin: 0% 0% 10% 10%; box-shadow: -2px 2px 5px 2px #747474;">
             <div id="car_list_title_box" >
                
@@ -113,13 +160,12 @@
                   </div>
                </c:if>
             </div>
-            <div id="car_list_maker_name" onclick="show('${item.no}')" style="float:left; width:50%; font-size:30px; margin: 0% 0% 0% 15%;">
+            <div id="car_list_maker_name" onclick="show('${item.no}')" style="float:left; width:50%; font-size:30px; margin: 0% 0% 0% 9%;">
                ${item.maker}&nbsp;&nbsp;${item.name}
             </div>
             
             <div id ="car_list_like_box" onclick="like('${item.no}','${loginUser.userid}')" style="float:left; font-size:30px;">
          <c:if test="${loginUser.userid != null }">
-               <c:set var="loop_flag" value="false" />
                <c:forEach items="${liked_Car}" var="liked_Car2">
                <c:if test="${loop_flag == false}">   <!-- 기본 flag값=false일때 forEach돈다 -->
                      <c:if test="${item.no == liked_Car2.carno}">   <!-- 현재 카개게츠이 번호와 과 지금 도는 liked의 차 번호가 같으면  -->
@@ -298,13 +344,14 @@
          </div> <%-- main --%>
    <c:set var="loop_index" value="${loop_index+1}" /> 
    <c:set var="loop_flag" value="false" /> 
+   </c:forEach>
    </div>
-</c:if>
    <%-- center --%>
    <%-- center --%>
    <%-- center --%>
-<c:if test="${loop_index%2 == 0 && loop_flag != false}">
-   <div id="car_list_out_container" style="float:left; width:40%; margin: 0% 0% 0% 0%; background-color: yellow;">
+   <div id="car_list_out_container" style="float:left; width:40%; margin: 0% 0% 0% 0%;">
+   <div id="car_list_in_rightside" style="float:left; width:746.48px; cursor:pointer; border: 0px solid #747474; border-radius:6px; margin: 0% 0% 10% 10%;"></div>
+      <c:forEach items="${carList2}" var="item">
          <div id="car_list_in_container${item.no}" onload="test(${item.no})" onmouseover="zoom('${item.no}')"style="float:left; width:90%; cursor:pointer; border: 0px solid #747474; border-radius:6px; margin: 0% 0% 10% 10%; box-shadow: -2px 2px 5px 2px #747474;">
             <div id="car_list_title_box" >
                
@@ -330,7 +377,7 @@
                   </div>
                </c:if>
             </div>
-            <div id="car_list_maker_name" onclick="show('${item.no}')" style="float:left; width:50%; font-size:30px; margin: 0% 0% 0% 15%;">
+            <div id="car_list_maker_name" onclick="show('${item.no}')" style="float:left; width:50%; font-size:30px; margin: 0% 0% 0% 9%;">
                ${item.maker}&nbsp;&nbsp;${item.name}
             </div>
             <div id ="car_list_like_box" onclick="like('${item.no}','${loginUser.userid}')" style="float:left; font-size:30px;">
@@ -518,51 +565,68 @@
          </div> <%-- main --%>
    <c:set var="loop_index" value="${loop_index+1}" /> 
    <c:set var="loop_flag" value="false" /> 
+   </c:forEach>
    </div>
-</c:if>
-   
-</c:forEach>
-
 </div>
 
 
 <script>
+window.onload = function() {
+	mycardec();
+}
+
+function mycardec(){
+	carno_max = Number('${maxnum}');
+	carno = document.getElementById("mycar").value;
+	console.log("초기 mycar : "+carno)
+	console.log(carno_max+"carno_max")
+	for (var i = 0; i <= 45; i++) {
+		$("#car_list_mycar"+i).hide()
+        $("#car_list_mycar_add"+i).show()
+        $("#car_list_in_container"+i).css("box-shadow","-2px 2px 5px 2px #747474")
+	}
+	$("#car_list_mycar"+carno).show()
+	$("#car_list_mycar_add"+carno).hide()
+	$("#car_list_in_container"+carno).css("box-shadow","-2px 2px 5px 2px #F15F5F")
+     //$("#car_list_in_container"+carno).css("opacity", 0);
+}
+
 function showSlides(n) {
-   }
+	}
    
 function slideShow() {
-     var i = 0;
-     var images = [
-       $("#imgSlide_2"),
-       $("#imgSlide_3"),
-       $("#imgSlide_4"),
-       $("#imgSlide_5"),
-       $("#imgSlide_1")
-     ];
+	var i = 0;
+	var images = [
+		$("#imgSlide_2"),
+       	$("#imgSlide_3"),
+       	$("#imgSlide_4"),
+       	$("#imgSlide_5"),
+       	$("#imgSlide_1")
+	];
      
-     var dots = [
-         $("#imgDot_2"),
-          $("#imgDot_3"),
-          $("#imgDot_4"),
-          $("#imgDot_5"),
-          $("#imgDot_1")
-        ];
+	var dots = [
+		$("#imgDot_2"),
+		$("#imgDot_3"),
+		$("#imgDot_4"),
+		$("#imgDot_5"),
+		$("#imgDot_1")
+	];
 
-     setInterval(function() {
-       images[i].show();
-       dots[i].css("color","#747474")
-       for (var j = 0; j < images.length; j++) {
-         if (j !== i) {
-           images[j].hide();
-           dots[i].css("color","#D5D5D5")
-         }
-       }
-       i++;
-       if (i == images.length) {
-         i = 0;
-       }
-     }, 1500);
-   }
+	setInterval(function() {
+		images[i].delay(1000).fadeIn(1000);
+		dots[i].delay(2000).css("background-color","#747474")
+		for (var j = 0; j < images.length; j++) {
+			if (j !== i) {
+				images[j].fadeOut(1000);
+				dots[j].css("background-color","#D5D5D5")
+			}
+		}
+		i++;
+		if (i == images.length) {
+			i = 0;
+		}
+	}, 3000);
+}
 
 $(document).ready(function(){
    $("#imgSlide_1").show();
@@ -571,11 +635,11 @@ $(document).ready(function(){
    $("#imgSlide_4").hide();
    $("#imgSlide_5").hide();
    
-   $("#imgDot_1").css("color","#747474")
-   $("#imgDot_2").css("color","#D5D5D5")
-   $("#imgDot_3").css("color","#D5D5D5")
-   $("#imgDot_4").css("color","#D5D5D5")
-   $("#imgDot_5").css("color","#D5D5D5")
+   $("#imgDot_1").css("background-color","#747474")
+   $("#imgDot_2").css("background-color","#D5D5D5")
+   $("#imgDot_3").css("background-color","#D5D5D5")
+   $("#imgDot_4").css("background-color","#D5D5D5")
+   $("#imgDot_5").css("background-color","#D5D5D5")
    
    
    
@@ -595,7 +659,7 @@ $(document).ready(function(){
       console.log(carno)
       carno_max = Number('${maxnum}'); // 45
       
-      mycardec(carno,userid)
+      //mycardec(carno,userid)
       
    })
 
@@ -622,8 +686,12 @@ $(document).ready(function(){
       var div_etc = document.getElementById("car_list_etc" + no);
       if (div_etc.style.display == "block") {
          div_etc.style.display = "none";
+         document.getElementById("car_list_out_container_t").style.height = "700px";
+         //document.getElementById("big_div").style.height = "11120px";
       } else {
          div_etc.style.display = "block";
+         document.getElementById("car_list_out_container_t").style.height = "520px";
+         //document.getElementById("big_div").style.height = "11120px";
       }
    }
 
@@ -790,25 +858,6 @@ $(document).ready(function(){
                }, 500);
             }
          });
-      }
-   }
-
-   function mycardec(carno,userid){
-      if (userid == '') {
-         for (var i = 0; i <= carno_max; i++) {
-            $("#car_list_mycar"+i).hide()
-            $("#car_list_mycar_add"+i).show()
-            $("#car_list_in_container"+i).css("box-shadow","-2px 2px 5px 2px #747474")
-         }
-      } else {
-         for (var i = 0; i <= carno_max; i++) {
-            $("#car_list_mycar"+i).hide()
-            $("#car_list_mycar_add"+i).show()
-            $("#car_list_in_container"+i).css("box-shadow","-2px 2px 5px 2px #747474")
-         }
-         $("#car_list_mycar"+carno).show()
-         $("#car_list_mycar_add"+carno).hide()
-         $("#car_list_in_container"+carno).css("box-shadow","-2px 2px 5px 2px #F15F5F")
       }
    }
    </script>   

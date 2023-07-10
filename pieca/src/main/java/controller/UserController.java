@@ -499,6 +499,7 @@ public class UserController {
    
    @PostMapping("update")
    public ModelAndView idCheckUpdate(@Valid User user,BindingResult bresult,String userid,HttpSession session) {
+	   System.out.println("도착");
       ModelAndView mav = new ModelAndView();
       //입력값 검증
       if(bresult.hasErrors()) {
@@ -518,6 +519,35 @@ public class UserController {
       try {
          user.setEmail(this.emailEncrypt(user.getEmail(), user.getUserid()));
          user.setPassword(passwordHash(user.getPassword()));
+         service.userUpdate(user);
+         if(loginUser.getUserid().equals(user.getUserid()))             
+            session.setAttribute("loginUser", user);
+         mav.setViewName("redirect:mypage?userid="+user.getUserid());
+      } catch (Exception e) {
+         e.printStackTrace();
+         throw new LoginException
+         ("update?userid="+user.getUserid());
+      }
+      return mav;
+   }
+   
+   @PostMapping("updateAdmin")
+   public ModelAndView idCheckUpdateAdmin(@Valid User user,BindingResult bresult,String userid,HttpSession session) {
+	   System.out.println("도착");
+      ModelAndView mav = new ModelAndView();
+      //입력값 검증
+      if(bresult.hasErrors()) {
+         mav.getModel().putAll(bresult.getModel());
+         bresult.reject("error.update.user");
+         mav.setViewName("user/mypage?userid="+user.getUserid());
+         return mav;
+      }
+      //비밀번호 검증
+      System.out.println("user ::"+user);
+      User loginUser = (User)session.getAttribute("loginUser");
+      //비밀번호 일치 => 데이터 수정
+      try {
+         user.setEmail(this.emailEncrypt(user.getEmail(), user.getUserid()));
          service.userUpdate(user);
          if(loginUser.getUserid().equals(user.getUserid()))             
             session.setAttribute("loginUser", user);

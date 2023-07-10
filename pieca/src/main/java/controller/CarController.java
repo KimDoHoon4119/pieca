@@ -3,20 +3,30 @@ package controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+import dao.CarDao;
 import logic.Car;
 import logic.Carlike;
 import logic.Mycar;
+import logic.Payment;
 import logic.ShopService;
 import logic.User;
+import util.CipherUtil;
 
 @Controller // @Component + Controller 기능
 @RequestMapping("car") // http://localhost:8080/shop1/item/*
@@ -28,13 +38,66 @@ public class CarController {
    @Autowired
    private Mycar mycar;
    
-   @RequestMapping("test") // get,post 방식에 상관없이 호출
-   public ModelAndView test(HttpSession session) {
+   @GetMapping("updateForm") // get,post 방식에 상관없이 호출
+   public ModelAndView updateForm(int carno,HttpSession session) {
       ModelAndView mav = new ModelAndView();
-      List<Integer> list = Arrays.asList(1, 2, 3);
-      mav.addObject("list",list);
+      System.out.println(carno+"차량 정보 수정");
+      Car car = new Car();
+      List<Car> carList = service.carList(car);
+      for(int i=0; i<carList.size(); i++) {
+         if(carList.get(i).getNo()==carno) {
+            car = carList.get(i);
+         }
+      }
+      mav.addObject("car",car);
       return mav;
    }
+   
+   @GetMapping("insert") // get,post 방식에 상관없이 호출
+   public ModelAndView getinsert(HttpSession session) {
+      ModelAndView mav = new ModelAndView();
+      Car car = new Car();
+      mav.addObject("car",car);
+      return mav;
+   }
+   @PostMapping("insert") // get,post 방식에 상관없이 호출
+   public ModelAndView postinsert(@Valid Car car, HttpSession session) {
+      ModelAndView mav = new ModelAndView();
+      Car carlist = new Car();
+      List<Car> cars = service.carList(carlist);
+      int max_no = cars.get(cars.size()-1).getNo()+1;
+      System.out.println(max_no + " = 최대 no");
+      car.setNo(max_no);
+      service.carInsert(car);
+      mav.setViewName("redirect:list");
+      return mav;
+   }
+   
+   @PostMapping("updateForm") // get,post 방식에 상관없이 호출
+   public ModelAndView update(@Valid Car car, BindingResult bresult, HttpSession session) {
+      ModelAndView mav = new ModelAndView();
+      if(bresult.hasErrors()) {
+         mav.getModel().putAll(bresult.getModel());
+         mav.addObject("carno",car.getNo());
+         return mav;
+      }
+      System.out.println(car+"차량 정보 수정 진행");
+      System.out.println(car);
+      service.carUpdate(car);
+      mav.setViewName("redirect:list");
+      return mav;
+   }
+   
+   @PostMapping("delete") // get,post 방식에 상관없이 호출
+   public ModelAndView delete(@Valid Car car, HttpSession session) {
+      ModelAndView mav = new ModelAndView();
+      System.out.println("차량 정보 삭제 진행");
+      System.out.println(car);
+      service.carDelete(car);
+      mav.setViewName("redirect:list");
+      return mav;
+   }
+   
    @RequestMapping("list") // get,post 방식에 상관없이 호출
    public ModelAndView list(String maker,String car_size,String car_type, HttpSession session) {
       // ModelAndView : Model + view
@@ -62,7 +125,9 @@ public class CarController {
       car.setCar_type(car_type);
       List<Car> carList = service.carList(car);
       System.out.println(carList);
-      
+      Car car_all = new Car(); 
+      List<Car> carList_all = service.carList(car_all);
+      mav.addObject("carList_all",carList_all);
       List<Car> carList1 = new ArrayList<>();
       List<Car> carList2 = new ArrayList<>();
       for(int i=0; i<carList.size(); i++) {

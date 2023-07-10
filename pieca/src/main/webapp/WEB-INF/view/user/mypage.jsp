@@ -241,38 +241,91 @@
          <span style="font-size:30px;">회원 관리</span>
       </div>
       <div style="font-size: 16px; width:90%; margin:0px 0px 40px 5%">
-         <table class="w3-table-all" style="text-align: center">
-         <tr>
-            <th width="100px;">가입유형</th>
-            <th width="70px;">이름</th>
-            <th width="100px;">전화번호</th>
-            <th width="140px;">생일</th>
-            <th width="100px">이메일</th>
-         </tr>
-      <c:forEach items="${list}" var="user">
-         <tr>
-            <td colspan="4"></td>
+         <table class="w3-table" style="text-align: center; border:2px solid #D5D5D5">
+         <tr style="border:2px solid #D5D5D5;">
+			<th width="15%" style="background-color:red; font-size:18px; color:#F15F5F">회원 이름</th>
+            <th width="21%" style="background-color:orange; font-size:18px; color:#F15F5F">전화번호</th>
+            <th width="18%" style="background-color:yellow; font-size:18px; color:#F15F5F; padding-left: 18px;">생년월일</th>
+            <th width="31%" style="background-color:green; font-size:18px; color:#F15F5F">이메일</th>
+            <th width="25%" style="background-color:blue; text-align:center; font-size:18px; color:#F15F5F">기타 기능</th>
+		</tr>
+		
+		<c:set var="userCnt" value="1" /> 
+		
+        <c:forEach items="${list}" var="user">
+         	
+		<form:form modelAttribute="user" method="post" action="updateAdmin">
+        <tr style=" border:2px solid #D5D5D5;">
             <td>
-               <a href="../user/update?userid=${user.userid}">[수정]</a>
-               <a href="../user/delete?userid=${user.userid}">[강제탈퇴]</a>
-               <a href="../user/mypage?userid=${user.userid}">[회원정보]</a>
+            	<c:if test="${user.channel eq 'pieca' }">
+            		<img src="../img/mypage_P2.png" style="width:25px;">
+            		<form:input path="username" id="adminUsername" value="${user.username}" readonly="true" style="width:65%; padding: 0px; font-size:16px; height:35px;"/>
+            	</c:if>
+            	<c:if test="${user.channel eq 'kakao' }">
+            		<img src="../img/mypage_K.png" style="width:25px;">
+            		<input type="text" value="${user.username}" readonly="readonly" style="width:65%; padding: 0px; font-size:16px; height:35px; border:none; padding-left: 3px;"/>
+            	</c:if>
+            	<c:if test="${user.channel eq 'naver' }">
+            		<img src="../img/mypage_N.png" style="width:25px;">
+            		<input type="text" value="${user.username}" readonly="readonly" style="width:65%; padding: 0px; font-size:16px; height:35px; border:none; padding-left: 3px;"/>
+            	</c:if>
+            </td>
+            <td>
+            	<c:if test="${user.channel eq 'pieca' }">
+            		<form:input path="phoneno" id="adminPhoneno" value="${user.phoneno}" readonly="true" style="width:95%; padding: 0px; font-size:16px; height:35px;"/>
+            	</c:if>
+            	<c:if test="${user.channel ne 'pieca' }">
+            		<input type="text" value="${user.phoneno}" readonly="readonly"style="width:90%; padding: 0px; font-size:16px; height:35px; border:none; padding-left: 3px;"/>
+            		
+            	</c:if>
+            </td>
+            <td>
+            	<c:if test="${user.channel eq 'pieca'}">
+            		<fmt:formatDate value="${user.birthday}" var="adminBirth" type="date" pattern="yyyy-MM-dd" />
+            		<form:input path="birthday" id="adminBirthday" value="${adminBirth}" readonly="true" style="width:100%; padding: 0px; height:35px; font-size:16px;"/>
+            	</c:if>
+            	<c:if test="${user.channel ne 'pieca'}">
+            		<fmt:formatDate value="${user.birthday}" var="adminBirth" type="date" pattern="****-MM-dd" />
+            		<input type="text" readonly="readonly" value="${adminBirth}" style="width:95%; padding: 0px; height:35px; font-size:16px; border:none; padding-left: 12px;"/>
+            	</c:if>
+            </td>
+            <td>
+            	<c:if test="${user.channel eq 'pieca'}">
+            		<form:input path="email" value="${user.email}" id="adminEmail" readonly="true" style="width:105%; padding: 0px; height:35px; font-size:16px;"/>
+            	</c:if>
+            	<c:if test="${user.channel ne 'pieca'}">
+            		<input type="text" value="${user.email}" readonly="readonly" style="width:105%; padding: 0px; height:35px; font-size:16px; border: none; padding-left: 3px;"/>
+            	</c:if>
+            </td>
+            <td>
+            	<c:if test="${user.channel eq 'pieca' }">
+               		<input type="button" id="admin_fix${userCnt}" value="수정" onclick="showUserId('${userCnt}')" style="width:50px; height: 35px; background-color: #008000; border:none; color:#FFFFFF; border-radius: 6px;">
+               		<input type="submit" id="admin_submit${userCnt}" value="저장" style="width:50px; height: 35px; background-color: #00B6EF;; border:none; color:#FFFFFF; border-radius: 6px;">
+               		<a href="../user/delete?userid=${user.userid}" style="color:">[탈퇴]</a>
+               	</c:if>
+               		
+               	<c:if test="${user.channel ne 'pieca' }">
+               		<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-</a>
+               		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../user/delete?userid=${user.userid}" style="color:#F15F5F">[탈퇴]</a>
+               	</c:if>
             </td>
          </tr>
          <tr>
-            <td>${user.channel}</td>
-            <td>${user.username}</td>
-            <td>${user.phoneno}</td>
-            <td><fmt:formatDate value="${user.birthday}" pattern="MM-dd" /></td>
-            <td>${user.email}</td>
+         	<td colspan="5" id="AdminUserIdBox${userCnt}">
+         		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-share fa-flip-vertical"></i> 아이디 : <form:input path="userid" id="adminUserid" value="${user.userid}" readonly="true" style="width:300px; padding:3px; border:none; height:35px; font-size:16px;"/>
+         	</td>
          </tr>
+      </form:form>
+      <c:set var="userCnt" value="${userCnt+1}" />
       </c:forEach>
+      <c:set var="userCntMax" value="${userCnt}" />
       </table>
+      <input type="hidden" id="userCntMax" value="${userCntMax}">
       </div>
       </div>
-         
-         
-         
          </c:if>
+         
+         
          <c:if test="${login.username != '관리자' }">
       <div id="mypage_car_wrapper" style="transition-duration: 0.5s; border: 1px solid #FFFFFF; border-radius: 5px; margin-bottom: 50px; margin-top: 200px; box-shadow: 0px 2px 4px 0px #1B1B1B; height: 280px;">
          <div id="mypage_car_left_inner" style="float: left; width: 20%; height: 230px; margin: 20px 0px 0px 50px;">
@@ -630,6 +683,11 @@
       
 </div>
 <script type="text/javascript">
+function showUserId(cnt) {
+	$("#AdminUserIdBox"+cnt).show()
+	$("#admin_fix"+cnt).hide()
+	$("#admin_submit"+cnt).show()
+}
 
 var isToggled = false;
 function test() {
@@ -780,7 +838,13 @@ $(document).ready(function(){
            }
         }
      });
-    
+	let max = $("#userCntMax").val();
+   for (let i=1; i<=max; i++ ) {
+	   $("#AdminUserIdBox"+i).hide()
+	   $("#admin_submit"+i).hide()
+   }
+	   
+   
    $("#mypage_car_right_name_box").hide();
    $("#mypage_car_right_type_box").hide();
    $("#mypage_car_right_price_box").hide();
