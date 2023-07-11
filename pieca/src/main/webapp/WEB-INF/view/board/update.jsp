@@ -15,7 +15,7 @@
 </script>
 </head>
 <body>
-<div style="width:1920px; height:700px; display: flex; justify-content: center; align-items: center;">
+<div style="width:1920px; height:750px; display: flex; justify-content: center; align-items: center;">
 	<form:form modelAttribute="board" action="update"
 		enctype="multipart/form-data" name="f">
 		<form:hidden path="num" />

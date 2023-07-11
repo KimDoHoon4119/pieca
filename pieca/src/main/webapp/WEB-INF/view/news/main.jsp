@@ -32,7 +32,7 @@
    	margin:20px 25px 20px 25px; 
    	width:250px; 
    	text-align:left; 
-   	font-size:22px;
+   	font-size:25px;
 }
             		
 #news_description {
@@ -40,6 +40,7 @@
 	width:250px; 
 	text-align:left; 
 	font-size:15px;
+	color:#747474;
 }
 #news_list:hover {
 	transform: scale(1.1);

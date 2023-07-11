@@ -86,7 +86,7 @@
 				<p>공지사항과 공유게시판에서<br>정보를 공유 하세요.</p>
 			</div>
 			<div style="font-size:20px; margin-top:15px; color:#F15F5F">
-				<a href="${path}../board/list">바로가기 </a>
+				<a href="${path}../car/list">바로가기 </a>
 			</div>
 		</div>
 		<div class="inner1">

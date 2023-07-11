@@ -638,7 +638,6 @@ public class UserController {
    
    @PostMapping("deleteAdmin")
    public String  idCheckdeleteAdmin(String userid,HttpSession session) {
-	   System.out.println("userid :: :: "+userid);
       // 관리자 탈퇴 불가
       if(userid.equals("admin"))
          throw new LoginException
@@ -650,6 +649,7 @@ public class UserController {
       if(loginUser.getChannel().equals("naver")) {
          try {
             service.userDelete(userid);
+            service.carDelete(userid);
             session.invalidate();
             return "redirect:login";
          } catch(DataIntegrityViolationException e) {
@@ -662,6 +662,7 @@ public class UserController {
       if(loginUser.getChannel().equals("kakao")) {
           try {
              service.userDelete(userid);
+             service.carDelete(userid);
              session.invalidate();
              return "redirect:login";
           } catch(DataIntegrityViolationException e) {
@@ -675,6 +676,7 @@ public class UserController {
          //비밀번호 일치 : 고객정보 제거
          try {
             service.userDelete(userid);
+            service.carDelete(userid);
          } catch(DataIntegrityViolationException e) {
             throw new LoginException ("mypage?userid="+userid);
          } catch(Exception e) {
@@ -685,7 +687,7 @@ public class UserController {
       
       //탈퇴 성공 : 회원정보를 제거 된 상태
       if(loginUser.getUserid().equals("admin")) {  //관리자가 강제 탈퇴
-         return "redirect:../admin/list";
+         return "redirect:../user/mypage?userid="+loginUser.getUserid();
       } else {           //본인 탈퇴. 
          session.invalidate();
          return "redirect:login";

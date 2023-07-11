@@ -281,6 +281,9 @@ public void carInsert(@Valid Car car) {
    carDao.carInsert(car);
    
 }
+public void carDelete(String userid) {
+	mycarDao.delete(userid);
+}
    
    
    

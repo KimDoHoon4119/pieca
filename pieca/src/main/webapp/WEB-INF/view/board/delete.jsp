@@ -9,7 +9,7 @@
 <title>게시판 삭제 화면</title>
 </head>
 <body>
-<div style="width:1920px; height:700px; display: flex; justify-content: center; align-items: center;">
+<div style="width:1920px; height:750px; display: flex; justify-content: center; align-items: center;">
 	<form action="delete" method="post" name="f">
 		<input type="hidden" name="num" value="${param.num}">
 		<table class="w3-table-all" style="width:600px; font-size:20px;">

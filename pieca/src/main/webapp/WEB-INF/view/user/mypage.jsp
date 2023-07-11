@@ -15,11 +15,12 @@
          <span class="fa-regular fa-user"></span> 회원 정보</a>
          
       <a onclick="movePage(2);" id="movepage2" style="cursor: pointer;">
-      <span class="fa-solid fa-car"></span>
          <c:if test="${login.username == '관리자' }">
+         	<span class="fa-solid fa-user-plus"></span>
             회원 관리
          </c:if>
          <c:if test="${login.username != '관리자' }">
+         	<span class="fa-solid fa-car"></span>
             차량 조회
          </c:if>
          </a>
@@ -240,14 +241,14 @@
       <div id="basic_info_left_inner2">
          <span style="font-size:30px;">회원 관리</span>
       </div>
-      <div style="font-size: 16px; width:85%; margin:0px 0px 40px 5%">
-         <table class="w3-table" style="text-align: center; border:2px solid #D5D5D5">
+      <div style="font-size: 16px; width:90%; margin:0px 0px 40px 5%;">
+         <table class="w3-table"  style="width:100%; text-align: center; border:2px solid #D5D5D5">
          <tr style="border:2px solid #D5D5D5;">
-			<th width="20%" style="background-color:red; font-size:18px; color:#F15F5F">회원 이름</th>
-            <th width="25%" style="background-color:orange; font-size:18px; color:#F15F5F">전화번호</th>
-            <th width="20%" style="background-color:yellow; font-size:18px; color:#F15F5F; padding-left: 18px;">생년월일</th>
-            <th width="35%" style="background-color:green; font-size:18px; color:#F15F5F">이메일</th>
-            <th width="15%" style="background-color:blue; text-align:center; font-size:18px; color:#F15F5F">수정</th>
+			<th width="20%" style="font-size:18px; color:#F15F5F">회원 이름</th>
+            <th width="25%" style="font-size:18px; color:#F15F5F">전화번호</th>
+            <th width="20%" style="font-size:18px; color:#F15F5F; padding-left: 18px;">생년월일</th>
+            <th width="35%" style="font-size:18px; color:#F15F5F">이메일</th>
+            <th width="15%" style="text-align:center; font-size:18px; color:#F15F5F">수정</th>
 		</tr>
 		
 		<c:set var="userCnt" value="1" /> 
@@ -298,23 +299,26 @@
             	</c:if>
             </td>
             <td>
-            	<c:if test="${user.channel eq 'pieca' }">
-               		<input type="button" id="admin_fix${userCnt}" value="수정" onclick="showUserId('${userCnt}')" style="width:50px; height: 35px; background-color: #008000; border:none; color:#FFFFFF; border-radius: 6px;">
-               		<input type="submit" id="admin_submit${userCnt}" value="저장" style="width:50px; height: 35px; background-color: #00B6EF;; border:none; color:#FFFFFF; border-radius: 6px;">
-               	</c:if>
-               		
-               	<c:if test="${user.channel ne 'pieca' }">
-               		<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-</a>
-               	</c:if>
+				<input type="button" id="admin_fix${userCnt}" value="수정" onclick="showUserId('${userCnt}')" style="width:50px; height: 35px; background-color: #008000; border:none; color:#FFFFFF; border-radius: 6px;">
+				<c:if test="${user.channel eq 'pieca'}">
+					<input type="submit" id="admin_submit${userCnt}" value="저장" style="width:50px; height: 35px; background-color: #00B6EF;; border:none; color:#FFFFFF; border-radius: 6px;">
+               	</c:if>	
             </td>
          </tr>
-         <tr>
-         	<td colspan="5" id="AdminUserIdBox${userCnt}">
-         		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-share fa-flip-vertical"></i> 아이디 : <form:input path="userid" id="adminUserid" value="${user.userid}" readonly="true" style="width:300px; padding:3px; border:none; height:35px; font-size:16px;"/>
+         <tr id="AdminUserIdBox${userCnt}">
+         	<td colspan="4" >
+         		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-share fa-flip-vertical"></i> 아이디 : <form:input path="userid" id="adminUserid" value="${user.userid}" readonly="true" style="width:550px; padding:3px; border:none; height:35px; font-size:16px;"/>
          	</td>
-         </tr>
+         
       </form:form>
       <c:set var="userCnt" value="${userCnt+1}" />
+      		<td colspan="1">
+      			<form method="post" action="deleteAdmin" name="deleteForm">
+                  	<input type="hidden" name="userid" value="${user.userid}">
+                  	<input type="hidden" name="channel" value="${user.channel}">
+      				<input type="submit" id="admin_delete${userCnt}" value="탈퇴" style="width:50px; height: 35px; background-color: #00B6EF;; border:none; color:#FFFFFF; border-radius: 6px;">
+      			</form>
+      		</td>
       </c:forEach>
       <c:set var="userCntMax" value="${userCnt}" />
       </table>

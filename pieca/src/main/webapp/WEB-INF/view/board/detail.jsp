@@ -30,7 +30,7 @@
 </style>
 </head>
 <body>
-<div style="width:1920px; height:700px; display: flex; justify-content: center; align-items: center;">
+<div style="width:1920px; height:750px; display: flex; justify-content: center; align-items: center;">
 
 	<table class="w3-table-all" style="width:1000px; margin: 9% 0% 0% 0%;">
 		<tr>

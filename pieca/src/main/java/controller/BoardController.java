@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import dao.BoardDao;
 import exception.BoardException;
 import exception.LoginException;
 import logic.Board;
@@ -51,6 +50,7 @@ public class BoardController {
    public ModelAndView loginwrite(HttpSession session) {
       ModelAndView mav = new ModelAndView();
       mav.addObject(new Board());
+      mav.addObject("login",session.getAttribute("loginUser"));
       return mav;
    }
    @PostMapping("write")
@@ -167,7 +167,21 @@ public class BoardController {
       mav.addObject(comm);
       return mav;
    }
-   @GetMapping({"reply","update","delete"})
+   @GetMapping({"delete","update"})
+   public ModelAndView getDelete(int num, HttpSession session) {
+      ModelAndView mav = new ModelAndView();
+      System.out.println(num + "num");
+      Board board = service.getBoard(num);
+      User login = (User)session.getAttribute("loginUser");
+      mav.addObject("board",board);
+      System.out.println(board.getWriter()+" 이거는 작성자 / "+login.getUsername()+" 이거는 이름");
+      if(!board.getWriter().equals(login.getUsername())) {
+         mav.setViewName("redirect:list?boardid="+board.getBoardid());
+      }
+      return mav;
+   }
+   
+   @GetMapping("reply")
    public ModelAndView getBoard(Integer num,HttpSession session) {
       ModelAndView mav = new ModelAndView();
       String boardid = (String)session.getAttribute("boardid");

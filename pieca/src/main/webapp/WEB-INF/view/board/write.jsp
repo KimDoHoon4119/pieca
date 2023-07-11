@@ -13,7 +13,7 @@
 <title>게시글 작성</title>
 </head>
 <body>
-<div style="width:1920px; height:700px; display: flex; justify-content: center; align-items: center;">
+<div style="width:1920px; height:750px; display: flex; justify-content: center; align-items: center;">
 	<form:form modelAttribute="board" action="write" enctype="multipart/form-data" name="f">
 		<table class="w3-table" style="width:1000px; margin-top: 10%;">
 			<tr>
