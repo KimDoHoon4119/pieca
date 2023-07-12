@@ -284,9 +284,10 @@ if (loc[1] == "main/home") {
 		$(".login").css('color', '#FFFFFF');
 		$(".mypage").css('color', '#FFFFFF');
 		$(".logout").css('color', '#FFFFFF');
+		$("#layout_top_btn").fadeOut(600);
+	    $("#layout_bottom_btn").fadeOut(600);
 	});
 }
-
 
 
 $(window).scroll(function() {

@@ -27,20 +27,20 @@ public class CarDao {
       param.put("maker",  car.getMaker());
       param.put("car_size",  car.getCar_size());
       param.put("car_type",  car.getCar_type());
-      System.out.println("이곳은 carDao"+car.getMaker()+"/"+car.getCar_size()+"/"+car.getCar_type());
       return template.getMapper(cls).select(param); //item 테이블의 전체 내용을 Item 객체의 목록 리턴 
    }
 
 public void carUpdate(Car car) {
-   System.out.println("CarDao.carUpdate 접속 : "+car);
    param.clear();
    param.put("car",  car);
+   if(car.getImg() != null) {
+ 	  car.setImgcnt(1);
+   }
    template.getMapper(cls).carUpdate(car);
    
 }
 
 public void carDelete(@Valid Car car) {
-   System.out.println("CarDao.carUpdate 접속 : "+car);
    param.clear();
    param.put("car",  car);
    template.getMapper(cls).carDelete(car);
@@ -49,9 +49,11 @@ public void carDelete(@Valid Car car) {
 
 
    public void carInsert(@Valid Car car) {
-      System.out.println("CarDao.insert 접속 : "+car);
       param.clear();
       param.put("car",  car);
+      if(car.getImg() != null) {
+    	  car.setImgcnt(1);
+      }
       template.getMapper(cls).carInsert(car);
 }
 

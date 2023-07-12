@@ -23,7 +23,7 @@ public interface CarMapper {
            "</script>"})
    List<Car> select(Map<String, Object> param); //namespace : dao.mapper.ItemMapper
 
-   @Update("update car set no=#{no}, maker=#{maker}, name=#{name}, car_size=#{car_size}, car_type=#{car_type},release_year=#{release_year}, "
+   @Update("update car set no=#{no}, maker=#{maker}, name=#{name}, img=#{img}, imgcnt=#{imgcnt}, car_size=#{car_size}, car_type=#{car_type},release_year=#{release_year}, "
          + "min_price=#{min_price}, max_price=#{max_price}, min_range=#{min_range}, max_range=#{max_range}, avg_min_fuel=#{avg_min_fuel}, avg_max_fuel=#{avg_max_fuel}, "
          + "dt_min_fuel=#{dt_min_fuel}, dt_max_fuel=#{dt_max_fuel}, high_min_fuel=#{high_min_fuel}, high_max_fuel=#{high_max_fuel}, min_output=#{min_output}, "
          + "max_output=#{max_output}, min_output_motor=#{min_output_motor}, max_output_motor=#{max_output_motor}, min_torque=#{min_torque}, "
@@ -35,9 +35,9 @@ public interface CarMapper {
    @Delete("delete from car where no = #{no}")
    void carDelete(@Valid Car car);
 
-   @Insert("insert into car (no, maker, name, car_size, car_type, release_year, min_price, max_price, min_range, max_range, avg_min_fuel, avg_max_fuel, dt_min_fuel, "
+   @Insert("insert into car (no, maker, name, img, imgcnt, car_size, car_type, release_year, min_price, max_price, min_range, max_range, avg_min_fuel, avg_max_fuel, dt_min_fuel, "
          + "dt_max_fuel, high_min_fuel, high_max_fuel, min_output, max_output, min_output_motor, max_output_motor, min_torque, max_torque, min_torque_motor, max_torque_motor, "
-         + "min_capacity, max_capacity, overall_length) values (#{no}, #{maker}, #{name}, #{car_size}, #{car_type}, #{release_year}, #{min_price}, #{max_price}, #{min_range}, "
+         + "min_capacity, max_capacity, overall_length) values (#{no}, #{maker}, #{name}, #{img}, #{imgcnt}, #{car_size}, #{car_type}, #{release_year}, #{min_price}, #{max_price}, #{min_range}, "
          + "#{max_range}, #{avg_min_fuel}, #{avg_max_fuel}, #{dt_min_fuel}, #{dt_max_fuel}, #{high_min_fuel}, #{high_max_fuel}, #{min_output}, #{max_output}, #{min_output_motor}, "
          + "#{max_output_motor}, #{min_torque}, #{max_torque}, #{min_torque_motor}, #{max_torque_motor}, #{min_capacity}, #{max_capacity}, #{overall_length})")
    void carInsert(@Valid Car car);

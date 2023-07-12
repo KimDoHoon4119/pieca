@@ -52,123 +52,123 @@
 </head>
 <body>
 <div id="map_loading" style="position: absolute; z-index:100; margin:10% 0% 0% 38%; text-align: center;">
-	<img src="../img/map_loading.gif" style="width:50%">
-	<p style="font-size:40px; color:#F15F5F">최적화 진행중입니다.</p>
+   <img src="../img/map_loading.gif" style="width:50%">
+   <p style="font-size:40px; color:#F15F5F">최적화 진행중입니다.</p>
 </div>
-	
-	
-	<div id="map_content" style="opacity: 0.2;">
-	<div class="w3-container">
-		<div>
-			<table id="place" class="w3-table-all" style="width: 30%;">
+   
+   
+   <div id="map_content" style="opacity: 0.2;">
+   <div class="w3-container">
+      <div>
+         <table id="place" class="w3-table-all" style="width: 30%;">
 
-			</table>
-		</div>
-	</div>
-	
-	<div style="position: absolute; z-index: 50; margin: 20px 0px 0px 20px;">
-		<span id="si2" style="">
-			<select name="si2" onchange="getText2('si2')" style="width:275px; height:50px; border-radius: 6px; padding-left:10px;">
-				<option value="">시/도 선택</option>
-			</select>
-		</span>
-	</div>
+         </table>
+      </div>
+   </div>
+   
+   <div style="position: absolute; z-index: 50; margin: 20px 0px 0px 20px;">
+      <span id="si2" style="">
+         <select name="si2" onchange="getText2('si2')" style="width:275px; height:50px; border-radius: 6px; padding-left:10px;">
+            <option value="">시/도 선택</option>
+         </select>
+      </span>
+   </div>
 
-	<div style="position: absolute; z-index: 50; margin: 80px 0px 0px 20px;">
-		<span id="gu2">
-			<select name="gu2" onchange="getText2('gu2')" style="width:275px; height:50px; border-radius: 6px; padding-left:10px;">
-				<option value="">구/군 선택</option>
-			</select>
-		</span>
-	</div>
-	
-	
-	<div style="position: absolute; z-index: 50; margin: 20px 0px 0px 310px;">
-		<input type="button" id='location_querybutton' value="조회" onclick="ecclocationApi()" disabled="true" 
-			style=" width: 110px; height: 110px; border-radius: 6px; color:white; font-size:30px;"/>
-	</div>
-
-
-	<input type='hidden' value="" name="zscode" id="zscode">
+   <div style="position: absolute; z-index: 50; margin: 80px 0px 0px 20px;">
+      <span id="gu2">
+         <select name="gu2" onchange="getText2('gu2')" style="width:275px; height:50px; border-radius: 6px; padding-left:10px;">
+            <option value="">구/군 선택</option>
+         </select>
+      </span>
+   </div>
+   
+   
+   <div style="position: absolute; z-index: 50; margin: 20px 0px 0px 310px;">
+      <input type="button" id='location_querybutton' value="조회" onclick="ecclocationApi()" disabled="true" 
+         style=" width: 110px; height: 110px; border-radius: 6px; color:white; font-size:30px;"/>
+   </div>
 
 
-	<div class="w3-container">
-		<div>
-			<table id="placetable" class="w3-table-all">
+   <input type='hidden' value="" name="zscode" id="zscode">
 
-			</table>
-		</div>
-	</div>
 
-	<div class="map_wrap" style="float:left;">
-		<div id="map"
-			style="width: 100%; height: 100%; position: relative; overflow: hidden;">
-		</div>
+   <div class="w3-container">
+      <div>
+         <table id="placetable" class="w3-table-all">
 
-		<div id="menu_wrap" class="bg_white">
-			<div class="option"></div>
-			<ul id="placesList"></ul>
-			<div id="pagination"></div>
-		</div>
-		
-		<div id="menu_wrap2" class="bg_white">
-		
-			<div>
-				<table id="placesList3" style="font-size: 20px;"></table> <%-- 지번 위에 까지 --%>
-			</div>
-			
-			<div>
-				<table id="placesList2"></table> <%-- 충전기 상태부터 끝까지 --%>
-			</div>
-			
-		</div>
-		
-	</div>
-	<div id="bottom_openclose_box" onclick="show_detail()" style="opacity:0.7; position: absolute; z-index: 50;  margin:510px 0px 0px 20px; width:50px; height:256px; float:left;">
-		<button id="bottom_close_btn" style="opacity:1; background-color:#FFFFFF; width:400px; height:50px; border-radius: 0px 0px 10px 10px; border:0px; font-size:20px;">목록 조회</button>
-	</div>
-	</div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02d94db8e10d97b2ae5cfd31f23e9c4c&libraries=services"></script>
+         </table>
+      </div>
+   </div>
+
+   <div class="map_wrap" style="float:left;">
+      <div id="map"
+         style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+      </div>
+
+      <div id="menu_wrap" class="bg_white">
+         <div class="option"></div>
+         <ul id="placesList"></ul>
+         <div id="pagination"></div>
+      </div>
+      
+      <div id="menu_wrap2" class="bg_white">
+      
+         <div>
+            <table id="placesList3" style="font-size: 20px;"></table> <%-- 지번 위에 까지 --%>
+         </div>
+         
+         <div>
+            <table id="placesList2"></table> <%-- 충전기 상태부터 끝까지 --%>
+         </div>
+         
+      </div>
+      
+   </div>
+   <div id="bottom_openclose_box" onclick="show_detail()" style="opacity:0.7; position: absolute; z-index: 50;  margin:510px 0px 0px 20px; width:50px; height:256px; float:left;">
+      <button id="bottom_close_btn" style="opacity:1; background-color:#FFFFFF; width:400px; height:50px; border-radius: 0px 0px 10px 10px; border:0px; font-size:20px;">목록 조회</button>
+   </div>
+   </div>
+   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6e73ded87a32820e5ffa86f62d0e0c64&libraries=services"></script>
 <script>
 window.onload = function() {
-	$("#map_content").attr("disabled","disabled");
-	document.querySelector("select[name=si2]").disabled = true;
-	document.querySelector("select[name=gu2]").disabled = true;
-	setTimeout(function() {
-		document.getElementById("map_loading").style.display = "none";
-		document.querySelector("select[name=si2]").disabled = false;
-		document.querySelector("select[name=gu2]").disabled = false;
-		document.getElementById("map_content").style.opacity = 1;
+   $("#map_content").attr("disabled","disabled");
+   document.querySelector("select[name=si2]").disabled = true;
+   document.querySelector("select[name=gu2]").disabled = true;
+   setTimeout(function() {
+      document.getElementById("map_loading").style.display = "none";
+      document.querySelector("select[name=si2]").disabled = false;
+      document.querySelector("select[name=gu2]").disabled = false;
+      document.getElementById("map_content").style.opacity = 1;
     }, 2500);
 };
 $("select[name=si2]").change(function(){
-	$("#pagination *").remove();
-	$("#placesList *").remove();
-	$("#placesList2 *").remove();
+   $("#pagination *").remove();
+   $("#placesList *").remove();
+   $("#placesList2 *").remove();
     $("#placesList3 *").remove();
-	show_detail();
+   show_detail();
 });
-	
+   
 $("select[name=gu2]").change(function(){
-	$("#pagination *").remove();
-	$("#placesList *").remove();
-	$("#placesList2 *").remove();
+   $("#pagination *").remove();
+   $("#placesList *").remove();
+   $("#placesList2 *").remove();
     $("#placesList3 *").remove();
-	show_detail();
-});	
+   show_detail();
+});   
 
 $("#menu_wrap2").hide();
 $("#bottom_openclose_box").hide();
 
 function show_detail() {
-	$("#menu_wrap2").fadeOut(500)
+   $("#menu_wrap2").fadeOut(500)
     $("#bottom_openclose_box").fadeOut(500)
     
     setTimeout(function() {
-    	$("#menu_wrap").animate({
-    		height: "80%"
-       	}, 750);
-  	}, 200);
+       $("#menu_wrap").animate({
+          height: "80%"
+          }, 750);
+     }, 200);
 }
 var mark_index=0;
 // 마커를 담을 배열입니다
@@ -205,7 +205,7 @@ function searchInMethod (data2 ,status, pagination) {
       // convert object
       for(const dataObj of data2){
          if(dataObj?.category_name === '교통,수송 > 자동차 > 전기자동차 충전소' || _.isEmpty(dataObj?.category_name)) {//옵셔널체이닝
-        	 //console.log("_.isEmpty(dataObj?.category_name : ", _.isEmpty(dataObj?.category_name));
+            //console.log("_.isEmpty(dataObj?.category_name : ", _.isEmpty(dataObj?.category_name));
             searchArr[runCnt] = dataObj; //testt
             //console.log(runCnt+'번째에 searcharr 넣음') 
             //console.log(dataIndexArr[runCnt])
@@ -282,7 +282,7 @@ function searchPlaces(data) {
 curPage = 1; //페이징처리하기위한 현재페이지 1로 초기화
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places,curPage) { //places == searchArr
-	
+   
    //console.log('displayPlaces call===')
    //console.log(places.length);
    var listEl = document.getElementById('placesList'), 
@@ -322,8 +322,8 @@ function displayPlaces(places,curPage) { //places == searchArr
             const dataIndex = searchArr.findIndex(obj => obj.place_name == title);
             const filteredArray2 = [dataIndexArr[dataIndex]];
             $("#menu_wrap").animate({
-            	  height: "41%"
-            	}, 250);
+                 height: "41%"
+               }, 250);
             
               $("#menu_wrap2").fadeIn(500)
               $("#bottom_openclose_box").fadeIn(500)
@@ -339,7 +339,7 @@ function displayPlaces(places,curPage) { //places == searchArr
            //console.log('searcharr ==  카카오api title로 장소명 필터')
            //console.log(searchArr)
           //////////onclick 시 카카오맵 api 정보 // 마커에서 클릭
-           plcaeinfo2 = "<tr><td>장소명111 : "+filteredArray[0].place_name+"</td></tr>"
+           plcaeinfo2 = "<tr><td>장소명 : "+filteredArray[0].place_name+"</td></tr>"
            plcaeinfo2 += '<tr><td>주소 : '+filteredArray[0].address_name+'</td></tr>'
            if(filteredArray[0].phone!=null && filteredArray[0].phone!=''){
               plcaeinfo2 += '<tr><td>연락처 : '+filteredArray[0].phone+'</td></tr>'
@@ -402,8 +402,8 @@ function displayPlaces(places,curPage) { //places == searchArr
                 const dataIndex = searchArr.findIndex(obj => obj.place_name == title);
                 const filteredArray2 = [dataIndexArr[dataIndex]];
                 $("#menu_wrap").animate({
-              	  height: "41%"
-              	}, 250);
+                   height: "41%"
+                 }, 250);
               
                 $("#menu_wrap2").fadeIn(500)
                 $("#bottom_openclose_box").fadeIn(500)
@@ -657,9 +657,9 @@ function removeAllChildNods(el) {
    }
  
    function getText2(name){
-	   $("#location_querybutton").css("background-color","#D5D5D5");
-		$("#location_querybutton").css("border","2px solid #D5D5D5");
-	   $("#location_querybutton").attr("disabled","disabled");
+      $("#location_querybutton").css("background-color","#D5D5D5");
+      $("#location_querybutton").css("border","2px solid #D5D5D5");
+      $("#location_querybutton").attr("disabled","disabled");
       let city = $("select[name='si2']").val();
       let gu = $("select[name='gu2']").val();
       let disname;
@@ -691,7 +691,7 @@ function removeAllChildNods(el) {
                })
             })
             if(city!=null && gu!=null && city!="" && gu!= ""){
-               	placecode(si2,gu2)
+                  placecode(si2,gu2)
             }
          }
       })
@@ -706,12 +706,12 @@ function removeAllChildNods(el) {
             data : params,
             type : "POST",
             success : function(data){
-            	console.log('#######################'+city)
-            	console.log('#######################'+gu)
-            	
+               console.log('#######################'+city)
+               console.log('#######################'+gu)
+               
                $('input[name=zscode]').attr('value',data[1].row[0].region_cd.substr(0,5))
                $("#location_querybutton").css("background-color","#008000");
-         		$("#location_querybutton").css("border","2px solid #008000");
+               $("#location_querybutton").css("border","2px solid #008000");
                $("#location_querybutton").removeAttr("disabled");
                
                //document.getElementById("location_querybutton").disabled = false;

@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="img_main" style="display:none; margin-bottom:300px;">
-	<img src="${path}../img/test.gif" alt="Image" style="width:100%">
+	<img src="${path}../img/main_main.gif" alt="Image" style="width:100%">
 </div>
 
 <%-- section 1 --%>
@@ -83,7 +83,7 @@
 				<p><i class="fa-solid fa-car"></i>&nbsp;Car</p>
 			</div>
 			<div style="font-size:20px; margin-top:20px;">
-				<p>공지사항과 공유게시판에서<br>정보를 공유 하세요.</p>
+				<p>전기차에 대한 기본 제원과<br>많은 사람들이 찾는 차종을 확인하세요.</p>
 			</div>
 			<div style="font-size:20px; margin-top:15px; color:#F15F5F">
 				<a href="${path}../car/list">바로가기 </a>
@@ -101,7 +101,7 @@ $(document).ready(function () {
   });
   
 $(window).scroll(function() {
-	if ($(window).scrollTop() > 700) {
+	if ($(window).scrollTop() > 500) {
 		$("#img_map").fadeIn(1000);
 	}
 	if ($(window).scrollTop() > 1200) {

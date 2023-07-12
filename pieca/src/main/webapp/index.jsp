@@ -12,6 +12,5 @@
 </style>
 </head>
 <body>
-what
 </body>
 </html>

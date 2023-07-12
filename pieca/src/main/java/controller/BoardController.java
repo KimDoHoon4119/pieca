@@ -64,6 +64,7 @@ public class BoardController {
       String boardid = (String)request.getSession().getAttribute("boardid");
       if(boardid == null) boardid="1";
       request.getSession().setAttribute("boardid", boardid);
+      System.out.println("boardid :: "+boardid);
       board.setBoardid(boardid);
       //BoardDao boardDao = new BoardDao();
       service.boardWrite(board,request);
