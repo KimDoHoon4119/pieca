@@ -714,7 +714,6 @@ function removeAllChildNods(el) {
                $("#location_querybutton").css("border","2px solid #008000");
                $("#location_querybutton").removeAttr("disabled");
                
-               //document.getElementById("location_querybutton").disabled = false;
             }
          })
       }

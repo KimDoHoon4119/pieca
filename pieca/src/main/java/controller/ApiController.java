@@ -100,7 +100,7 @@ public class ApiController {
 
       
       @RequestMapping("ecclocationApi") //충전소 장소 출력 (new ver)
-      public @ResponseBody JSONArray test4(String zscode, HttpServletRequest request) throws IOException, ParseException {
+      public @ResponseBody JSONArray ecclocationApi(String zscode, HttpServletRequest request) throws IOException, ParseException {
       //public @ResponseBody String test4(String zscode, HttpServletRequest request) throws IOException, ParseException {
        System.out.println("ecclocationApi call");
        //System.out.println("si2 = "+si2+" gu2 = "+gu2);
