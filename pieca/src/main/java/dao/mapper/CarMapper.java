@@ -17,9 +17,9 @@ public interface CarMapper {
    @Select({"<script>",
            "select * from car where no IS NOT NULL",
            "<if test='maker != null'> and maker = #{maker}</if>",
-             "<if test='car_size != null'> and car_size = #{car_size} </if>",
-             "<if test='car_type != null'> and car_type = #{car_type} </if>",
-             " order by no",
+           "<if test='car_size != null'> and car_size = #{car_size} </if>",
+           "<if test='car_type != null'> and car_type = #{car_type} </if>",
+           " order by no",
            "</script>"})
    List<Car> select(Map<String, Object> param); //namespace : dao.mapper.ItemMapper
 
