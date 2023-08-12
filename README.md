@@ -1,5 +1,5 @@
 # pieca - 전기차 소개 웹사이트
-PIECA는 의미는 Place Information Electric Car Assistance의 약자입니다.
+PIECA는 의미는 Place Information Electric Car Assistance의 약자이며, 전기차 소개 웹사이트 입니다.
 1. 전기차 충전소 조회 - 카카오맵, 전기차 충전소 공공데이터 API를 이용하여 사용자가 원하는 지역의 전기차 충전소를 조회 할수 있습니다.  
 2. 게시판 - 전기차, 충전소에 대해 사용자들끼리 정보 공유가 가능합니다.
 3. 전기차 뉴스 - 네이버 뉴스 API를 이용하여 전기차 관련 정보를 제공 합니다.
