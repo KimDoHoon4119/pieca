@@ -148,40 +148,6 @@ function tosspay() {
    })
 }
 
-function toss(json) {
-   IMP.request_pay({
-      pg : "tosspay", // 상점 구문, 카카오페이
-      pay_method : "card", // 카드 결제
-      merchant_uid : json.merchant_uid, // 주문번호 : 주문별 유일한값이 필요. userid-session id 값
-      name : "PIECA CARD 충전", // 상품명
-      amount : json.amount, // 주문금액
-      //buyer_email : "guardian010@naver.com", // 주문자의 이메일, 테스트용
-      buyer_name : json.buyer_name, // 주문자 성명
-      buyer_tel : json.buyer_tel, // 주문자 전화번호
-      //buyer_addr : json.buyer_addr, // 주문자 주소
-      //buyer_postcode : json.buyer_postcode
-      // 주문자 우편변호
-   }, function(rsp) {
-      if (rsp.success) {
-         //const orderno = rsp.merchant_uid;
-         //const amount = rsp.paid_amount;
-         insertkakaopay(rsp.merchant_uid,rsp.paid_amount);
-         //msg += "\n:교유ID : "+rsp.imp_uid
-         //msg += "\n:상점ID : "+rsp.merchant_uid
-         //msg += "\n:결제금액 : "+rsp.paid_amount
-         let msg = "결제가 완료 되었습니다."
-		 msg += "\n:고유ID : " + rsp.imp_uid
-		 msg += "\n:상점ID : " + rsp.merchant_uid
-		 msg += "\n:결제금액 : " + rsp.paid_amount
-		 alert(msg)
-         self.close();
-      } else {
-         alert("결제 실패:" + rsp.error_msg)
-      }
-   })
-}
-
-
 function insertkakaopay(orderno,amount) {
 $.ajax({
    type : "POST",

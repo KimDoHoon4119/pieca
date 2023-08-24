@@ -15,7 +15,7 @@ import logic.Car;
 public interface CarMapper {
 
    @Select({"<script>",
-           "select * from car",
+           "select * from car where no > 0",
            "<if test='maker != null'> and maker = #{maker}</if>",
              "<if test='car_size != null'> and car_size = #{car_size} </if>",
              "<if test='car_type != null'> and car_type = #{car_type} </if>",
