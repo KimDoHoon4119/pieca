@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${boardName}</title>
+<title>PIECA</title>
 <script type="text/javascript">
 	function listpage(page) {
 		document.searchform.pageNum.value = page;

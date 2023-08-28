@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시물 상세보기</title>
+<title>PIECA</title>
 <style type="text/css">
 .leftcol {
 	text-align: left;

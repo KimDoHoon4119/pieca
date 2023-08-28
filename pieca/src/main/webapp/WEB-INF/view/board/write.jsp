@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 작성</title>
+<title>PIECA</title>
 </head>
 <body>
 <div style="width:1920px; height:750px; display: flex; justify-content: center; align-items: center;">

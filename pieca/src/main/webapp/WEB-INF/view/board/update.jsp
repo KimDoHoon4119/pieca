@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 수정</title>
+<title>PIECA</title>
 <script type="text/javascript">
 	function file_delete() {
 		document.f.fileurl.value = ""

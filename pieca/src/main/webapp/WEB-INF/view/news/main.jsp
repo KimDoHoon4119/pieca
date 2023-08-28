@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>PIKA</title>
+<title>PIECA</title>
 <style>
 #main_list {
 	width: 1050px;

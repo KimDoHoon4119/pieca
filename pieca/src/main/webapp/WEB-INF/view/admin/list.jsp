@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 목록</title>
+<title>PIECA</title>
 <script type="text/javascript">
    function allchkbox(allchk) {
 	   //prop() : 속성등록,조회 jquery함수

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 삭제 화면</title>
+<title>PIECA</title>
 </head>
 <body>
 <div style="width:1920px; height:750px; display: flex; justify-content: center; align-items: center;">

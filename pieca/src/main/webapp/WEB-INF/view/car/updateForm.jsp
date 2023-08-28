@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>차량 정보 수정</title>
+<title>PIECA</title>
 <style>
 input {
   border-radius: 5px;
