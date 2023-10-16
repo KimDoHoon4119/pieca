@@ -28,7 +28,7 @@ public class DBConfig {
 			ds.setJdbcUrl("jdbc:mariadb://14.36.141.71:20000/gdudb55");
 			ds.setUser("gdu55");
 			ds.setPassword("asd4119@");
-			ds.setMaxPoolSize(20);
+			ds.setMaxPoolSize(35);
 			ds.setMinPoolSize(3); 
 			ds.setInitialPoolSize(5); 
 			ds.setAcquireIncrement(5);

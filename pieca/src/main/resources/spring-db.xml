@@ -21,7 +21,7 @@
     <property name="jdbcUrl"><value>jdbc:mariadb://14.36.141.71:20000/gdudb55</value></property>  
     <property name="user"><value>gdu55</value></property>  
     <property name="password"><value>asd4119@</value></property>
-    <property name="maxPoolSize"><value>20</value></property><!-- 최대 connection 객체의 갯수 -->
+    <property name="maxPoolSize"><value>30</value></property><!-- 최대 connection 객체의 갯수 -->
     <property name="minPoolSize"><value>3</value></property> <!-- 최소 connection 객체의 갯수 -->
     <property name="initialPoolSize"><value>5</value></property> <!-- 초기 connection 객체의 갯수 -->
     <property name="acquireIncrement"><value>5</value></property> <!-- 증가될 connection 객체의 갯수 -->     
